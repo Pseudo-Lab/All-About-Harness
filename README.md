@@ -191,11 +191,13 @@ Harness의 주요 구성 요소를 직접 사용하고 구현해봅니다.
 ```text
 All-About-Harness
 │
-├── docs/           # Harness 구조 분석 및 학습 자료
-├── experiments/    # Harness / Skill / Tool 비교 실험
-├── skills/         # 직접 만든 Skill
-├── presets/        # Preset Agent
-├── examples/       # 실행 예제
+├── workspace/
+│   ├── week1/      # 주차별 실습과 실행 결과
+│   ├── experiments/# Harness / Skill / Tool 비교 실험
+│   ├── analysis/   # Harness 구조 분석 및 학습 자료
+│   ├── skills/     # 직접 만든 Skill
+│   └── presets/    # Preset Agent
+├── deepseek-harness/ # 로컬 Harness 소스(Git에서 제외)
 └── README.md
 ```
 
@@ -229,6 +231,83 @@ Share
 단순히 자료를 읽는 것보다 직접 코드를 실행하고 수정하면서 구조를 이해하는 것을 중요하게 생각합니다.
 
 실험 과정에서 나온 성공 사례뿐 아니라 **잘 동작하지 않았던 구조와 시행착오도 함께 기록**합니다.
+
+---
+
+## Local Development Setup
+
+All-About-Harness의 로컬 폴더는 학습 결과물과 실행 가능한 DeepSeek Harness 소스를 분리해서 관리합니다.
+
+```text
+All-About-Harness/
+├── workspace/          # 주차별 실습, 실행 결과, 비교 분석
+│   └── week1/
+├── deepseek-harness/   # 별도로 clone한 DeepSeek Harness 소스코드
+├── setup.sh
+└── README.md
+```
+
+`deepseek-harness/`는 자체 `.git`을 가진 별도 저장소이며, 최상위 `.gitignore`에서 제외됩니다. 따라서 로컬에서는 한 폴더처럼 사용할 수 있지만 All-About-Harness GitHub에는 DeepSeek Harness 소스가 포함되지 않습니다.
+
+### 처음 설정하기
+
+```bash
+git clone https://github.com/Pseudo-Lab/All-About-Harness.git
+cd All-About-Harness
+./setup.sh
+```
+
+`setup.sh`는 `All-About-Harness/deepseek-harness`에 소스 저장소를 clone하고 프로젝트가 선언한 pnpm 버전으로 의존성을 설치한 뒤, 이전 산출물을 정리하고 Web UI까지 실행 가능한 상태로 빌드합니다. pnpm 명령이 없으면 Corepack을 사용하고, Corepack도 없으면 Node.js에 포함된 npx로 해당 pnpm 버전을 일회성 실행하므로 pnpm을 미리 전역 설치할 필요가 없습니다. 즉, npx가 내려받은 DSH 패키지 캐시를 직접 수정하는 대신 Git으로 관리되는 소스 checkout을 실행 환경으로 사용합니다.
+
+현재 기준 버전은 로컬 npx에서 확인한 `@deepseek-ai/dsh@0.1.5-rc.3`입니다. [POQOPO/deepseek-harness](https://github.com/poqopo/deepseek-harness)는 이에 대응하는 Git tag `dsh-v0.1.5-rc.3`에서 fork되었고, 기본 작업 브랜치는 `study/npx-0.1.5-rc.3`입니다. setup도 이 tag와 브랜치를 검증하므로 팀원이 서로 다른 기반 버전을 받는 일을 방지합니다.
+
+버전을 의도적으로 바꿀 때는 npm 버전과 Git tag를 함께 지정합니다.
+
+```bash
+DEEPSEEK_HARNESS_VERSION=0.1.5-rc.3 \
+DEEPSEEK_HARNESS_REF=dsh-v0.1.5-rc.3 \
+  ./setup.sh
+```
+
+의존성 설치와 빌드 없이 저장소 구성만 확인하려면 다음과 같이 실행합니다.
+
+```bash
+./setup.sh --skip-install
+```
+
+설치만 하고 빌드를 생략하려면 `./setup.sh --skip-build`를 사용합니다. 정상 setup이 끝난 뒤 Web UI는 다음 명령으로 실행합니다.
+
+```bash
+cd deepseek-harness
+npm run dsh -- web
+```
+
+기본 주소는 `http://127.0.0.1:3080`이며, 터미널에 출력되는 `?token=...`이 포함된 전체 URL로 접속해야 합니다.
+
+### 팀 fork 사용하기
+
+DeepSeek Harness 자체의 변경사항은 프로젝트 fork인 `POQOPO/deepseek-harness`에서 공유합니다. setup의 기본 clone 주소가 이미 이 fork로 설정되어 있습니다.
+
+```bash
+./setup.sh
+```
+
+remote 역할은 다음과 같습니다.
+
+```bash
+cd deepseek-harness
+git remote -v
+# origin   https://github.com/poqopo/deepseek-harness.git
+# upstream https://github.com/deepseek-ai/deepseek-harness.git
+```
+
+이후 Harness 소스 변경은 `deepseek-harness` fork의 브랜치에, 학습 기록과 실험 자료는 `All-About-Harness`의 브랜치에 각각 commit합니다.
+
+경로를 다르게 두고 싶다면 `DEEPSEEK_HARNESS_DIR`도 지정할 수 있습니다.
+
+```bash
+DEEPSEEK_HARNESS_DIR=/absolute/path/to/deepseek-harness ./setup.sh
+```
 
 ---
 

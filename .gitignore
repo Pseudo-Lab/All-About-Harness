@@ -1,0 +1,6 @@
+# DeepSeek Harness is a separate local Git checkout.
+/deepseek-harness/
+
+# Local environment overrides.
+.env
+.env.local

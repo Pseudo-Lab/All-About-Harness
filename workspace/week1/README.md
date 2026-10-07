@@ -40,3 +40,53 @@ Minimal mode와 Standard mode에서 각각 새로운 세션을 만들고 다음�
 - 더 많은 기능이 토큰 사용량이나 실행 시간을 증가시켰는가?
 
 실험 결과를 바탕으로 단순한 질문에서도 많은 Skill과 도구가 유리한지, 필요한 기능만 제공하는 구성이 더 효율적인지 살펴봅니다.
+
+## 첫 주차 과제
+
+Standard mode보다 Minimal mode에서 더 좋은 답변이 나오는 질문을 3개 찾아봅니다.
+
+각 질문을 두 mode의 새 세션에서 실행하고 다음 항목을 정리합니다.
+
+- 질문과 두 mode의 답변 요약
+- Minimal mode의 답변이 더 좋다고 판단한 이유
+- 각 mode의 입력, 출력, 전체 토큰 사용량
+- 각 mode의 전체 실행 시간
+
+## 제출물
+
+각자 다음 경로에 실험 결과를 Markdown 또는 HTML로 작성합니다.
+
+```text
+workspace/week1/<GitHub-ID>/result.md
+workspace/week1/<GitHub-ID>/result.html
+```
+
+두 형식 중 하나만 제출하면 됩니다. 결과에는 다음 내용을 포함합니다.
+
+- 실행 시각과 사용한 모델
+- 선택한 질문 3개와 두 mode의 답변 요약
+- 각 mode가 사용한 Tool
+- 질문별 입력, 출력, 전체 토큰 사용량
+- 질문별 전체 실행 시간
+- 각 질문에서 Minimal mode의 답변이 더 좋다고 판단한 이유
+
+API key, access token, credential 파일이나 민감한 session log는 올리지 않습니다.
+
+## 제출 방법
+
+공용 `main`에 직접 commit하지 않고 개인 branch에서 Pull Request를 만듭니다.
+
+```bash
+git switch main
+git pull --ff-only
+git switch -c week1/<GitHub-ID>-skill-comparison
+
+mkdir -p workspace/week1/<GitHub-ID>
+# result.md 또는 result.html 작성
+
+git add workspace/week1/<GitHub-ID>
+git commit -m "Add week 1 experiment for <GitHub-ID>"
+git push -u origin week1/<GitHub-ID>-skill-comparison
+```
+
+push가 끝나면 GitHub에서 `main`을 대상으로 Pull Request를 생성합니다. 저장소에 branch를 push할 권한이 없다면 자신의 fork에 branch를 push한 뒤 원본 저장소로 Pull Request를 보냅니다. 최종 merge는 리뷰 후 관리자가 진행합니다.

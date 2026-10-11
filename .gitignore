@@ -4,3 +4,6 @@
 # Local environment overrides.
 .env
 .env.local
+
+# macOS metadata files.
+.DS_Store

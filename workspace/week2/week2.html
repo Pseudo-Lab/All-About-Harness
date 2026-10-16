@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>All About Harness — Week 02 · Creator Mode & RALPH</title>
+<style>
+:root{--ink:#18212f;--muted:#6a7587;--muted2:#9aa4b3;--line:#e3e8f0;--blue:#6989ed;--purple:#8976e7;--mint:#44bba8;--white:#fff;--card:rgba(255,255,255,.86)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:#e7ebf3;font-family:Inter,"Pretendard","Apple SD Gothic Neo","Noto Sans CJK KR",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}button,a{font:inherit}
+#deck{width:1920px;height:1080px;position:absolute;left:50%;top:50%;transform-origin:center center;overflow:hidden;background:#fbfcff;box-shadow:0 36px 130px #20294035}
+#deck::before,#deck::after{content:"";position:absolute;border-radius:50%;pointer-events:none;z-index:0;filter:blur(5px)}#deck::before{width:720px;height:720px;right:-330px;top:-430px;background:radial-gradient(circle,#eaeafd 0%,#f8f9ff 75%)}#deck::after{width:700px;height:550px;left:-400px;bottom:-380px;background:radial-gradient(circle,#f0effb 0%,#fbfcff 78%)}
+.slide{position:absolute;inset:0;z-index:1;width:1920px;height:1080px;padding:120px 124px 102px;opacity:0;visibility:hidden;transform:translate3d(42px,0,0);transition:opacity .38s ease,transform .45s cubic-bezier(.2,.82,.24,1),visibility .38s;pointer-events:none}.slide.active{opacity:1;visibility:visible;transform:translate3d(0,0,0);pointer-events:auto}.slide.before{transform:translate3d(-42px,0,0)}
+.chrome{position:absolute;top:54px;right:126px;display:flex;align-items:center;gap:23px;color:#99a3b3;font-size:20px;letter-spacing:.1em;font-weight:700}.chrome strong{font-size:19px;color:#6d788c}.bottomline{position:absolute;left:126px;right:126px;bottom:72px;height:1px;background:#e6eaf2}.foot{position:absolute;left:126px;bottom:39px;color:#9ba4b5;font-size:17px;letter-spacing:.1em;font-weight:750}.progress{position:absolute;right:126px;bottom:42px;display:flex;gap:13px}.dot{height:8px;width:8px;border-radius:50%;background:#d8deeb;transition:background .2s,transform .2s}.dot.current{background:var(--purple);transform:scale(1.38)}
+.kicker{font-size:24px;font-weight:800;letter-spacing:.16em;color:var(--purple);margin:0 0 22px}.heading{font-size:74px;letter-spacing:-.052em;line-height:1.22;margin:0;color:var(--ink);font-weight:800}.subtitle{font-size:29px;color:var(--muted);margin:21px 0 0;font-weight:430;line-height:1.45}.card{border:1.5px solid var(--line);background:var(--card);border-radius:26px;box-shadow:0 12px 36px rgba(49,64,102,.035);backdrop-filter:blur(10px);position:relative}.card .bar{position:absolute;left:18px;top:38px;width:6px;height:39px;border-radius:8px;background:var(--blue)}.card.blue .bar{background:var(--blue)}.card.purple .bar{background:var(--purple)}.card.mint .bar{background:var(--mint)}.faded{color:var(--muted)}.tag{display:inline-flex;padding:12px 19px;border-radius:18px;background:#eeeffc;color:#8270d7;font-size:19px;font-weight:780;line-height:1}.tag.blue{background:#e9f0ff;color:var(--blue)}.tag.mint{background:#eaf9f6;color:#30ad9d}.smallcaps{font-size:19px;letter-spacing:.11em;font-weight:800;color:var(--purple)}
+/* title */
+.cover{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:0;text-align:center}.cover h1{font-size:128px;line-height:1.2;letter-spacing:-.07em;margin:0;font-weight:850}.cover p{font-size:40px;color:var(--muted);margin:42px 0 0;letter-spacing:-.018em}.cover .dash{height:5px;width:155px;border-radius:5px;background:var(--purple);margin:58px 0 42px}.cover .eyebrow{font-size:24px;letter-spacing:.28em;font-weight:800;color:#a0aabd}.cover-glow{width:710px;height:710px;border-radius:50%;position:absolute;background:radial-gradient(circle,#eaf0ff 0%,transparent 72%);right:-90px;top:-110px;z-index:-1}
+/* agenda */
+.agenda{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:158px;gap:28px;margin-top:69px}.agenda .card{display:flex;align-items:center;padding:31px 35px;gap:30px}.agenda .number{font-size:34px;font-weight:800;color:var(--purple);flex:0 0 62px}.agenda .item-text{flex:1}.agenda strong{display:block;font-size:30px;font-weight:750;letter-spacing:-.035em}.agenda span{font-size:20px;color:#9aa5b3;display:block;margin-top:11px}.agenda .time{font-size:18px;font-weight:800;color:var(--blue);padding-top:68px}.agenda .card:nth-child(3n) .number,.agenda .card:nth-child(3n) .time{color:var(--mint)}
+/* github */
+.repo{margin-top:75px;background:#f0f3fa;padding:38px 52px;display:flex;align-items:center;justify-content:space-between;border-radius:25px;font-size:37px;font-weight:780;letter-spacing:-.035em}.repo a{color:var(--ink);text-decoration:none}.repo a:hover{text-decoration:underline}.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:29px;margin-top:61px}.steps3 .card{height:266px;padding:55px 40px}.steps3 b{font-size:26px;color:var(--purple)}.steps3 .card:nth-child(2) b{color:var(--blue)}.steps3 .card:nth-child(3) b{color:var(--mint)}.steps3 h3{font-size:34px;margin:26px 0 17px;letter-spacing:-.04em}.steps3 p{font-size:24px;margin:0;color:var(--muted)}
+/* Review */
+.review{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:78px}.review .card{padding:51px 43px;height:319px}.review h3{font-size:43px;margin:34px 0 18px;letter-spacing:-.055em}.review p{font-size:26px;color:var(--muted);margin:0}.review-footer{margin-top:45px;min-height:117px;border-radius:21px;background:#f0ecfd;display:flex;align-items:center;gap:56px;padding:31px 42px}.review-footer .lead{color:var(--purple);font-weight:800;font-size:24px;white-space:nowrap}.review-footer .questions{font-weight:700;font-size:31px;letter-spacing:-.04em}
+/* Creator compare */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:73px}.compare .card{height:365px;padding:54px 46px}.compare h3{font-size:49px;margin:37px 0 22px;letter-spacing:-.055em}.compare p{color:var(--muted);font-size:25px;margin:0}.concepts{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:33px}.concept{border-radius:20px;background:#f0f3fa;padding:27px 27px;display:flex;align-items:center;gap:25px;font-size:23px}.concept strong{color:var(--purple);font-size:23px}.concept:nth-child(2) strong{color:var(--blue)}.concept:nth-child(3) strong{color:var(--mint)}
+
+/* Creator plugin comparison (from shipped preset YAML) */
+.plugin-common{margin-top:55px;background:#f0f3fa;border-radius:22px;display:flex;align-items:center;gap:45px;padding:20px 34px;height:86px;font-size:25px;font-weight:730;letter-spacing:-.015em}
+.plugin-common strong{font-size:21px;letter-spacing:.08em;color:var(--purple)}
+.plugin-labels{display:grid;grid-template-columns:28% 16% 19% 37%;align-items:center;margin:30px 35px 12px;gap:0;color:var(--muted);font-size:17px;font-weight:790;letter-spacing:.07em}
+.plugin-labels div:first-child,.plugin-labels div:nth-child(3){color:var(--purple)}
+.plugin-rows{display:grid;gap:16px}
+.plugin-row{background:rgba(255,255,255,.94);border:1.5px solid var(--line);border-radius:22px;display:grid;grid-template-columns:28% 16% 19% 37%;align-items:center;min-height:98px;padding:0 35px;position:relative}
+.plugin-row::before{content:"";position:absolute;width:5px;height:54px;border-radius:5px;background:var(--blue);left:8px;top:24px}
+.plugin-row:nth-child(2)::before{background:var(--purple)}.plugin-row:nth-child(3)::before{background:var(--mint)}
+.plugin-name{font-size:27px;font-weight:780;letter-spacing:-.035em}.plugin-row:nth-child(2) .plugin-name,.plugin-row:nth-child(3) .plugin-name{font-size:24px}
+.plugin-old{font-size:23px;color:var(--muted)}.plugin-new{font-size:24px;font-weight:780;color:var(--purple)}.plugin-effect{font-size:23px;font-weight:610;letter-spacing:-.018em}
+.plugin-takeaway{background:#f0ecfd;border-radius:18px;margin-top:17px;padding:16px 31px;display:flex;gap:37px;align-items:center;font-size:22px;font-weight:750}
+.plugin-takeaway strong{font-size:18px;letter-spacing:.08em;color:var(--purple);white-space:nowrap}
+.plugin-footnote{font-size:15px;color:#98a3b3;margin-top:9px}
+
+/* demo */
+.prompt{background:#f0f3fa;border:1px solid #e6eaf4;border-radius:23px;margin-top:77px;padding:45px 51px;font-size:32px;letter-spacing:-.03em;font-weight:750}.flow4{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:61px}.flow4 .card{height:247px;padding:49px 35px}.flow4 strong{font-size:38px;display:block;margin-top:31px}.flow4 p{color:var(--muted);font-size:23px;margin-top:16px}.demo-note{font-size:25px;font-weight:760;color:var(--purple);margin-top:49px}
+/* Ralph */
+.ralph-layout{margin-top:63px}.ralph-upper{display:flex;align-items:center;gap:23px}.objective{width:342px;padding:36px 25px;background:#efebfb;border-radius:21px;text-align:center;color:var(--purple);font-size:35px;font-weight:820;letter-spacing:.02em}.chevron{font-size:50px;color:#b3bdce;font-weight:200}.agent{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:24px;text-align:center;background:#fff;padding:35px 15px 28px}.agent .round{font-size:20px;font-weight:800;color:var(--purple)}.agent:nth-child(3) .round{color:var(--blue)}.agent:nth-child(7) .round{color:var(--mint)}.agent h4{font-size:29px;letter-spacing:-.03em;margin:24px 0 19px}.agent p{font-size:20px;color:var(--muted);margin:0}.shared{width:1004px;margin:52px 0 0 auto;background:#f0f3fa;padding:33px 30px;border-radius:21px;text-align:center;font-size:28px;font-weight:780;letter-spacing:.025em}.shared::before{content:"↓              ↓              ↓";display:block;color:var(--blue);white-space:pre;margin-top:-68px;font-size:40px;margin-bottom:21px;font-weight:400}.terms{display:grid;grid-template-columns:repeat(3,1fr);gap:27px;margin-top:55px}.terms .card{height:77px;display:flex;align-items:center;justify-content:space-between;padding:0 31px;background:#f1eefc}.terms .card:nth-child(2){background:#e9f8f5}.terms .card:nth-child(3){background:#f3f5f9}.terms b{font-size:24px;color:var(--purple)}.terms .card:nth-child(2) b{color:var(--mint)}.terms .card:nth-child(3) b{color:var(--muted)}.terms span{color:var(--muted);font-size:21px}
+/* task */
+.assignment{display:grid;grid-template-columns:repeat(3,1fr);gap:29px;margin-top:74px}.assignment .card{padding:49px 40px;height:313px}.assignment h3{font-size:38px;letter-spacing:-.048em;margin:37px 0 29px}.assignment p{font-size:25px;line-height:1.4;color:var(--muted)}.checkpoint{margin-top:42px;background:#f1f3f9;border-radius:23px;display:flex;align-items:center;gap:70px;padding:34px 38px;font-size:27px;font-weight:730}.checkpoint b{font-size:21px;color:var(--purple);letter-spacing:.04em;white-space:nowrap}
+/* closer */
+.closer{display:grid;grid-template-columns:1fr 1fr;gap:35px;margin-top:75px}.closer .card{height:365px;padding:55px 45px}.closer h3{font-size:49px;letter-spacing:-.06em;margin:32px 0 26px}.closer p{font-size:27px;color:var(--muted);line-height:1.5;margin:0}.closing-bar{margin-top:44px;background:#f0ecfb;border-radius:21px;text-align:center;padding:31px;font-size:30px;letter-spacing:-.04em;font-weight:740}
+/* navigation */
+#controls{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:5;display:flex;gap:14px;align-items:center}#controls button{border:1px solid #dbe1eb;border-radius:50%;background:rgba(255,255,255,.88);color:#516079;width:40px;height:40px;cursor:pointer;font-size:21px;box-shadow:0 4px 15px #00000015}#controls button:hover{background:#eef1fa}.hint{position:fixed;right:19px;bottom:29px;font-size:12px;color:#7a8396;z-index:4}#stepIndex{font-size:13px;color:#566071;min-width:56px;text-align:center;font-variant-numeric:tabular-nums}
+a.source{position:absolute;bottom:102px;right:125px;color:#8f99ac;text-decoration:none;font-size:17px}a.source:hover{text-decoration:underline}
+@media(prefers-reduced-motion:reduce){.slide,.dot{transition:none}}
+</style>
+</head>
+<body>
+<main id="deck" aria-label="All About Harness Week 02 발표자료">
+<section class="slide cover active" data-slide="1">
+<div class="cover-glow"></div>
+<h1>All About Harness</h1><p>Week 02 &nbsp;·&nbsp; Creator Mode &amp; RALPH</p><div class="dash"></div><div class="eyebrow">BUILD &nbsp;·&nbsp; TEST &nbsp;·&nbsp; COMPARE</div>
+</section>
+<section class="slide" data-slide="2" data-section="AGENDA">
+<div class="kicker">TODAY</div><h2 class="heading">오늘의 흐름</h2><p class="subtitle">GitHub 정리부터 Custom RALPH 실습까지 &nbsp;·&nbsp; 21:00–23:00</p>
+<div class="agenda">
+<div class="card"><div class="number">01</div><div class="item-text"><strong>GitHub Collaborator 추가</strong><span>21:00–21:10</span></div><div class="time">10 MIN</div></div>
+<div class="card"><div class="number">02</div><div class="item-text"><strong>1주차 과제 발표 및 결과 공유</strong><span>21:10–21:40</span></div><div class="time">30 MIN</div></div>
+<div class="card"><div class="number">03</div><div class="item-text"><strong>Creator Mode 소개 &amp; 데모</strong><span>21:40–22:05</span></div><div class="time">25 MIN</div></div>
+<div class="card"><div class="number">04</div><div class="item-text"><strong>2주차 과제 소개</strong><span>22:05–22:15</span></div><div class="time">10 MIN</div></div>
+<div class="card"><div class="number">05</div><div class="item-text"><strong>Creator Mode 자유 실습</strong><span>22:15–22:40</span></div><div class="time">25 MIN</div></div>
+<div class="card"><div class="number">06</div><div class="item-text"><strong>아이디어 공유 및 Q&amp;A</strong><span>22:40–23:00</span></div><div class="time">20 MIN</div></div>
+</div></section>
+<section class="slide" data-slide="3" data-section="GITHUB">
+<div class="kicker">10 MIN</div><h2 class="heading">함께 만드는 기록</h2><p class="subtitle">스터디 GitHub에서 코드를 모으고, 실험 과정을 남깁니다.</p>
+<div class="repo"><a href="https://github.com/Pseudo-Lab/All-About-Harness" target="_blank" rel="noreferrer">Pseudo-Lab / All-About-Harness ↗</a><span class="tag blue">OPEN REPOSITORY</span></div>
+<div class="steps3"><div class="card purple"><div class="bar"></div><b>01</b><h3>Collaborator 초대 수락</h3><p>GitHub 접근 권한 확인</p></div><div class="card blue"><div class="bar"></div><b>02</b><h3>자신의 작업 폴더 확인</h3><p>예제 및 공통 자료 살펴보기</p></div><div class="card mint"><div class="bar"></div><b>03</b><h3>과제 결과 업로드</h3><p>코드 + 실행 로그 + 관찰 내용</p></div></div>
+</section>
+<section class="slide" data-slide="4" data-section="WEEK 01 REVIEW">
+<div class="kicker">30 MIN</div><h2 class="heading">같은 작업, 서로 다른 Harness</h2><p class="subtitle">Standard와 Minimal은 어떤 행동 차이를 보였을까?</p>
+<div class="review"><div class="card purple"><div class="bar"></div><div class="smallcaps">TASK 01</div><h3>문서 요약</h3><p>Tool 없이 작업할 때</p></div><div class="card blue"><div class="bar"></div><div class="smallcaps" style="color:var(--blue)">TASK 02</div><h3>외부 정보 조회</h3><p>도구 선택과 호출 방식</p></div><div class="card mint"><div class="bar"></div><div class="smallcaps" style="color:var(--mint)">TASK 03</div><h3>코드 작성</h3><p>탐색 · 검증 · 수정 범위</p></div></div>
+<div class="review-footer"><span class="lead">함께 볼 질문</span><span class="questions">① 무엇이 달랐나? &nbsp;&nbsp;&nbsp; ② 그 차이를 만든 하네스 요소는?</span></div>
+</section>
+<section class="slide" data-slide="5" data-section="CREATOR MODE">
+<div class="kicker">CREATOR MODE</div><h2 class="heading">이제 에이전트의 구성을 직접 바꿔보자</h2><p class="subtitle">이미 구성된 에이전트를 사용하는 것에서, 하네스를 설계하는 단계로.</p>
+<div class="compare"><div class="card blue"><div class="bar"></div><span class="tag blue">USE</span><h3>Standard Mode</h3><p>주어진 Prompt · Tool · Skill로 작업</p></div><div class="card purple"><div class="bar"></div><span class="tag">BUILD</span><h3>Creator Mode</h3><p>Preset · Plugin · Tool 구성 직접 설계</p></div></div>
+<div class="concepts"><div class="concept"><strong>Preset</strong><span>동작에 필요한 Plugin 조합</span></div><div class="concept"><strong>Plugin</strong><span>새로운 기능과 실행 정책</span></div><div class="concept"><strong>Install</strong><span>적용 후 실제 동작 확인</span></div></div>
+<a class="source" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/preset/agent-preset/README.md" target="_blank" rel="noreferrer">DeepSeek Harness Preset docs ↗</a>
+</section>
+<section class="slide" data-slide="6" data-section="CREATOR PLUGINS">
+<div class="kicker">PRESET COMPARISON</div><h2 class="heading">Creator Mode에만 추가된 기능은?</h2><p class="subtitle">기본 작업 도구는 유사하지만, 하네스를 검사하고 설치하는 권한이 달라집니다.</p>
+<div class="plugin-common"><strong>SHARED</strong><span>Bash &nbsp;·&nbsp; Filesystem &nbsp;·&nbsp; Web &nbsp;·&nbsp; Subagent &nbsp;·&nbsp; Workflow &nbsp;·&nbsp; Skill</span></div>
+<div class="plugin-labels"><div>PLUGIN</div><div>STANDARD</div><div>CREATOR</div><div>WHAT CHANGES</div></div>
+<div class="plugin-rows">
+ <div class="plugin-row"><div class="plugin-name">tool-cordis</div><div class="plugin-old">없음</div><div class="plugin-new">추가</div><div class="plugin-effect">현재 Cordis API · Tool · Config 조회</div></div>
+ <div class="plugin-row"><div class="plugin-name">plugin-manager/tools</div><div class="plugin-old">비활성</div><div class="plugin-new">활성*</div><div class="plugin-effect">Plugin Bundle 설치 · 활성화 · 관리</div></div>
+ <div class="plugin-row"><div class="plugin-name">skill-filesystem</div><div class="plugin-old">기본 Skill</div><div class="plugin-new">제작 Skill 추가</div><div class="plugin-effect">Preset · Plugin 개발 지침과 템플릿</div></div>
+</div>
+<div class="plugin-takeaway"><strong>KEY POINT</strong><span>같은 모델과 기본 Tool에도, 검사·설치·제작 기능이 추가되면 역할이 달라진다.</span></div>
+<div class="plugin-footnote">※ Plugin Manager는 프로필 연결 시 활성화</div>
+<a class="source" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/bundle/web-app/presets/cordis.patch.yml" target="_blank" rel="noreferrer">Official Creator preset YAML ↗</a>
+</section>
+<section class="slide" data-slide="7" data-section="CREATOR DEMO">
+<div class="kicker">LIVE DEMO</div><h2 class="heading">한 문장으로 구성하고, 직접 실행하기</h2><p class="subtitle">작은 Reviewer Preset을 만드는 과정을 시연해봅니다.</p>
+<div class="prompt">“Markdown 문서를 읽고 논리와 근거를 검토하는 Reviewer Agent를 만들어줘.”</div>
+<div class="flow4"><div class="card purple"><div class="bar"></div><span class="smallcaps">01</span><strong>Describe</strong><p>원하는 행동 설명</p></div><div class="card blue"><div class="bar"></div><span class="smallcaps" style="color:var(--blue)">02</span><strong>Create</strong><p>Preset / Plugin 작성</p></div><div class="card mint"><div class="bar"></div><span class="smallcaps" style="color:var(--mint)">03</span><strong>Install</strong><p>구성 등록 및 활성화</p></div><div class="card purple"><div class="bar"></div><span class="smallcaps">04</span><strong>Verify</strong><p>새 세션에서 실제 테스트</p></div></div>
+<div class="demo-note">POINT &nbsp;·&nbsp; 생성된 구성 확인 → 설치 상태 확인 → 실제 작동 검증</div>
+</section>
+<section class="slide" data-slide="8" data-section="RALPH">
+<div class="kicker">RALPH LOOP</div><h2 class="heading">완료될 때까지, 새로운 Context로 반복</h2><p class="subtitle">같은 목표를 향해 새로운 작업자가 이전 결과를 이어받습니다.</p>
+<div class="ralph-layout"><div class="ralph-upper"><div class="objective">OBJECTIVE</div><div class="chevron">→</div><div class="agent"><div class="round">ROUND 1</div><h4>Fresh Agent</h4><p>작업 + 결과 기록</p></div><div class="chevron">→</div><div class="agent"><div class="round">ROUND 2</div><h4>Fresh Agent</h4><p>이전 상태 확인</p></div><div class="chevron">→</div><div class="agent"><div class="round">ROUND N</div><h4>Fresh Agent</h4><p>개선 + 검증</p></div></div>
+<div class="shared">SHARED WORKSPACE &nbsp;+&nbsp; STRUCTURED HANDOFF</div>
+<div class="terms"><div class="card"><b>CONTINUE</b><span>다음 Round</span></div><div class="card"><b>COMPLETE</b><span>완료 보고</span></div><div class="card"><b>BLOCKED</b><span>진행 중단</span></div></div></div>
+<a class="source" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/experimental/tool-ralph/README.md" target="_blank" rel="noreferrer">Official tool-ralph docs ↗</a>
+</section>
+<section class="slide" data-slide="9" data-section="THIS WEEK’S TASK">
+<div class="kicker">WEEK 02 · ASSIGNMENT</div><h2 class="heading">Build Your Own RALPH</h2><p class="subtitle">Creator Mode로 만들고, 같은 작업을 공식 tool-ralph와 비교하세요.</p>
+<div class="assignment"><div class="card purple"><div class="bar"></div><div class="smallcaps">01 · BUILD</div><h3>Custom RALPH 제작</h3><p>주제 자유 · Fresh Context 반복 구성</p></div><div class="card blue"><div class="bar"></div><div class="smallcaps" style="color:var(--blue)">02 · RUN</div><h3>실제 작업 수행</h3><p>반복 과정과 실행 결과 기록</p></div><div class="card mint"><div class="bar"></div><div class="smallcaps" style="color:var(--mint)">03 · COMPARE</div><h3>공식 tool-ralph와 비교</h3><p>같은 Task · Model · 초기 조건</p></div></div>
+<div class="checkpoint"><b>CHECKPOINT</b><span>반복 방식 &nbsp;/&nbsp; Context 전달 &nbsp;/&nbsp; 종료 조건 &nbsp;/&nbsp; 결과물</span></div>
+</section>
+<section class="slide" data-slide="10" data-section="BUILD & SHARE">
+<div class="kicker">HANDS ON</div><h2 class="heading">만들어보고, 비교하고, 남기기</h2><p class="subtitle">실습 25분 &nbsp;·&nbsp; 아이디어 공유 및 Q&amp;A 20분</p>
+<div class="closer"><div class="card blue"><div class="bar"></div><span class="tag blue">TODAY</span><h3>자유 실습</h3><p>Preset을 만들어 실행해보고,<br>막히는 부분을 함께 해결하기</p></div><div class="card mint"><div class="bar"></div><span class="tag mint">SUBMIT</span><h3>결과 공유</h3><p>① Preset 구성 &nbsp;② 실행 로그<br>③ 공식 RALPH와 비교한 내용</p></div></div>
+<div class="closing-bar">지난주에는 Harness를 비교했다면, 이번 주에는 직접 만들어봅니다.</div>
+</section>
+<div id="footerUI" aria-hidden="true"><div class="chrome"><span id="sectionLabel"></span><strong id="pageLabel"></strong></div><div class="bottomline"></div><div class="foot">ALL ABOUT HARNESS · WEEK 02</div><div class="progress" id="dots"></div></div>
+</main>
+<div id="controls"><button id="prev" aria-label="이전 슬라이드">←</button><span id="stepIndex">1 / 10</span><button id="next" aria-label="다음 슬라이드">→</button></div><div class="hint">← → / Space / Scroll</div>
+<script>
+(()=>{
+ const W=1920,H=1080,deck=document.getElementById('deck');const all=[...document.querySelectorAll('.slide')];const dots=document.getElementById('dots');let active=0,wheellock=false;
+ for(let i=0;i<all.length;i++){let d=document.createElement('span');d.className='dot';dots.append(d)}
+ function fit(){let sc=Math.min(innerWidth/W,innerHeight/H);deck.style.transform=`translate(-50%,-50%) scale(${sc})`}fit();window.addEventListener('resize',fit);
+ function show(n){let prev=active;active=Math.max(0,Math.min(n,all.length-1));all.forEach((el,i)=>{el.classList.toggle('active',i===active);el.classList.toggle('before',i<active)});[...dots.children].forEach((x,i)=>x.classList.toggle('current',i===active));let section=all[active].dataset.section||'';document.getElementById('sectionLabel').textContent=section;document.getElementById('pageLabel').textContent=`${String(active+1).padStart(2,'0')} / ${String(all.length).padStart(2,'0')}`;document.getElementById('stepIndex').textContent=`${active+1} / ${all.length}`;document.getElementById('footerUI').style.display=active===0?'none':'block';history.replaceState(null,'',`#slide-${active+1}`)}
+ document.getElementById('prev').addEventListener('click',()=>show(active-1));document.getElementById('next').addEventListener('click',()=>show(active+1));
+ window.addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();show(active+1)}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(active-1)}else if(e.key==='Home'){show(0)}else if(e.key==='End'){show(all.length-1)}});
+ window.addEventListener('wheel',e=>{if(wheellock||Math.abs(e.deltaY)<8)return;wheellock=true;show(active+(e.deltaY>0?1:-1));setTimeout(()=>wheellock=false,620)},{passive:true});
+ const m=location.hash.match(/^#slide-(\d+)$/);show(m?Number(m[1])-1:0);
+})();
+</script>
+</body></html>

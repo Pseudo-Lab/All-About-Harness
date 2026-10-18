@@ -1,0 +1,27 @@
+{
+  "name": "@local/verified-ralph",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Deployment-owned verified RALPH loop: fresh structured-output workers, an optional per-round verifier command, and a durable progress file.",
+  "icon": "./icon.svg",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "locale/*.json",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

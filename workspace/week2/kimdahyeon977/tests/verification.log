@@ -1,0 +1,316 @@
+TAP version 13
+# Subtest: new storage lists an empty JSON array
+ok 1 - new storage lists an empty JSON array
+  ---
+  duration_ms: 42.944751
+  type: 'test'
+  ...
+# Subtest: adds persist literal titles across processes with stable increasing IDs
+ok 2 - adds persist literal titles across processes with stable increasing IDs
+  ---
+  duration_ms: 91.134638
+  type: 'test'
+  ...
+# Subtest: completion persists, is repeatable, and preserves IDs and other todos
+ok 3 - completion persists, is repeatable, and preserves IDs and other todos
+  ---
+  duration_ms: 234.232307
+  type: 'test'
+  ...
+# Subtest: invalid input never creates storage
+ok 4 - invalid input never creates storage
+  ---
+  duration_ms: 532.574479
+  type: 'test'
+  ...
+# Subtest: invalid input preserves storage bytes, todos, and the next ID
+ok 5 - invalid input preserves storage bytes, todos, and the next ID
+  ---
+  duration_ms: 1104.225547
+  type: 'test'
+  ...
+# Subtest: TODO_FILE isolates independent stores
+ok 6 - TODO_FILE isolates independent stores
+  ---
+  duration_ms: 134.114552
+  type: 'test'
+  ...
+# Subtest: implementation then distinct test child, disposal, and real acceptance precede complete
+ok 7 - implementation then distinct test child, disposal, and real acceptance precede complete
+  ---
+  duration_ms: 3.613696
+  type: 'test'
+  ...
+# Subtest: assertion failure hands previous implementation and failure evidence into next round
+ok 8 - assertion failure hands previous implementation and failure evidence into next round
+  ---
+  duration_ms: 1.070751
+  type: 'test'
+  ...
+# Subtest: test-child failure cannot be overruled by host pass
+ok 9 - test-child failure cannot be overruled by host pass
+  ---
+  duration_ms: 1.266852
+  type: 'test'
+  ...
+# Subtest: default budget is exactly five failed rounds with fresh children
+ok 10 - default budget is exactly five failed rounds with fresh children
+  ---
+  duration_ms: 1.949902
+  type: 'test'
+  ...
+# Subtest: invalid round budget 0 blocks before children
+ok 11 - invalid round budget 0 blocks before children
+  ---
+  duration_ms: 0.321616
+  type: 'test'
+  ...
+# Subtest: invalid round budget 6 blocks before children
+ok 12 - invalid round budget 6 blocks before children
+  ---
+  duration_ms: 0.129878
+  type: 'test'
+  ...
+# Subtest: invalid round budget -1 blocks before children
+ok 13 - invalid round budget -1 blocks before children
+  ---
+  duration_ms: 0.278242
+  type: 'test'
+  ...
+# Subtest: invalid round budget 1.5 blocks before children
+ok 14 - invalid round budget 1.5 blocks before children
+  ---
+  duration_ms: 0.167658
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: undefined
+ok 15 - invalid or blocked host evidence cannot complete: undefined
+  ---
+  duration_ms: 0.401826
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {}
+ok 16 - invalid or blocked host evidence cannot complete: {}
+  ---
+  duration_ms: 0.398978
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":0,"kind":"passed","summary":"fixed tests executed"}
+ok 17 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":0,"kind":"passed","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.233693
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":-1,"kind":"passed","summary":"fixed tests executed"}
+ok 18 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":-1,"kind":"passed","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.205717
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":"3","kind":"passed","summary":"fixed tests executed"}
+ok 19 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":"3","kind":"passed","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.252958
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":3,"kind":"infrastructure-error","summary":"fixed tests executed"}
+ok 20 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":3,"kind":"infrastructure-error","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.235574
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":3,"kind":"assertion-failure","summary":"fixed tests executed"}
+ok 21 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":3,"kind":"assertion-failure","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.219598
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report undefined blocks and disposes
+ok 22 - implementation malformed or blocked report undefined blocks and disposes
+  ---
+  duration_ms: 0.342008
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report {} blocks and disposes
+ok 23 - implementation malformed or blocked report {} blocks and disposes
+  ---
+  duration_ms: 0.125253
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report {"status":"pass","summary":""} blocks and disposes
+ok 24 - implementation malformed or blocked report {"status":"pass","summary":""} blocks and disposes
+  ---
+  duration_ms: 0.165556
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report {"status":"blocked","summary":"environment unavailable"} blocks and disposes
+ok 25 - implementation malformed or blocked report {"status":"blocked","summary":"environment unavailable"} blocks and disposes
+  ---
+  duration_ms: 0.196112
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report {"status":"ready","summary":"ok","extra":true} blocks and disposes
+ok 26 - implementation malformed or blocked report {"status":"ready","summary":"ok","extra":true} blocks and disposes
+  ---
+  duration_ms: 0.192499
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report undefined blocks and disposes
+ok 27 - test malformed or blocked report undefined blocks and disposes
+  ---
+  duration_ms: 0.133226
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report {} blocks and disposes
+ok 28 - test malformed or blocked report {} blocks and disposes
+  ---
+  duration_ms: 0.095696
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report {"status":"pass","summary":""} blocks and disposes
+ok 29 - test malformed or blocked report {"status":"pass","summary":""} blocks and disposes
+  ---
+  duration_ms: 0.124705
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report {"status":"blocked","summary":"environment unavailable"} blocks and disposes
+ok 30 - test malformed or blocked report {"status":"blocked","summary":"environment unavailable"} blocks and disposes
+  ---
+  duration_ms: 0.174046
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report {"status":"ready","summary":"ok","extra":true} blocks and disposes
+ok 31 - test malformed or blocked report {"status":"ready","summary":"ok","extra":true} blocks and disposes
+  ---
+  duration_ms: 0.144933
+  type: 'test'
+  ...
+# Subtest: child reject blocks
+ok 32 - child reject blocks
+  ---
+  duration_ms: 0.291745
+  type: 'test'
+  ...
+# Subtest: child abnormal blocks
+ok 33 - child abnormal blocks
+  ---
+  duration_ms: 0.096643
+  type: 'test'
+  ...
+# Subtest: child dispose blocks
+ok 34 - child dispose blocks
+  ---
+  duration_ms: 0.165942
+  type: 'test'
+  ...
+# Subtest: child duplicate blocks
+ok 35 - child duplicate blocks
+  ---
+  duration_ms: 0.134835
+  type: 'test'
+  ...
+# Subtest: cancellation reaches active child and disposal finishes before return
+ok 36 - cancellation reaches active child and disposal finishes before return
+  ---
+  duration_ms: 14.946629
+  type: 'test'
+  ...
+# Subtest: already cancelled run starts no children
+ok 37 - already cancelled run starts no children
+  ---
+  duration_ms: 0.266847
+  type: 'test'
+  ...
+# Subtest: frozen manifest mutation during implementation blocks
+ok 38 - frozen manifest mutation during implementation blocks
+  ---
+  duration_ms: 0.247821
+  type: 'test'
+  ...
+# Subtest: frozen manifest mutation during test blocks
+ok 39 - frozen manifest mutation during test blocks
+  ---
+  duration_ms: 0.160826
+  type: 'test'
+  ...
+# Subtest: frozen manifest mutation during acceptance blocks
+ok 40 - frozen manifest mutation during acceptance blocks
+  ---
+  duration_ms: 0.231244
+  type: 'test'
+  ...
+# Subtest: frozen manifest mutation during dispose blocks
+ok 41 - frozen manifest mutation during dispose blocks
+  ---
+  duration_ms: 0.171603
+  type: 'test'
+  ...
+# Subtest: acceptance environment exception blocks without retry
+ok 42 - acceptance environment exception blocks without retry
+  ---
+  duration_ms: 0.231651
+  type: 'test'
+  ...
+# Subtest: real runner classifies passing
+ok 43 - real runner classifies passing
+  ---
+  duration_ms: 116.376728
+  type: 'test'
+  ...
+# Subtest: real runner classifies assertion
+ok 44 - real runner classifies assertion
+  ---
+  duration_ms: 101.551315
+  type: 'test'
+  ...
+# Subtest: real runner classifies throw
+ok 45 - real runner classifies throw
+  ---
+  duration_ms: 82.038257
+  type: 'test'
+  ...
+# Subtest: real runner classifies zero tests
+ok 46 - real runner classifies zero tests
+  ---
+  duration_ms: 80.742838
+  type: 'test'
+  ...
+# Subtest: runner executes TODO_CLI from run workspace, not bundled example
+ok 47 - runner executes TODO_CLI from run workspace, not bundled example
+  ---
+  duration_ms: 99.359855
+  type: 'test'
+  ...
+# Subtest: runner cancellation propagates instead of producing pass
+ok 48 - runner cancellation propagates instead of producing pass
+  ---
+  duration_ms: 55.627388
+  type: 'test'
+  ...
+# Subtest: runner timeout blocks as infrastructure error
+ok 49 - runner timeout blocks as infrastructure error
+  ---
+  duration_ms: 54.593671
+  type: 'test'
+  ...
+# Subtest: snapshot stable unchanged, detects bytes, membership, rename and permissions
+ok 50 - snapshot stable unchanged, detects bytes, membership, rename and permissions
+  ---
+  duration_ms: 13.587088
+  type: 'test'
+  ...
+# Subtest: snapshot refuses file and ancestor symlinks, missing roots, and outside roots
+ok 51 - snapshot refuses file and ancestor symlinks, missing roots, and outside roots
+  ---
+  duration_ms: 4.814523
+  type: 'test'
+  ...
+1..51
+# tests 51
+# suites 0
+# pass 51
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2206.052084

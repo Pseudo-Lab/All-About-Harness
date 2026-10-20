@@ -1,0 +1,30 @@
+{
+  "mode": "custom",
+  "sessionId": "experiment-939ab6f6-ba90-4922-8458-07af71df8590",
+  "preset": "custom-ralph",
+  "value": {
+    "status": "complete",
+    "rounds": [
+      {
+        "round": 1,
+        "implementation": {
+          "id": "3c127299-36b0-445e-abdb-e2576bd89ea1",
+          "status": "ready",
+          "summary": "Implemented dependency-free Node.js ESM TODO CLI at ./cli.mjs with add, list, and complete commands. IDs are positive safe integers, stable across processes, and strictly increasing. All validation requirements are implemented: rejects empty/whitespace titles, extra arguments, unknown commands, malformed IDs (0, negative, decimal, scientific notation, non-numeric, unsafe integers), and nonexistent IDs with nonzero exit. Errors never create/modify storage or consume IDs. Completion is repeatable. TODO_FILE isolates stores. Ready for acceptance testing."
+        },
+        "test": {
+          "id": "6035baa6-1891-4640-a077-1b88c3108b53",
+          "status": "pass",
+          "summary": "All 6 acceptance tests passed successfully. The TODO CLI at ./cli.mjs correctly implements all requirements: add/list/complete commands with proper JSON output, positive safe integer IDs that are stable across processes and strictly increasing, literal title preservation, validation rejecting empty/whitespace titles, extra arguments, unknown commands, malformed IDs (0, negative, decimal, non-numeric), and nonexistent IDs with nonzero exit codes. Errors never create or modify storage or consume IDs. Completion is repeatable. TODO_FILE properly isolates independent stores. Test output: \"# tests 6 # pass 6 # fail 0\""
+        },
+        "acceptance": {
+          "exitCode": 0,
+          "testsRun": 6,
+          "kind": "passed",
+          "summary": "TAP version 13\n# Subtest: new storage lists an empty JSON array\nok 1 - new storage lists an empty JSON array\n  ---\n  duration_ms: 28.190617\n  type: 'test'\n  ...\n# Subtest: adds persist literal titles across processes with stable increasing IDs\nok 2 - adds persist literal titles across processes with stable increasing IDs\n  ---\n  duration_ms: 84.439654\n  type: 'test'\n  ...\n# Subtest: completion persists, is repeatable, and preserves IDs and other todos\nok 3 - completion persists, is repeatable, and preserves IDs and other todos\n  ---\n  duration_ms: 193.249532\n  type: 'test'\n  ...\n# Subtest: invalid input never creates storage\nok 4 - invalid input never creates storage\n  ---\n  duration_ms: 507.61791\n  type: 'test'\n  ...\n# Subtest: invalid input preserves storage bytes, todos, and the next ID\nok 5 - invalid input preserves storage bytes, todos, and the next ID\n  ---\n  duration_ms: 1101.351432\n  type: 'test'\n  ...\n# Subtest: TODO_FILE isolates independent stores\nok 6 - TODO_FILE isolates independent stores\n  ---\n  duration_ms: 136.182661\n  type: 'test'\n  ...\n1..6\n# tests 6\n# suites 0\n# pass 6\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 2105.857846\n"
+        }
+      }
+    ],
+    "manifestHash": "7fe2121ad1516f428ac6b1756542412e5260752ac19f5e37d995c19288865460"
+  }
+}

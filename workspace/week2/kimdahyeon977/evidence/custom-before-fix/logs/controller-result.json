@@ -1,0 +1,30 @@
+{
+  "mode": "custom",
+  "sessionId": "experiment-fce95867-6392-458d-ae28-992014d9ec5e",
+  "preset": "custom-ralph",
+  "value": {
+    "status": "complete",
+    "rounds": [
+      {
+        "round": 1,
+        "implementation": {
+          "id": "74d67e9b-6908-496a-8c33-e532b5720820",
+          "status": "ready",
+          "summary": "Successfully implemented TODO CLI at ./cli.mjs in the first round. All 6 acceptance tests pass:\n✅ Empty storage initialization returns []\n✅ Add command persists todos with stable, increasing IDs and literal titles\n✅ Complete command is repeatable and persists changes\n✅ Invalid input (empty titles, malformed IDs, extra args, unknown commands) never creates storage\n✅ Errors preserve storage bytes and don't consume IDs\n✅ TODO_FILE isolates independent stores\n\nThe CLI correctly:\n- Uses dependency-free Node.js ESM (only fs module imports)\n- Prints JSON on success (add returns todo object, list returns array, complete returns completed todo)\n- Generates positive safe integer IDs that increase strictly\n- Preserves literal titles including special characters and emojis\n- Rejects all invalid inputs with nonzero exit codes\n- Never modifies storage on errors\n- Supports repeatable completion\n- Respects TODO_FILE environment variable\n\nManual verification confirmed proper stdout/stderr handling and correct exit codes."
+        },
+        "test": {
+          "id": "bfc3f01a-aa57-4c1c-a7f3-1eef7da6fb0e",
+          "status": "pass",
+          "summary": "All 6 acceptance tests pass. The TODO CLI at ./cli.mjs is correctly implemented with dependency-free Node.js ESM, supports add/list/complete commands, prints JSON on success, uses stable increasing positive safe integer IDs, preserves literal titles, rejects all invalid inputs with nonzero exit codes, never creates/modifies storage on errors, supports repeatable completion, and respects TODO_FILE isolation. Manual verification confirms proper stdout/stderr handling and correct exit codes for both success and error cases."
+        },
+        "acceptance": {
+          "exitCode": 0,
+          "testsRun": 6,
+          "kind": "passed",
+          "summary": "TAP version 13\n# Subtest: new storage lists an empty JSON array\nok 1 - new storage lists an empty JSON array\n  ---\n  duration_ms: 34.086551\n  type: 'test'\n  ...\n# Subtest: adds persist literal titles across processes with stable increasing IDs\nok 2 - adds persist literal titles across processes with stable increasing IDs\n  ---\n  duration_ms: 82.717435\n  type: 'test'\n  ...\n# Subtest: completion persists, is repeatable, and preserves IDs and other todos\nok 3 - completion persists, is repeatable, and preserves IDs and other todos\n  ---\n  duration_ms: 185.420633\n  type: 'test'\n  ...\n# Subtest: invalid input never creates storage\nok 4 - invalid input never creates storage\n  ---\n  duration_ms: 463.669339\n  type: 'test'\n  ...\n# Subtest: invalid input preserves storage bytes, todos, and the next ID\nok 5 - invalid input preserves storage bytes, todos, and the next ID\n  ---\n  duration_ms: 1069.813936\n  type: 'test'\n  ...\n# Subtest: TODO_FILE isolates independent stores\nok 6 - TODO_FILE isolates independent stores\n  ---\n  duration_ms: 134.065902\n  type: 'test'\n  ...\n1..6\n# tests 6\n# suites 0\n# pass 6\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 2025.524079\n"
+        }
+      }
+    ],
+    "manifestHash": "7fe2121ad1516f428ac6b1756542412e5260752ac19f5e37d995c19288865460"
+  }
+}

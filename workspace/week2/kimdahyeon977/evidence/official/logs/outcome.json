@@ -1,0 +1,11 @@
+{
+  "code": 0,
+  "signal": null,
+  "checkOnly": false,
+  "frozenUnchanged": true,
+  "acceptance": {
+    "exitCode": 0,
+    "signal": null,
+    "spawnError": false
+  }
+}

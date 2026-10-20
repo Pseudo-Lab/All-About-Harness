@@ -81,13 +81,15 @@ Custom Preset은 직접 작성한 persona·파일·셸·Custom RALPH와 Creator 
 
 두 실행 모두 1 Round에서 완료됐다. Custom은 별도 검증 Child와 호스트 실행에서 6개 테스트가 모두 통과했기 때문에 다음 Round를 시작하지 않았다. 실패 피드백을 다음 Round에 넘기는 경로와 5 Round 소진 경로는 자동 테스트로 확인했다. 실제 모델 실행에서 여러 Round를 거친 사례는 이번 최종 비교에 없다.
 
-토큰은 native session의 사용량 합계다. 입력에는 일반 입력과 캐시 읽기·쓰기가 포함되며 API 비용과 같은 지표가 아니다. 시간은 `creator_run_loop` 호출부터 컨트롤러 종료까지이며 별도의 최종 외부 테스트 시간은 제외했다. 최종 Custom은 별도 위임을 호출하지 않았고 구현 Child는 `read`, `write`, `structured_output`, 테스트 Child는 `read`, `bash`, `structured_output`만 호출했다.
+토큰은 native session의 사용량 합계다. 입력에는 일반 입력과 캐시 읽기·쓰기가 포함되며 API 비용과 같은 지표가 아니다. 시간은 `creator_run_loop` 호출부터 `experiment/end` 기록까지이며 별도의 최종 외부 테스트 시간은 제외했다. 컨트롤러 반환 후 종료 기록까지의 약 1ms도 포함한다. 최종 Custom은 별도 위임을 호출하지 않았고 구현 Child는 `read`, `write`, `structured_output`, 테스트 Child는 `read`, `bash`, `structured_output`만 호출했다.
 
 [Custom 실행 로그와 결과](evidence/custom/logs/controller-result.json), [공식 실행 로그와 결과](evidence/official/logs/controller-result.json), 각 `native-summary.json`과 `final-acceptance.tap`에 근거가 있다. 모델에 전달한 동일한 작업과 초기 테스트 hash는 각 `manifest.json`에서 대조할 수 있다. 원본 세션은 로컬 실행 폴더에 보관하고 제출물에는 선택한 실행 메타데이터만 포함했다.
 
 ## 결론
 
 최종 소스 검증은 별도 서브에이전트가 실행했다. CLI 계약, 반복·상태 전달·종료·취소, 실제 테스트 실행기, 파일 무결성, Preset의 scoped 도구 제한을 포함해 **53개 통과, 실패·취소·생략 0개**다. [최종 테스트 로그](tests/final-verification.log)에 실행 결과를 보관했다. 실제 모델 실행의 최종 외부 테스트도 Custom·공식 각각 6개를 통과했다.
+
+2026-10-20 PR 제출 전 서브에이전트가 같은 53개 테스트와 보관된 Custom·공식 최종 CLI의 계약 테스트 각 6개를 재실행했다. **총 65개 통과, 실패·취소·생략 0개**이며 [재검증 로그](tests/pre-pr-verification.log)와 [증거 대조 기록](tests/pre-pr-audit.md)을 추가했다. 모델을 다시 호출하지 않고 보관된 결과물과 원본 고정 테스트를 검증했다.
 
 Custom은 구현과 검증 역할을 분리하고 실제 고정 테스트를 종료 조건으로 연결했다. 이번 단일 작업에서는 두 방식 모두 정답을 만들었고, Custom은 캐시를 포함한 처리 토큰이 적었지만 실행 시간은 더 길었다. Custom의 작은 Preset과 공식 Creator Preset의 차이도 결과에 포함되므로 반복 설계 하나의 효과나 일반적인 우열로 해석하지 않는다.
 

@@ -1,0 +1,426 @@
+TAP version 13
+# Subtest: new storage lists an empty JSON array
+ok 1 - new storage lists an empty JSON array
+  ---
+  duration_ms: 46.437459
+  type: 'test'
+  ...
+# Subtest: adds persist literal titles across processes with stable increasing IDs
+ok 2 - adds persist literal titles across processes with stable increasing IDs
+  ---
+  duration_ms: 112.681253
+  type: 'test'
+  ...
+# Subtest: completion persists, is repeatable, and preserves IDs and other todos
+ok 3 - completion persists, is repeatable, and preserves IDs and other todos
+  ---
+  duration_ms: 241.255106
+  type: 'test'
+  ...
+# Subtest: invalid input never creates storage
+ok 4 - invalid input never creates storage
+  ---
+  duration_ms: 537.465566
+  type: 'test'
+  ...
+# Subtest: invalid input preserves storage bytes, todos, and the next ID
+ok 5 - invalid input preserves storage bytes, todos, and the next ID
+  ---
+  duration_ms: 1133.663977
+  type: 'test'
+  ...
+# Subtest: TODO_FILE isolates independent stores
+ok 6 - TODO_FILE isolates independent stores
+  ---
+  duration_ms: 135.015972
+  type: 'test'
+  ...
+# Subtest: preset-scoped delegation cannot execute in an unassigned child or deeper descendant
+ok 7 - preset-scoped delegation cannot execute in an unassigned child or deeper descendant
+  ---
+  duration_ms: 44.632697
+  type: 'test'
+  ...
+# Subtest: real scoped tool dispatch enforces each live role and removes role on disposal
+ok 8 - real scoped tool dispatch enforces each live role and removes role on disposal
+  ---
+  duration_ms: 153.366963
+  type: 'test'
+  ...
+# Subtest: implementation then distinct test child, disposal, and real acceptance precede complete
+ok 9 - implementation then distinct test child, disposal, and real acceptance precede complete
+  ---
+  duration_ms: 4.335703
+  type: 'test'
+  ...
+# Subtest: assertion failure hands previous implementation and failure evidence into next round
+ok 10 - assertion failure hands previous implementation and failure evidence into next round
+  ---
+  duration_ms: 1.091083
+  type: 'test'
+  ...
+# Subtest: test-child failure cannot be overruled by host pass
+ok 11 - test-child failure cannot be overruled by host pass
+  ---
+  duration_ms: 1.706063
+  type: 'test'
+  ...
+# Subtest: default budget is exactly five failed rounds with fresh children
+ok 12 - default budget is exactly five failed rounds with fresh children
+  ---
+  duration_ms: 2.345163
+  type: 'test'
+  ...
+# Subtest: invalid round budget 0 blocks before children
+ok 13 - invalid round budget 0 blocks before children
+  ---
+  duration_ms: 0.371186
+  type: 'test'
+  ...
+# Subtest: invalid round budget 6 blocks before children
+ok 14 - invalid round budget 6 blocks before children
+  ---
+  duration_ms: 0.244384
+  type: 'test'
+  ...
+# Subtest: invalid round budget -1 blocks before children
+ok 15 - invalid round budget -1 blocks before children
+  ---
+  duration_ms: 0.241326
+  type: 'test'
+  ...
+# Subtest: invalid round budget 1.5 blocks before children
+ok 16 - invalid round budget 1.5 blocks before children
+  ---
+  duration_ms: 0.199852
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: undefined
+ok 17 - invalid or blocked host evidence cannot complete: undefined
+  ---
+  duration_ms: 0.554994
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {}
+ok 18 - invalid or blocked host evidence cannot complete: {}
+  ---
+  duration_ms: 0.675248
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":0,"kind":"passed","summary":"fixed tests executed"}
+ok 19 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":0,"kind":"passed","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.322557
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":-1,"kind":"passed","summary":"fixed tests executed"}
+ok 20 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":-1,"kind":"passed","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.339515
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":"3","kind":"passed","summary":"fixed tests executed"}
+ok 21 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":"3","kind":"passed","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.272013
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":3,"kind":"infrastructure-error","summary":"fixed tests executed"}
+ok 22 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":3,"kind":"infrastructure-error","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.305007
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":3,"kind":"assertion-failure","summary":"fixed tests executed"}
+ok 23 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":3,"kind":"assertion-failure","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.267077
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report undefined blocks and disposes
+ok 24 - implementation malformed or blocked report undefined blocks and disposes
+  ---
+  duration_ms: 0.363787
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report {} blocks and disposes
+ok 25 - implementation malformed or blocked report {} blocks and disposes
+  ---
+  duration_ms: 0.146955
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report {"status":"pass","summary":""} blocks and disposes
+ok 26 - implementation malformed or blocked report {"status":"pass","summary":""} blocks and disposes
+  ---
+  duration_ms: 0.205397
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report {"status":"blocked","summary":"environment unavailable"} blocks and disposes
+ok 27 - implementation malformed or blocked report {"status":"blocked","summary":"environment unavailable"} blocks and disposes
+  ---
+  duration_ms: 0.340714
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report {"status":"ready","summary":"ok","extra":true} blocks and disposes
+ok 28 - implementation malformed or blocked report {"status":"ready","summary":"ok","extra":true} blocks and disposes
+  ---
+  duration_ms: 0.190209
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report undefined blocks and disposes
+ok 29 - test malformed or blocked report undefined blocks and disposes
+  ---
+  duration_ms: 0.180838
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report {} blocks and disposes
+ok 30 - test malformed or blocked report {} blocks and disposes
+  ---
+  duration_ms: 0.189702
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report {"status":"pass","summary":""} blocks and disposes
+ok 31 - test malformed or blocked report {"status":"pass","summary":""} blocks and disposes
+  ---
+  duration_ms: 0.185379
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report {"status":"blocked","summary":"environment unavailable"} blocks and disposes
+ok 32 - test malformed or blocked report {"status":"blocked","summary":"environment unavailable"} blocks and disposes
+  ---
+  duration_ms: 0.178198
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report {"status":"ready","summary":"ok","extra":true} blocks and disposes
+ok 33 - test malformed or blocked report {"status":"ready","summary":"ok","extra":true} blocks and disposes
+  ---
+  duration_ms: 0.179121
+  type: 'test'
+  ...
+# Subtest: child reject blocks
+ok 34 - child reject blocks
+  ---
+  duration_ms: 0.366316
+  type: 'test'
+  ...
+# Subtest: child abnormal blocks
+ok 35 - child abnormal blocks
+  ---
+  duration_ms: 0.096788
+  type: 'test'
+  ...
+# Subtest: child dispose blocks
+ok 36 - child dispose blocks
+  ---
+  duration_ms: 0.192449
+  type: 'test'
+  ...
+# Subtest: child duplicate blocks
+ok 37 - child duplicate blocks
+  ---
+  duration_ms: 0.107861
+  type: 'test'
+  ...
+# Subtest: cancellation reaches active child and disposal finishes before return
+ok 38 - cancellation reaches active child and disposal finishes before return
+  ---
+  duration_ms: 21.046399
+  type: 'test'
+  ...
+# Subtest: already cancelled run starts no children
+ok 39 - already cancelled run starts no children
+  ---
+  duration_ms: 0.411505
+  type: 'test'
+  ...
+# Subtest: frozen manifest mutation during implementation blocks
+ok 40 - frozen manifest mutation during implementation blocks
+  ---
+  duration_ms: 0.330156
+  type: 'test'
+  ...
+# Subtest: frozen manifest mutation during test blocks
+ok 41 - frozen manifest mutation during test blocks
+  ---
+  duration_ms: 0.331174
+  type: 'test'
+  ...
+# Subtest: frozen manifest mutation during acceptance blocks
+ok 42 - frozen manifest mutation during acceptance blocks
+  ---
+  duration_ms: 0.221211
+  type: 'test'
+  ...
+# Subtest: frozen manifest mutation during dispose blocks
+ok 43 - frozen manifest mutation during dispose blocks
+  ---
+  duration_ms: 0.200813
+  type: 'test'
+  ...
+# Subtest: acceptance environment exception blocks without retry
+ok 44 - acceptance environment exception blocks without retry
+  ---
+  duration_ms: 0.324579
+  type: 'test'
+  ...
+# Subtest: real runner classifies passing
+ok 45 - real runner classifies passing
+  ---
+  duration_ms: 123.548426
+  type: 'test'
+  ...
+# Subtest: real runner classifies assertion
+ok 46 - real runner classifies assertion
+  ---
+  duration_ms: 130.070251
+  type: 'test'
+  ...
+# Subtest: real runner classifies throw
+ok 47 - real runner classifies throw
+  ---
+  duration_ms: 93.116327
+  type: 'test'
+  ...
+# Subtest: real runner classifies zero tests
+ok 48 - real runner classifies zero tests
+  ---
+  duration_ms: 81.09735
+  type: 'test'
+  ...
+# Subtest: runner executes TODO_CLI from run workspace, not bundled example
+ok 49 - runner executes TODO_CLI from run workspace, not bundled example
+  ---
+  duration_ms: 104.158866
+  type: 'test'
+  ...
+# Subtest: runner cancellation propagates instead of producing pass
+ok 50 - runner cancellation propagates instead of producing pass
+  ---
+  duration_ms: 57.695664
+  type: 'test'
+  ...
+# Subtest: runner timeout blocks as infrastructure error
+ok 51 - runner timeout blocks as infrastructure error
+  ---
+  duration_ms: 57.490934
+  type: 'test'
+  ...
+# Subtest: snapshot stable unchanged, detects bytes, membership, rename and permissions
+ok 52 - snapshot stable unchanged, detects bytes, membership, rename and permissions
+  ---
+  duration_ms: 15.2343
+  type: 'test'
+  ...
+# Subtest: snapshot refuses file and ancestor symlinks, missing roots, and outside roots
+ok 53 - snapshot refuses file and ancestor symlinks, missing roots, and outside roots
+  ---
+  duration_ms: 4.244242
+  type: 'test'
+  ...
+1..53
+# tests 53
+# suites 0
+# pass 53
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2286.201269
+
+=== archived custom CLI; TODO_CLI=/home/user/All-About-Harness/workspace/week2/kimdahyeon977/evidence/custom/workspace/cli.mjs; node --test --test-reporter=tap /tmp/week2-harness-runs/custom-Sdt8j4/frozen/todo.test.mjs ===
+TAP version 13
+# Subtest: new storage lists an empty JSON array
+ok 1 - new storage lists an empty JSON array
+  ---
+  duration_ms: 29.847138
+  type: 'test'
+  ...
+# Subtest: adds persist literal titles across processes with stable increasing IDs
+ok 2 - adds persist literal titles across processes with stable increasing IDs
+  ---
+  duration_ms: 81.010305
+  type: 'test'
+  ...
+# Subtest: completion persists, is repeatable, and preserves IDs and other todos
+ok 3 - completion persists, is repeatable, and preserves IDs and other todos
+  ---
+  duration_ms: 185.116114
+  type: 'test'
+  ...
+# Subtest: invalid input never creates storage
+ok 4 - invalid input never creates storage
+  ---
+  duration_ms: 526.859523
+  type: 'test'
+  ...
+# Subtest: invalid input preserves storage bytes, todos, and the next ID
+ok 5 - invalid input preserves storage bytes, todos, and the next ID
+  ---
+  duration_ms: 1126.315152
+  type: 'test'
+  ...
+# Subtest: TODO_FILE isolates independent stores
+ok 6 - TODO_FILE isolates independent stores
+  ---
+  duration_ms: 134.670463
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2138.067739
+ARCHIVED_CUSTOM_EXIT=0
+
+=== archived official CLI; TODO_CLI=/home/user/All-About-Harness/workspace/week2/kimdahyeon977/evidence/official/workspace/cli.mjs; node --test --test-reporter=tap /tmp/week2-harness-runs/official-1RGywZ/frozen/todo.test.mjs ===
+TAP version 13
+# Subtest: new storage lists an empty JSON array
+ok 1 - new storage lists an empty JSON array
+  ---
+  duration_ms: 31.39439
+  type: 'test'
+  ...
+# Subtest: adds persist literal titles across processes with stable increasing IDs
+ok 2 - adds persist literal titles across processes with stable increasing IDs
+  ---
+  duration_ms: 83.792806
+  type: 'test'
+  ...
+# Subtest: completion persists, is repeatable, and preserves IDs and other todos
+ok 3 - completion persists, is repeatable, and preserves IDs and other todos
+  ---
+  duration_ms: 193.429368
+  type: 'test'
+  ...
+# Subtest: invalid input never creates storage
+ok 4 - invalid input never creates storage
+  ---
+  duration_ms: 527.88495
+  type: 'test'
+  ...
+# Subtest: invalid input preserves storage bytes, todos, and the next ID
+ok 5 - invalid input preserves storage bytes, todos, and the next ID
+  ---
+  duration_ms: 1102.27286
+  type: 'test'
+  ...
+# Subtest: TODO_FILE isolates independent stores
+ok 6 - TODO_FILE isolates independent stores
+  ---
+  duration_ms: 142.464864
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2136.853616
+ARCHIVED_OFFICIAL_EXIT=0

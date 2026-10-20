@@ -1,0 +1,15 @@
+Implement a dependency-free Node.js ESM TODO CLI at ./cli.mjs.
+Support: node cli.mjs add TITLE, list, and complete ID. Persist JSON at TODO_FILE.
+Print JSON on success: add returns {id,title,completed:false}; list returns an array; complete returns the item with completed:true.
+IDs are positive safe integers, stable across processes, and strictly increasing on successful adds.
+Preserve literal titles. Reject empty or whitespace-only titles, extra arguments, unknown commands, malformed or missing IDs, and nonexistent IDs with a nonzero exit code. Errors must not create storage or change existing storage bytes or consume IDs. Completion is repeatable. TODO_FILE isolates stores.
+The CLI is initially absent. Implement the CLI yourself. Never modify acceptance/ or any test files. Do not access any reference example solution or other experiment workspace.
+
+This is a deliberately planned staged demonstration of failure feedback and repair, not a spontaneous bug discovery. Apply the same objective and staging to either loop implementation. Use the controller-provided fresh contexts, with at most five implementation rounds. Do not start extra agents or nested loops. Custom uses its separate implementation/test roles; the official worker implements and runs tests itself, reporting continue or complete through its own schema.
+
+Round 1: implement only add and list, including their validation and persistence requirements. Leave complete explicitly unsupported: it must exit nonzero with an unsupported-command error, without changing storage. Do not implement completion yet. The implementation agent should report ready for independent testing while clearly describing this planned omission. The independent test agent must inspect the actual CLI and run the FULL unchanged frozen suite, including every completion test. Do not skip, filter, weaken, rewrite, or replace tests. Observe and report the real completion assertion failures and the nonzero test exit code, return fail in the Custom test role or continue in the official worker report, and continue to round 2. Do not claim the task is complete or classify this expected assertion failure as an infrastructure blocker.
+
+Round 2: read the previous implementation and available failure handoff (Custom independent test/host report, or official worker evidence). Use that feedback to implement complete ID and satisfy the full specification above, preserving working add/list behavior. The independent test agent must again inspect the actual CLI and run the FULL unchanged frozen suite. Return pass only when the entire suite actually passes. If further failures remain, report them and continue within the five-round maximum.
+
+In every round run the frozen suite with: TODO_CLI="$PWD/cli.mjs" node --test --test-reporter=tap acceptance/todo.test.mjs
+Custom host verification runs after each pair of children; external host verification evaluates both final outputs against the same unchanged suite. Report concrete evidence from each round. Final success requires the full suite to pass; the planned first-round failure alone is never success.

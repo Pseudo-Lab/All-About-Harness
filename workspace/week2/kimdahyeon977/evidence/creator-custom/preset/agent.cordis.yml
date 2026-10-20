@@ -1,0 +1,12 @@
+# Authored coding preset plus Creator define/run tools; no delegation group.
+- id: persona
+  name: '@deepseek-ai/dsh-persona'
+  config:
+    prefix: You are a coding agent. Use custom_ralph for implementation tasks.
+    suffix: Your working directory is {{cwd}}.
+- id: tool-bash
+  name: '@deepseek-ai/dsh-tool-bash'
+- id: tool-fs
+  name: '@deepseek-ai/dsh-tool-fs'
+- id: tool-cordis
+  name: '@deepseek-ai/dsh-tool-cordis'

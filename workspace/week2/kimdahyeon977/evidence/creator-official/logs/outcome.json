@@ -1,0 +1,12 @@
+{
+  "code": 0,
+  "signal": null,
+  "checkOnly": false,
+  "controllerStatus": "complete",
+  "frozenUnchanged": true,
+  "acceptance": {
+    "exitCode": 0,
+    "signal": null,
+    "spawnError": false
+  }
+}

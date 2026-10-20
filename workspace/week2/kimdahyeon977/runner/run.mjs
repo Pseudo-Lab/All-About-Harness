@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import { dirname, resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
+import { buildCreatorSource } from './creator-source.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const assignment = dirname(here);
@@ -26,7 +27,13 @@ const logs = join(run, 'logs');
 for (const path of [workspace, home, logs, join(workspace, 'acceptance'), join(run, 'frozen')]) await mkdir(path, { recursive: true, mode: 0o700 });
 const originalTest = join(assignment, 'acceptance/todo.test.mjs');
 const initialTest = await readFile(originalTest);
-const task = await readFile(join(here, 'task.txt'));
+const scenario = process.env.RALPH_SCENARIO ?? 'staged';
+if (!['single', 'staged'].includes(scenario)) throw new Error('RALPH_SCENARIO must be single or staged');
+const task = await readFile(join(here, scenario === 'single' ? 'task.txt' : 'task-staged.txt'));
+const creatorSource = await buildCreatorSource(mode);
+const creatorCode = join(run, 'creator.host.js');
+await writeFile(creatorCode, creatorSource, { mode: 0o600 });
+const runtimeConfig = { workspace, frozenRoots: ['acceptance'], testFiles: ['acceptance/todo.test.mjs'], maxRounds: 5, provider: 'spawn' };
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 for (const dest of [join(workspace, 'acceptance/todo.test.mjs'), join(run, 'frozen/todo.test.mjs')]) {
   await writeFile(dest, initialTest, { mode: 0o444 });
@@ -52,15 +59,11 @@ if (mode === 'custom') {
   const authoredRows = yaml.load(await readFile(join(assignment, 'preset/agent.cordis.yml'), 'utf8'));
   // Keep the authored coding surface, without inheriting Creator's delegation
   // group: its scoped tool registrations can escape a global child tool filter.
-  const allowed = new Set(['persona', 'tool-bash', 'tool-fs', 'custom-ralph']);
+  const allowed = new Set(['persona', 'tool-bash', 'tool-fs']);
   const authored = authoredRows.filter(row => allowed.has(row.id));
   for (const id of allowed) {
     if (authored.filter(row => row.id === id).length !== 1) throw new Error(`preset/ must declare exactly one ${id}`);
   }
-  const custom = authored.find(row => row.id === 'custom-ralph');
-  if (!custom) throw new Error('preset/ must declare custom-ralph');
-  custom.name = adapterFile;
-  custom.config = { workspace, frozenRoots: ['acceptance'], testFiles: ['acceptance/todo.test.mjs'], maxRounds: 5, provider: 'spawn' };
   const generated = join(presetRoots, presetId);
   await mkdir(generated, { recursive: true });
   await copyFile(join(assignment, 'preset/preset.yml'), join(generated, 'preset.yml'));
@@ -80,16 +83,16 @@ const inserts = [
 ];
 inserts.push({ id: 'experiment-bootstrap', name: join(here, 'bootstrap.mjs'), config: {
   mode, presetId, check: option === '--check', events: join(logs, 'bootstrap.jsonl'), task: join(run, 'task.txt'),
-  creatorCode: join(here, 'creator.host.js'), result: join(logs, 'controller-result.json'),
+  creatorCode, runtimeConfig, runtimeModule: adapterFile, result: join(logs, 'controller-result.json'),
 } });
 rows.push({ insert: inserts });
 const overlay = join(run, 'experiment.patch.json');
 await writeFile(overlay, JSON.stringify(rows, null, 2));
-const manifest = { mode, presetId, state: 'prepared-not-executed', run, workspace, dshHome: home,
+const manifest = { mode, scenario, presetId, state: 'prepared-not-executed', run, workspace, dshHome: home,
   provider: 'amazon-bedrock', model: 'us.anthropic.claude-sonnet-4-5-20250929-v1:0', modelPatch: patch,
   maxRounds: 5, cliInitiallyPresent: false, initialFiles: { 'acceptance/todo.test.mjs': hash(initialTest) },
   taskSha256: hash(task), acceptanceSha256: hash(initialTest), adapterSha256: hash(adapterSource),
-  creatorSourceSha256: hash(await readFile(join(here, 'creator.host.js'))) };
+  creatorSourceSha256: hash(creatorSource) };
 await writeFile(join(run, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
 console.log(run);
 if (option === '--prepare') process.exit(0);

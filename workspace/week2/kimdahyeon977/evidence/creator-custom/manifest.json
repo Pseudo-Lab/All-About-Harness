@@ -1,0 +1,21 @@
+{
+  "mode": "custom",
+  "scenario": "staged",
+  "presetId": "custom-ralph",
+  "state": "prepared-not-executed",
+  "run": "/tmp/week2-harness-runs/custom-Sqv4Os",
+  "workspace": "/tmp/week2-harness-runs/custom-Sqv4Os/workspace",
+  "dshHome": "/tmp/week2-harness-runs/custom-Sqv4Os/dsh-home",
+  "provider": "amazon-bedrock",
+  "model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+  "modelPatch": "/home/user/.dsh/bedrock.patch.yml",
+  "maxRounds": 5,
+  "cliInitiallyPresent": false,
+  "initialFiles": {
+    "acceptance/todo.test.mjs": "4b935693162b7093a9aabeb39b1cbc7fff608b949cfe7547d9edfa47c4ea0f87"
+  },
+  "taskSha256": "6a83becd24d728a3953ddf98d0a939cea12e88d4b88b400ee7a38e492960cd92",
+  "acceptanceSha256": "4b935693162b7093a9aabeb39b1cbc7fff608b949cfe7547d9edfa47c4ea0f87",
+  "adapterSha256": "e841a9b3e72fd7ae54b55f8f201b2190fe9a03d1ad26f11640a5716d82784003",
+  "creatorSourceSha256": "61e0d1864f95b5b1349bc9e3400818647530a11448a120f745da4f2bc507d2bf"
+}

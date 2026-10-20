@@ -6,7 +6,7 @@ export const name = 'custom-ralph';
 export const inject = ['tools', 'subagents'];
 
 /** Mount the custom loop. Configuration belongs to the preset, never model arguments. */
-export function apply(ctx, config) {
+export function createRuntime(ctx, config) {
   const { workspace, frozenRoots, testFiles, provider = 'spawn', maxRounds = 5 } = config;
   if (!workspace || !frozenRoots?.length || !testFiles?.length) throw new Error('workspace, frozenRoots, testFiles required');
   if (!Number.isInteger(maxRounds) || maxRounds < 1 || maxRounds > 5) throw new Error('maxRounds must be 1..5');
@@ -35,13 +35,8 @@ export function apply(ctx, config) {
     for (const item of pending) item.controller.abort(new Error('Plugin disposed'));
     await Promise.allSettled(pending.map(item => item.done));
   });
-  ctx.effect(() => ctx.tools.register(defineTool({
-    name: 'custom_ralph',
-    description: 'Implement then independently test in fresh contexts, at most five rounds. Tests are frozen and checked by the host.',
-    parameters: { task: { type: 'string', required: true, description: 'Complete implementation specification.' } },
-    isConcurrencySafe: () => false,
-    output: { schema: { type: 'json' }, render: (_args, value) => [{ type: 'text', text: JSON.stringify(value) }] },
-    async execute({ task }, exec) {
+  return {
+    async withRun(task, exec, executeLoop) {
       if (!exec.agent) throw new Error('Calling agent required');
       if (busy) throw new Error('RALPH workspace already in use');
       const backend = ctx.subagents.getProvider(provider);
@@ -55,7 +50,8 @@ export function apply(ctx, config) {
       const item = { controller, done: new Promise(resolve => { finish = resolve; }) };
       controllers.add(item);
       try {
-        return await runRalph({ task, maxRounds, signal: controller.signal,
+        return await executeLoop({ task, maxRounds, signal: controller.signal,
+          record: config.record ?? (async () => {}),
           snapshotTests: () => snapshotTests(workspace, frozenRoots),
           runAcceptance: ({ signal }) => runAcceptance({ workspace, testFiles, signal, timeoutMs: config.timeoutMs }),
           startChild: async ({ role, round, task, feedback, signal }) => {
@@ -68,8 +64,8 @@ export function apply(ctx, config) {
               prompt: [{ type: 'text', text: JSON.stringify({ role, round, task, feedback, workspace,
                 frozenRoots, environment: { TODO_CLI: `${workspace}/cli.mjs` }, command: [process.execPath, '--test', '--test-reporter=tap', ...testFiles],
                 instructions: role === 'implementation'
-                  ? 'Implement the task in shared workspace. Never change frozen roots. Return ready or blocked with summary.'
-                  : 'Independently inspect implementation and execute the exact command in workspace. Never edit files. Return pass only if tests ran and passed, otherwise fail or blocked, with evidence in summary.' }) }],
+                  ? 'Implement only the current round stage in shared workspace. Never change frozen roots, run shell commands, or delegate. Tests are handled by the separate test role. Return ready after the current stage, or blocked for an actual environment blocker.'
+                  : 'Independently inspect implementation and execute the exact command once in workspace. Never edit files or delegate. Return pass only if tests ran and passed; assertion failures return fail, environment errors return blocked. Include actual test output and do not repeat manual checks after a clear suite result.' }) }],
             });
             // Install policy before returning the handle to the orchestrator.
             // Startup remains fail-closed through the depth-based guard above.
@@ -90,5 +86,18 @@ export function apply(ctx, config) {
         busy = false;
       }
     },
+  };
+}
+
+/** Compatibility file-based entry; Creator executes the same core inside its VM. */
+export function apply(ctx, config) {
+  const runtime = createRuntime(ctx, config);
+  ctx.effect(() => ctx.tools.register(defineTool({
+    name: 'custom_ralph',
+    description: 'Implement and independently verify with fresh children, up to five rounds.',
+    parameters: { task: { type: 'string', required: true } },
+    isConcurrencySafe: () => false,
+    output: { schema: { type: 'json' }, render: (_args, value) => [{ type: 'text', text: JSON.stringify(value) }] },
+    execute({ task }, exec) { return runtime.withRun(task, exec, runRalph); },
   })));
 }

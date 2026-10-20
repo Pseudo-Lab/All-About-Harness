@@ -29,9 +29,9 @@ node workspace/week2/kimdahyeon977/runner/run.mjs custom
 node workspace/week2/kimdahyeon977/runner/run.mjs official
 ```
 
-`--check`는 모델 호출 없이 실제 Preset 로딩과 `cordis_define` → `cordis_run`을 확인한다. 실제 실행은 동적 Plugin의 `creator_run_loop`를 통해 자체 `custom_ralph` 또는 공식 `ralph`를 호출한다. 반복 제어 구현은 `plugin/core.mjs`, Harness 연결은 `plugin/index.mjs`에 있다. Creator Mode에 등록하는 동적 코드는 이 컨트롤러를 호출하는 연결 Plugin이다.
+`--check`는 모델 호출 없이 실제 Preset 로딩과 `cordis_define` → `cordis_run`을 확인한다. Custom 실행은 `plugin/core.mjs` 전체를 `creator.host.js`에 삽입한 소스를 `cordis_define`에 제출한다. 따라서 반복문·상태 전달·완료 판단은 Creator VM 안에서 실행된다. `plugin/index.mjs`의 `createRuntime`은 Child 생성·정리, 파일 hash와 테스트 실행만 제공한다. 이 경로에는 정적 `custom_ralph` 도구를 등록하지 않는다. 공식 비교만 별도 동적 진입점에서 공식 `ralph`를 호출한다. 실제 제출 소스는 각 실행 폴더의 `creator.host.js`와 정의 로그에 보관한다.
 
-다른 Workspace용 Preset 파일만 생성하려면 다음 명령을 사용한다. 이 명령은 원본 템플릿과 사용자 홈을 변경하지 않고 `preset/generated/`에 설정을 만든다. 실제 마운트 시 호스트는 `subagents`와 `spawn`, 파일·셸 실행 서비스와 모델 경로를 제공해야 한다.
+기존 파일 기반 호환 Preset만 생성하려면 다음 명령을 사용한다. 이 명령은 원본 템플릿과 사용자 홈을 변경하지 않고 `preset/generated/`에 설정을 만든다. 실제 마운트 시 호스트는 `subagents`와 `spawn`, 파일·셸 실행 서비스와 모델 경로를 제공해야 한다.
 
 ```sh
 node workspace/week2/kimdahyeon977/plugin/install.mjs \
@@ -52,14 +52,15 @@ node workspace/week2/kimdahyeon977/example/cli.mjs complete 1
 node --test workspace/week2/kimdahyeon977/acceptance/todo.test.mjs
 ```
 
-전체 검증은 로컬 Harness 빌드가 있는 환경에서 다음과 같이 실행한다. 마지막 테스트는 실제 Harness의 scoped 도구 등록과 실행 guard를 확인한다.
+전체 검증은 로컬 Harness 빌드가 있는 환경에서 다음과 같이 실행한다. scoped guard 테스트는 실제 Harness 도구 제한을, Creator VM 테스트는 동적으로 제출한 소스의 반복·Handoff·종료를 확인한다.
 
 ```sh
 node --test --test-reporter=tap \
   workspace/week2/kimdahyeon977/acceptance/todo.test.mjs \
   workspace/week2/kimdahyeon977/tests/core.test.mjs \
   workspace/week2/kimdahyeon977/tests/host.test.mjs \
-  workspace/week2/kimdahyeon977/plugin/scoped-guard.test.mjs
+  workspace/week2/kimdahyeon977/plugin/scoped-guard.test.mjs \
+  workspace/week2/kimdahyeon977/tests/creator-dynamic.test.mjs
 ```
 
 ## 공식 구현과 비교할 기준
@@ -72,4 +73,6 @@ node --test --test-reporter=tap \
 | 완료 판단 | 테스트 Child 통과 + 실제 고정 테스트 통과 | 작업 Child의 완료 보고 |
 | 최대 Round | 5 | 비교 실행에서 5로 설정 |
 
-실제 비교 수치와 한계는 [실행 결과](result.md), 자동 검증 기록은 `tests/`, 실행 로그와 최종 코드는 `evidence/custom/`과 `evidence/official/`에 있다. 수정 전 우회 호출 기록은 `evidence/custom-before-fix/`에 별도로 보관했다.
+기본 실행은 의도적으로 단계별 작업을 사용한다. Round 1에서 추가·조회만 구현하고 실제 완료 처리 테스트 실패를 확인한 뒤, Round 2에서 이전 실패를 받아 완료 기능을 구현한다. 실패를 조작하거나 테스트를 약화하지 않는다. 최초 단일 단계 작업은 `RALPH_SCENARIO=single`로 재현한다.
+
+실제 비교 수치와 한계는 [실행 결과](result.md), 자동 검증 기록은 `tests/`, 실행 로그와 최종 코드는 `evidence/creator-custom/`과 `evidence/creator-official/`에 있다. 초기 1 Round 비교는 `evidence/custom/`과 `evidence/official/`에 보관했다. 수정 전 우회 호출 기록은 `evidence/custom-before-fix/`에 별도로 보관했다.

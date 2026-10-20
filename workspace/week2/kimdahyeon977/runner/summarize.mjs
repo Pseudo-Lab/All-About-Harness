@@ -3,8 +3,8 @@ import { resolve, join, relative, dirname, isAbsolute } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as zlib from 'node:zlib';
 
-// Native records are private input. Only explicitly selected scalar metadata leaves
-// this module; no message bodies, tool arguments/results, or transport errors do.
+// Export selected metadata and structured worker reports, never arbitrary
+// message bodies, command arguments/results, or transport errors.
 const scalar = value => typeof value === 'string' || typeof value === 'boolean' ||
   (typeof value === 'number' && Number.isFinite(value)) || value === null;
 const pick = (value, keys) => Object.fromEntries(keys.filter(key => value && scalar(value[key])).map(key => [key, value[key]]));
@@ -39,7 +39,7 @@ export function summarizeSession(records) {
   const header = records.find(row => row.type === 'session');
   if (!header?.id) throw new Error('Native session header missing');
   const result = { ...pick(header, ['id', 'parentSession', 'createdAt', 'origin', 'delegationDepth']),
-    role: 'unknown', round: null, childSessionIds: [], timeline: [], usage: [] };
+    role: 'unknown', round: null, childSessionIds: [], timeline: [], usage: [], structuredReports: [] };
   for (const row of records) {
     const data = row.data ?? {};
     if (row.type === 'subagent/descriptor' || row.type === 'subagent/catalog') {
@@ -70,6 +70,18 @@ export function summarizeSession(records) {
       if (row.type === 'turn/end') Object.assign(event, pick(data.reason, ['kind']));
       result.timeline.push(event);
     }
+    if (row.type === 'tool/call' && data.name === 'structured_output') {
+      let report;
+      try { report = typeof data.arguments === 'string' ? JSON.parse(data.arguments) : data.arguments; }
+      catch { continue; }
+      if (report && ['ready', 'pass', 'fail', 'continue', 'complete', 'blocked'].includes(report.status)) {
+        const selected = { ...pick(row, ['seq', 'time']), ...pick(report, ['status', 'summary', 'blocker']) };
+        for (const key of ['evidence', 'nextSteps']) {
+          if (Array.isArray(report[key])) selected[key] = report[key].filter(item => typeof item === 'string');
+        }
+        result.structuredReports.push(selected);
+      }
+    }
     const usage = pick(data.usage ?? data.response?.usage ?? (/usage/.test(row.type) ? data : undefined), usageKeys);
     if (Object.keys(usage).length) result.usage.push({ ...pick(row, ['seq', 'time']), ...usage });
   }
@@ -98,9 +110,15 @@ export async function exportSummary(runPath, outputPath) {
   JSON.parse(outcome.toString());
   const manifest = JSON.parse((await input('manifest.json')).toString());
   const files = new Map([['logs/outcome.json', outcome]]);
-  for (const path of ['manifest.json', 'logs/controller-result.json', 'logs/final-acceptance.tap', 'logs/bootstrap.jsonl', 'workspace/cli.mjs', 'task.txt']) {
+  for (const path of ['manifest.json', 'logs/controller-result.json', 'logs/final-acceptance.tap', 'logs/bootstrap.jsonl', 'workspace/cli.mjs', 'task.txt', 'creator.host.js']) {
     const bytes = await input(path, true);
     if (bytes) files.set(path, bytes);
+  }
+  if (manifest.mode === 'custom') {
+    for (const name of ['agent.cordis.yml', 'preset.yml']) {
+      const bytes = await input(`presets/${manifest.presetId}/${name}`, true);
+      if (bytes) files.set(`preset/${name}`, bytes);
+    }
   }
   const sessions = [];
   async function visit(path) {

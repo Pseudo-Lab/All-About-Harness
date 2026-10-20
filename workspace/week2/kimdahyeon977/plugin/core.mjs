@@ -6,7 +6,7 @@
  * returns { exitCode, testsRun, kind: passed|assertion-failure|infrastructure-error, summary }.
  */
 export async function runRalph({ startChild, snapshotTests, runAcceptance, task,
-  signal = new AbortController().signal, maxRounds = 5 }) {
+  signal = new AbortController().signal, maxRounds = 5, record = async () => {} }) {
   const rounds = [];
   let baseline;
   const check = async () => {
@@ -22,7 +22,8 @@ export async function runRalph({ startChild, snapshotTests, runAcceptance, task,
     const ids = new Set();
     let feedback = '';
     for (let round = 1; round <= maxRounds; round++) {
-      const entry = { round };
+      const entry = { round, handoff: feedback };
+      await record({ event: 'round/start', round, handoff: feedback });
       rounds.push(entry);
       for (const role of ['implementation', 'test']) {
         cancelled();
@@ -66,6 +67,7 @@ export async function runRalph({ startChild, snapshotTests, runAcceptance, task,
         || typeof entry.acceptance.summary !== 'string') throw new Error('Invalid acceptance execution evidence');
       if (entry.acceptance.kind === 'infrastructure-error') throw new Error('Acceptance infrastructure error');
       if ((entry.acceptance.kind === 'passed') !== (entry.acceptance.exitCode === 0)) throw new Error('Inconsistent acceptance evidence');
+      await record({ event: 'round/end', round, test: entry.test, acceptance: entry.acceptance });
       if (entry.test.status === 'pass' && entry.acceptance.exitCode === 0) return { status: 'complete', rounds, manifestHash: baseline };
       feedback = JSON.stringify({ implementation: entry.implementation, test: entry.test, acceptance: { ...entry.acceptance, summary: entry.acceptance.summary.slice(-4000) } });
     }

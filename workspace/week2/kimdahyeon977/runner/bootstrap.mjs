@@ -1,17 +1,17 @@
 import { readFile, appendFile, writeFile } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
 
 export const name = 'experiment-bootstrap';
-export const inject = ['agents', 'sessions', 'tools', 'agentPresets', 'agentDefaultModel'];
+export const inject = ['agents', 'sessions', 'tools', 'subagents', 'agentPresets', 'agentDefaultModel'];
 
 export function apply(ctx, config) {
   const controller = new AbortController();
   ctx.on('dispose', () => controller.abort(new Error('Experiment disposed')));
   const record = async (event) => appendFile(config.events, JSON.stringify({ at: new Date().toISOString(), ...event }) + '\n');
-  ctx.provide('experimentLoop', {
-    async run(objective, exec) {
-      const target = config.mode === 'custom' ? 'custom_ralph' : 'ralph';
-      return dispatch(exec.agent, target, config.mode === 'custom' ? { task: objective } : { objective, maxRounds: 5 }, exec.signal);
+  if (config.mode === 'official') ctx.provide('experimentLoop', {
+    run(objective, exec) {
+      return dispatch(exec.agent, 'ralph', { objective, maxRounds: 5 }, exec.signal);
     },
   });
   async function dispatch(agent, tool, args, signal = controller.signal) {
@@ -25,6 +25,11 @@ export function apply(ctx, config) {
   }
   async function run() {
     await ctx.get('loader').await();
+    if (config.mode === 'custom') {
+      const { createRuntime } = await import(pathToFileURL(config.runtimeModule).href);
+      // Host supplies single-child startup, IO, and cleanup; no rounds run here.
+      ctx.provide('ralphHost', createRuntime(ctx, { ...config.runtimeConfig, record }));
+    }
     const selection = ctx.agentDefaultModel.currentSelection();
     if (selection.provider !== 'amazon-bedrock' || selection.model !== 'us.anthropic.claude-sonnet-4-5-20250929-v1:0') {
       throw new Error('Expected the exact week1 Sonnet 4.5 route');
@@ -36,10 +41,14 @@ export function apply(ctx, config) {
       setup: async (agentCtx) => { await ctx.agentPresets.mount(agentCtx, config.presetId); },
     });
     await agent.whenIdle();
+    if (config.mode === 'custom' && ctx.tools.get('custom_ralph', agent)) {
+      throw new Error('Creator experiment must not mount the file-based loop tool');
+    }
     await record({ event: 'agent/created', sessionId: agent.id, preset: config.presetId, selection, mode: config.mode });
     const definition = await dispatch(agent, 'cordis_define', {
-      plugin: { kind: 'new', idPrefix: 'loop' }, name: 'Coding experiment bridge',
-      purpose: 'Activate and invoke the bounded coding controller through Creator Mode.',
+      plugin: { kind: 'new', idPrefix: 'loop' },
+      name: config.mode === 'custom' ? 'Creator-native Coding RALPH' : 'Official comparison entry',
+      purpose: config.mode === 'custom' ? 'Control rounds, structured handoff and termination inside the Creator dynamic package.' : 'Execute official Ralph under the same task conditions.',
       code: { host: await readFile(config.creatorCode, 'utf8') },
     });
     const activation = await dispatch(agent, 'cordis_run', {

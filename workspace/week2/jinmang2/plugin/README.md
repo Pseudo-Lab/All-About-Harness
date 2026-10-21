@@ -20,19 +20,26 @@ Each round:
 1. The plugin starts exactly one fresh child through `ctx.subagents` with the
    configured provider, labelled with the round and attempt. A provider that
    inherits the parent context or lacks structured output is refused before any
-   child starts.
+   child starts, and so is one that cannot honour `workerTools` (tool filter)
+   or `workerEffort` (agent options) when those are set.
 2. The child prompt contains only the objective, `round i of N`, the
    durable-memory instruction (inspect the workspace and progress file first,
    keep existing work), the previous verifier result (exit code plus the last
    `maxFeedbackChars` characters of output), and the previous worker report.
    Neither the parent conversation nor an earlier child session is seeded.
+   With `workerProtocol: focused` the brief instead says the plugin alone owns
+   the progress file, asks the worker to batch independent reads and commands,
+   to do only this round's part, and to re-check every requirement before it
+   reports `complete`.
 3. The child must return a structured report
    `{ status: "continue" | "complete" | "blocked", summary, nextSteps, blocker }`.
 4. After the child settles, the plugin — not the child — appends the round to the
    progress file: round number, worker status and summary, and the verifier
    result.
 5. When `verifyCommand` is set, the plugin runs it in the caller's working
-   directory under `verifyTimeoutMs`. Exit 0 ends the loop as `verified`.
+   directory under `verifyTimeoutMs`. Exit 0 ends the loop as `verified`; with
+   `stopWhen: verifier-and-worker`, only when the same round's worker also
+   reported `complete` (a passing verifier with a `continue` starts the next round).
 6. Termination: a worker `blocked` ends as `blocked`; with no `verifyCommand`, a
    worker `complete` ends as `self-reported`; a failing verifier or a continuing
    worker starts the next round; reaching the round cap ends as `budget-limited`.
@@ -55,6 +62,10 @@ Deployment-owned; part of the preset row, not of the tool schema.
 | `verifyTimeoutMs` | `120000` | Verifier timeout; the whole process tree is killed when it expires. |
 | `progressFile` | `.ralph/progress.md` | Progress log appended by the plugin, resolved against the caller's working directory. |
 | `maxFeedbackChars` | `4000` | Length of the verifier output tail carried into the next round and shown in the result. |
+| `stopWhen` | `verifier` | `verifier`: exit 0 ends the loop. `verifier-and-worker`: exit 0 ends it only with a worker `complete` in the same round, so a narrow verifier cannot end a loop the worker says is unfinished. |
+| `workerTools` | `[]` | Tool allow-list for every round's child (for example `[bash, read, edit, write, glob, grep]`). Empty keeps the caller's catalog. `structured_output` is always kept by the provider. |
+| `workerProtocol` | `basic` | `basic`: the original brief. `focused`: the brief described in step 2. |
+| `workerEffort` | `""` | Reasoning effort for every round's child: `off`, `low`, `high` or `max`. Empty inherits the caller's. |
 
 ## Preset
 

@@ -27,7 +27,29 @@ const DEFAULTS = Object.freeze({
   verifyTimeoutMs: 120000,
   progressFile: '.ralph/progress.md',
   maxFeedbackChars: 4000,
+  stopWhen: 'verifier',
+  workerTools: [],
+  workerEffort: '',
+  workerProtocol: 'basic',
 })
+
+/** Reasoning efforts a worker may be pinned to; empty inherits the caller's. */
+const EFFORTS = ['', 'off', 'low', 'high', 'max']
+
+/**
+ * How a round's worker is briefed. `basic` is the original brief. `focused`
+ * also tells the worker that the plugin alone owns the progress file, to batch
+ * independent reads and commands, and to check the whole objective, not only
+ * its own part, before it reports `complete`.
+ */
+const PROTOCOLS = ['basic', 'focused']
+
+/**
+ * When a passing verifier ends the loop: `verifier` on exit 0 alone, or
+ * `verifier-and-worker` only when the same round's worker also reported
+ * `complete`, so a narrow verifier cannot end a loop the worker says is unfinished.
+ */
+const STOP_RULES = ['verifier', 'verifier-and-worker']
 
 /**
  * The one structured report a worker may return. Object-rooted and limited to
@@ -120,6 +142,30 @@ function normalizedString(value, field, { allowEmpty = false } = {}) {
   return value
 }
 
+/** Read the stop rule from deployment config or throw. */
+function stopRule(value) {
+  if (!STOP_RULES.includes(value)) {
+    throw new TypeError(`verified_ralph config \`stopWhen\` must be one of ${STOP_RULES.join(', ')}`)
+  }
+  return value
+}
+
+/** Read one of a fixed set of strings from deployment config or throw. */
+function oneOf(value, allowed, field) {
+  if (!allowed.includes(value)) {
+    throw new TypeError(`verified_ralph config \`${field}\` must be one of ${allowed.map((v) => JSON.stringify(v)).join(', ')}`)
+  }
+  return value
+}
+
+/** Read the worker tool allow-list: empty keeps the caller's whole catalog. */
+function toolNames(value) {
+  if (!Array.isArray(value) || value.some((v) => typeof v !== 'string' || v.length === 0 || v !== v.trim())) {
+    throw new TypeError('verified_ralph config `workerTools` must be an array of tool names')
+  }
+  return Object.freeze([...new Set(value)])
+}
+
 /** Resolve the deployment-owned config, applying defaults outside the Loader too. */
 function resolveConfig(config) {
   const source = config !== null && typeof config === 'object' && !Array.isArray(config) ? config : {}
@@ -139,6 +185,10 @@ function resolveConfig(config) {
       source.maxFeedbackChars ?? DEFAULTS.maxFeedbackChars,
       'maxFeedbackChars',
     ),
+    stopWhen: stopRule(source.stopWhen ?? DEFAULTS.stopWhen),
+    workerTools: toolNames(source.workerTools ?? DEFAULTS.workerTools),
+    workerEffort: oneOf(source.workerEffort ?? DEFAULTS.workerEffort, EFFORTS, 'workerEffort'),
+    workerProtocol: oneOf(source.workerProtocol ?? DEFAULTS.workerProtocol, PROTOCOLS, 'workerProtocol'),
   }
 }
 
@@ -195,13 +245,23 @@ function errorText(error) {
  * verifier result, and the previous worker report. No parent conversation and
  * no earlier child session is seeded.
  */
-function buildRoundPrompt({ objective, round, maxRounds, progressFile, previousReport, previousVerifier, maxFeedbackChars }) {
+function buildRoundPrompt({ objective, round, maxRounds, progressFile, previousReport, previousVerifier, maxFeedbackChars, protocol = 'basic' }) {
   const parts = [
     'You are the worker for one round of a Ralph loop toward one immutable objective. You start with no parent conversation and no earlier session. Do not call the verified_ralph tool from this round; you are already its worker.',
     `Immutable objective:\n${objective}`,
     `Round ${round} of ${maxRounds}.`,
-    `The shared workspace and the progress file at ${progressFile} are the durable memory. Inspect them first, keep all existing work, and make concrete in-scope progress. Verify what you change.`,
   ]
+  if (protocol === 'focused') {
+    parts.push(
+      `The shared workspace is the durable memory. The loop appends every round's report and verifier result to ${progressFile} itself: read it if you need history, never edit or create it. Inspect the workspace first, keep all existing work, and make concrete in-scope progress. Verify what you change.`,
+      'Work efficiently: issue independent reads and commands together in one step, do not re-read a file you just wrote, and run the project tests once after your changes rather than after every edit.',
+      'Do only the part of the objective this round is meant to do, as the objective defines it; never do a later round\'s part early. Report "complete" only when nothing remains after this round, and before you do, re-read the objective\'s source of truth and confirm every requirement against the code with a quick probe; if any requirement fails, report "continue" and name it instead.',
+    )
+  } else {
+    parts.push(
+      `The shared workspace and the progress file at ${progressFile} are the durable memory. Inspect them first, keep all existing work, and make concrete in-scope progress. Verify what you change.`,
+    )
+  }
   if (previousVerifier === null) {
     parts.push('Previous round verifier result: none — this is the first round.')
   } else {
@@ -226,13 +286,15 @@ function buildRoundPrompt({ objective, round, maxRounds, progressFile, previousR
  * structured report. A rejection, a non-completed stop, or an invalid report is
  * a failed attempt the caller may retry. The run is always disposed.
  */
-async function runChild({ ctx, providerName, parent, prompt, round, attempt, maxRounds, signal }) {
+async function runChild({ ctx, providerName, parent, prompt, round, attempt, maxRounds, signal, workerTools = [], workerEffort = '' }) {
   const run = await ctx.subagents.start(providerName, {
     label: `verified_ralph round ${round}/${maxRounds} attempt ${attempt}`,
     prompt: [textBlock(prompt)],
     parent,
     signal,
     outputSchema: REPORT_SCHEMA,
+    ...(workerTools.length > 0 ? { toolFilter: { allow: [...workerTools] } } : {}),
+    ...(workerEffort.length > 0 ? { agentOptions: { reasoningEffort: workerEffort } } : {}),
   })
   try {
     const result = await run.result
@@ -396,8 +458,8 @@ function callerCwd(parent) {
   return typeof cwd === 'string' && cwd.length > 0 ? cwd : process.cwd()
 }
 
-/** Refuse a provider that is missing, inherits context, or lacks structured output. */
-function requireFreshProvider(ctx, providerName) {
+/** Refuse a provider that is missing, inherits context, or lacks a capability the config needs. */
+function requireFreshProvider(ctx, providerName, resolved) {
   const provider = ctx.subagents.getProvider(providerName)
   if (provider === undefined) {
     throw new Error(`verified_ralph subagent provider "${providerName}" is not registered`)
@@ -405,11 +467,25 @@ function requireFreshProvider(ctx, providerName) {
   if (!provider.capabilities.outputSchema) {
     throw new Error(`verified_ralph subagent provider "${providerName}" does not support structured output`)
   }
+  if (resolved.workerTools.length > 0 && !provider.capabilities.toolFilter) {
+    throw new Error(`verified_ralph subagent provider "${providerName}" does not support workerTools (toolFilter)`)
+  }
+  if (resolved.workerEffort.length > 0 && !provider.capabilities.agentOptions) {
+    throw new Error(`verified_ralph subagent provider "${providerName}" does not support workerEffort (agentOptions)`)
+  }
   if (provider.inheritsParentContext) {
     throw new Error(
       `verified_ralph subagent provider "${providerName}" inherits parent context; a fresh provider is required`,
     )
   }
+}
+
+/** The stop sentence of the tool description for the configured rule. */
+function stopDescription(stopWhen) {
+  if (stopWhen === 'verifier-and-worker') {
+    return 'When a verify command is configured it runs after every worker round: the loop ends as verified only when it exits 0 and the same round\'s worker reported "complete", so neither a worker "complete" nor a passing verifier ends it on its own.'
+  }
+  return 'When a verify command is configured it runs after every worker round: exit 0 ends the loop as verified, so a worker "complete" is never trusted on its own.'
 }
 
 /** Register the deployment-owned verified_ralph tool. */
@@ -419,7 +495,7 @@ function apply(ctx, config) {
   ctx.tools.register({
     name: 'verified_ralph',
     description:
-      'Run a foreground verified Ralph loop toward one immutable objective. Each round starts one fresh child through the configured subagent provider; only the objective, the previous verifier result, and the previous worker report cross rounds, and the workspace plus the progress file are the durable memory. The plugin appends every round to the progress file itself. When a verify command is configured it runs after every worker round: exit 0 ends the loop as verified, so a worker "complete" is never trusted on its own. Without one, a worker "complete" ends as self-reported. A worker "blocked" ends as blocked, and the round ceiling ends as budget-limited. Use it when a deployment wants fresh-agent iteration whose completion is machine-checked.',
+      `Run a foreground verified Ralph loop toward one immutable objective. Each round starts one fresh child through the configured subagent provider; only the objective, the previous verifier result, and the previous worker report cross rounds, and the workspace plus the progress file are the durable memory. The plugin appends every round to the progress file itself. ${stopDescription(resolved.stopWhen)} Without one, a worker "complete" ends as self-reported. A worker "blocked" ends as blocked, and the round ceiling ends as budget-limited. Use it when a deployment wants fresh-agent iteration whose completion is machine-checked.`,
     parameters: {
       type: 'object',
       additionalProperties: false,
@@ -471,7 +547,7 @@ function apply(ctx, config) {
         maxRounds = requestedRounds
       }
 
-      requireFreshProvider(ctx, resolved.subagentProvider)
+      requireFreshProvider(ctx, resolved.subagentProvider, resolved)
       throwIfAborted(exec.signal)
 
       const cwd = callerCwd(parent)
@@ -501,6 +577,7 @@ function apply(ctx, config) {
           previousReport,
           previousVerifier,
           maxFeedbackChars: resolved.maxFeedbackChars,
+          protocol: resolved.workerProtocol,
         })
 
         let report = null
@@ -521,6 +598,8 @@ function apply(ctx, config) {
               attempt,
               maxRounds,
               signal: controller.signal,
+              workerTools: resolved.workerTools,
+              workerEffort: resolved.workerEffort,
             })
             if (outcome.report !== null) report = outcome.report
             else lastFailure = outcome.failure
@@ -564,7 +643,7 @@ function apply(ctx, config) {
         )
         throwIfAborted(exec.signal)
 
-        if (verifier !== null && verifier.passed) {
+        if (verifier !== null && verifier.passed && (resolved.stopWhen === 'verifier' || report.status === 'complete')) {
           status = 'verified'
           settled = true
           break

@@ -1,5 +1,7 @@
 # Week 2 — Creator Mode에서 직접 제어하는 Coding RALPH
 
+> Task 3·4 피드백을 반영한 더 큰 과제와 동일 Preset 재실험은 [프로젝트 플래너 결과](result-planner.md)에 기록했다. 아래 TODO 결과와 수치는 당시의 서로 다른 Preset으로 실행한 원본 실험 기록이다.
+
 ## 필수 제출 항목
 
 | 항목 | 제출 파일과 실제 증거 |

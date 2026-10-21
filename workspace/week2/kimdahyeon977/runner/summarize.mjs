@@ -114,11 +114,17 @@ export async function exportSummary(runPath, outputPath) {
     const bytes = await input(path, true);
     if (bytes) files.set(path, bytes);
   }
-  if (manifest.mode === 'custom') {
-    for (const name of ['agent.cordis.yml', 'preset.yml']) {
-      const bytes = await input(`presets/${manifest.presetId}/${name}`, true);
-      if (bytes) files.set(`preset/${name}`, bytes);
+  for (const name of ['agent.cordis.yml', 'preset.yml']) {
+    const bytes = await input(`presets/${manifest.presetId}/${name}`, true);
+    if (bytes) files.set(`preset/${name}`, bytes);
+  }
+  try {
+    for (const entry of (await readdir(join(run, 'workspace/lib'), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
+      if (!entry.isFile() || !entry.name.endsWith('.mjs')) throw new Error('Workspace lib contains an unexpected entry');
+      files.set(`workspace/lib/${entry.name}`, await input(`workspace/lib/${entry.name}`));
     }
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
   }
   const sessions = [];
   async function visit(path) {

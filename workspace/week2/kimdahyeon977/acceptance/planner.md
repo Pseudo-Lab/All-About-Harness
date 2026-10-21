@@ -1,0 +1,11 @@
+# Dependency-aware project planner acceptance contract
+
+This follow-up task is a multi-project CLI with a persisted dependency graph. It is larger than the TODO CLI because correctness crosses project and task identity, graph validation, readiness, state transitions, reporting, and file persistence. All commands run in fresh Node.js processes without third-party packages.
+
+Run the frozen suite with `TODO_CLI=/absolute/path/to/cli.mjs node --test --test-reporter=tap acceptance/planner.test.mjs`. `TODO_CLI` is the runner's existing target-CLI variable; it does not imply TODO semantics. `PLAN_FILE` selects the JSON store. Each test uses a private temporary store.
+
+The CLI prints exactly one JSON value on success and exits nonzero on invalid input. `project add NAME` returns `{id,name}`; `project list` returns projects in creation order. `task add PROJECT_ID TITLE` returns `{id,projectId,title,status:'open',dependsOn:[]}`. `task list PROJECT_ID` returns that project's tasks in creation order. IDs are positive safe integers, stable across processes, and increase within their entity type on successful creation. Names and titles retain their literal input; blank values fail.
+
+`task depend TASK_ID ON_ID` adds a prerequisite and returns the updated task. It rejects missing tasks, self links, duplicate links, cross-project links, links from a done task, and cycles, without modifying storage. `task ready PROJECT_ID` returns open tasks whose every prerequisite is done, in task creation order. `task complete TASK_ID` requires the task to be ready, returns it with `status:'done'`, and persists the change. Repeating completion returns the same task without changing storage bytes. `project report PROJECT_ID` returns `{projectId,total,open,done,readyTaskIds}` derived from persisted tasks; IDs in `readyTaskIds` follow task creation order.
+
+Unknown commands, wrong argument counts, malformed or nonexistent IDs, and invalid graph or state transitions fail without creating a store or changing existing store bytes. Read-only commands on a new store do not create a file. `PLAN_FILE` isolates independent stores. A successful write leaves valid JSON. Concurrent writers and recovery from externally corrupted data are outside this contract.

@@ -27,9 +27,15 @@ const home = join(run, 'dsh-home');
 const logs = join(run, 'logs');
 for (const path of [workspace, home, logs, join(workspace, 'acceptance'), join(run, 'frozen')]) await mkdir(path, { recursive: true, mode: 0o700 });
 const scenario = process.env.RALPH_SCENARIO ?? 'staged';
-if (!['single', 'staged', 'planner'].includes(scenario)) throw new Error('RALPH_SCENARIO must be single, staged, or planner');
-const taskFile = { single: 'task.txt', staged: 'task-staged.txt', planner: 'task-planner.txt' }[scenario];
-const acceptanceNames = scenario === 'planner' ? ['planner.test.mjs', 'planner.md'] : ['todo.test.mjs'];
+const scenarioFiles = {
+  single: { task: 'task.txt', acceptance: ['todo.test.mjs'] },
+  staged: { task: 'task-staged.txt', acceptance: ['todo.test.mjs'] },
+  planner: { task: 'task-planner.txt', acceptance: ['planner.test.mjs', 'planner.md'] },
+  inventory: { task: 'task-inventory.txt', acceptance: ['inventory.test.mjs', 'inventory.md'] },
+  ledger: { task: 'task-ledger.txt', acceptance: ['ledger.test.mjs', 'ledger.md'] },
+};
+if (!Object.hasOwn(scenarioFiles, scenario)) throw new Error(`Unknown RALPH_SCENARIO: ${scenario}`);
+const { task: taskFile, acceptance: acceptanceNames } = scenarioFiles[scenario];
 const testName = acceptanceNames[0];
 const acceptanceFiles = new Map(await Promise.all(acceptanceNames.map(async name =>
   [name, await readFile(join(assignment, 'acceptance', name))])));

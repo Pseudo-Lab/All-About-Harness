@@ -1,0 +1,574 @@
+{
+  "schemaVersion": 1,
+  "mode": "custom",
+  "sessions": [
+    {
+      "id": "experiment-62f84e23-2316-4487-ad32-1077f14eac3f",
+      "createdAt": 1792569153428,
+      "delegationDepth": 0,
+      "role": "controller",
+      "round": null,
+      "childSessionIds": [
+        "311f0e41-2e20-43be-8c1e-34911c1d90f3",
+        "ff9b9c98-3cc0-4cec-a6b0-4ab5d7a1ceef"
+      ],
+      "timeline": [
+        {
+          "event": "subagent/catalog",
+          "seq": 3,
+          "time": 1792569153916,
+          "childId": "311f0e41-2e20-43be-8c1e-34911c1d90f3",
+          "round": 1,
+          "role": "implementation"
+        },
+        {
+          "event": "subagent/catalog",
+          "seq": 4,
+          "time": 1792569210810,
+          "childId": "ff9b9c98-3cc0-4cec-a6b0-4ab5d7a1ceef",
+          "round": 1,
+          "role": "test"
+        }
+      ],
+      "usage": [],
+      "structuredReports": [],
+      "startedAt": null,
+      "endedAt": null,
+      "toolNames": []
+    },
+    {
+      "id": "311f0e41-2e20-43be-8c1e-34911c1d90f3",
+      "parentSession": "experiment-62f84e23-2316-4487-ad32-1077f14eac3f",
+      "createdAt": 1792569153827,
+      "origin": "subagent",
+      "delegationDepth": 1,
+      "role": "implementation",
+      "round": 1,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 4,
+          "time": 1792569153908,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 7,
+          "time": 1792569153949,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 15,
+          "time": 1792569158048,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_uWmg2g3WBfCWSpP5Ga17vP"
+        },
+        {
+          "event": "tool/result",
+          "seq": 16,
+          "time": 1792569158090,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_uWmg2g3WBfCWSpP5Ga17vP"
+        },
+        {
+          "event": "step/end",
+          "seq": 17,
+          "time": 1792569158092,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 18,
+          "time": 1792569158114,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 20,
+          "time": 1792569161389,
+          "turn": 1,
+          "step": 2,
+          "name": "read",
+          "callId": "tooluse_aIE6YRO9NVScEfVPcs71H7"
+        },
+        {
+          "event": "tool/result",
+          "seq": 21,
+          "time": 1792569161420,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_aIE6YRO9NVScEfVPcs71H7"
+        },
+        {
+          "event": "step/end",
+          "seq": 22,
+          "time": 1792569161422,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 23,
+          "time": 1792569161439,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 25,
+          "time": 1792569173621,
+          "turn": 1,
+          "step": 3,
+          "name": "write",
+          "callId": "tooluse_hAQquBIzzR3K5W7k7mQc3G"
+        },
+        {
+          "event": "tool/result",
+          "seq": 26,
+          "time": 1792569173664,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_hAQquBIzzR3K5W7k7mQc3G"
+        },
+        {
+          "event": "step/end",
+          "seq": 27,
+          "time": 1792569173665,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 28,
+          "time": 1792569173678,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 30,
+          "time": 1792569179671,
+          "turn": 1,
+          "step": 4,
+          "name": "write",
+          "callId": "tooluse_rSnt5AVu5EptT5fDt3whuz"
+        },
+        {
+          "event": "tool/result",
+          "seq": 31,
+          "time": 1792569179720,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_rSnt5AVu5EptT5fDt3whuz"
+        },
+        {
+          "event": "step/end",
+          "seq": 32,
+          "time": 1792569179720,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "step/start",
+          "seq": 33,
+          "time": 1792569179736,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "tool/call",
+          "seq": 35,
+          "time": 1792569199344,
+          "turn": 1,
+          "step": 5,
+          "name": "write",
+          "callId": "tooluse_k3d3cBlIkE2Ftqu0PZWDJp"
+        },
+        {
+          "event": "tool/result",
+          "seq": 36,
+          "time": 1792569199383,
+          "turn": 1,
+          "step": 5,
+          "callId": "tooluse_k3d3cBlIkE2Ftqu0PZWDJp"
+        },
+        {
+          "event": "step/end",
+          "seq": 37,
+          "time": 1792569199384,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "step/start",
+          "seq": 38,
+          "time": 1792569199395,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "tool/call",
+          "seq": 40,
+          "time": 1792569210668,
+          "turn": 1,
+          "step": 6,
+          "name": "structured_output",
+          "callId": "tooluse_cDIKavcYPOFG6nURN07Pbz"
+        },
+        {
+          "event": "tool/result",
+          "seq": 41,
+          "time": 1792569210695,
+          "turn": 1,
+          "step": 6,
+          "callId": "tooluse_cDIKavcYPOFG6nURN07Pbz"
+        },
+        {
+          "event": "step/end",
+          "seq": 42,
+          "time": 1792569210696,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "turn/end",
+          "seq": 43,
+          "time": 1792569210697,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 14,
+          "time": 1792569158044,
+          "inputTokens": 3,
+          "outputTokens": 80,
+          "totalTokens": 4553,
+          "cacheWriteTokens": 4470
+        },
+        {
+          "seq": 19,
+          "time": 1792569161387,
+          "inputTokens": 5,
+          "outputTokens": 60,
+          "totalTokens": 5147,
+          "cacheReadTokens": 4470,
+          "cacheWriteTokens": 612
+        },
+        {
+          "seq": 24,
+          "time": 1792569173618,
+          "inputTokens": 5,
+          "outputTokens": 1025,
+          "totalTokens": 8802,
+          "cacheReadTokens": 5082,
+          "cacheWriteTokens": 2690
+        },
+        {
+          "seq": 29,
+          "time": 1792569179669,
+          "inputTokens": 5,
+          "outputTokens": 395,
+          "totalTokens": 9254,
+          "cacheReadTokens": 7772,
+          "cacheWriteTokens": 1082
+        },
+        {
+          "seq": 34,
+          "time": 1792569199342,
+          "inputTokens": 5,
+          "outputTokens": 1840,
+          "totalTokens": 11153,
+          "cacheReadTokens": 8854,
+          "cacheWriteTokens": 454
+        },
+        {
+          "seq": 39,
+          "time": 1792569210667,
+          "inputTokens": 5,
+          "outputTokens": 449,
+          "totalTokens": 11661,
+          "cacheReadTokens": 9308,
+          "cacheWriteTokens": 1899
+        }
+      ],
+      "structuredReports": [
+        {
+          "seq": 40,
+          "time": 1792569210668,
+          "status": "ready",
+          "summary": "Implemented complete dependency-free Node.js ESM inventory CLI system with cli.mjs, lib/store.mjs, and lib/inventory.mjs. The implementation covers all contract requirements: item registration with strict SKU/name validation, stock operations (receive, reserve, release, ship), quantity validation with overflow protection, aggregate reporting, JSON persistence, and error handling that preserves storage bytes. The system maintains insertion order, stores literal names, handles empty reads without creating files, and validates all state transitions before mutations."
+        }
+      ],
+      "startedAt": 1792569153908,
+      "endedAt": 1792569210697,
+      "toolNames": [
+        "read",
+        "write",
+        "structured_output"
+      ]
+    },
+    {
+      "id": "ff9b9c98-3cc0-4cec-a6b0-4ab5d7a1ceef",
+      "parentSession": "experiment-62f84e23-2316-4487-ad32-1077f14eac3f",
+      "createdAt": 1792569210746,
+      "origin": "subagent",
+      "delegationDepth": 1,
+      "role": "test",
+      "round": 1,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 4,
+          "time": 1792569210807,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 7,
+          "time": 1792569210826,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 15,
+          "time": 1792569215192,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_Q2Xyw1uoaRqAueeQAqbfrx"
+        },
+        {
+          "event": "tool/call",
+          "seq": 16,
+          "time": 1792569215198,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_i6OFjXleFKBstutFc6XVik"
+        },
+        {
+          "event": "tool/call",
+          "seq": 17,
+          "time": 1792569215203,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_rejNt3zcMOsBNZDE0TooWK"
+        },
+        {
+          "event": "tool/call",
+          "seq": 18,
+          "time": 1792569215204,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_ucRHm5AbDjv94aWdM9lPDl"
+        },
+        {
+          "event": "tool/result",
+          "seq": 19,
+          "time": 1792569215241,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_Q2Xyw1uoaRqAueeQAqbfrx"
+        },
+        {
+          "event": "tool/result",
+          "seq": 20,
+          "time": 1792569215252,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_i6OFjXleFKBstutFc6XVik"
+        },
+        {
+          "event": "tool/result",
+          "seq": 21,
+          "time": 1792569215253,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_rejNt3zcMOsBNZDE0TooWK"
+        },
+        {
+          "event": "tool/result",
+          "seq": 22,
+          "time": 1792569215267,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_ucRHm5AbDjv94aWdM9lPDl"
+        },
+        {
+          "event": "step/end",
+          "seq": 23,
+          "time": 1792569215268,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 24,
+          "time": 1792569215283,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 26,
+          "time": 1792569219722,
+          "turn": 1,
+          "step": 2,
+          "name": "bash",
+          "callId": "tooluse_4ZM5T7DciHXKhabro8DlMN"
+        },
+        {
+          "event": "tool/result",
+          "seq": 27,
+          "time": 1792569225074,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_4ZM5T7DciHXKhabro8DlMN"
+        },
+        {
+          "event": "step/end",
+          "seq": 28,
+          "time": 1792569225075,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 29,
+          "time": 1792569225104,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 31,
+          "time": 1792569229101,
+          "turn": 1,
+          "step": 3,
+          "name": "bash",
+          "callId": "tooluse_GihkDFmteIgOMeyHQLjQLB"
+        },
+        {
+          "event": "tool/result",
+          "seq": 32,
+          "time": 1792569234330,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_GihkDFmteIgOMeyHQLjQLB"
+        },
+        {
+          "event": "step/end",
+          "seq": 33,
+          "time": 1792569234331,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 34,
+          "time": 1792569234345,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 36,
+          "time": 1792569242947,
+          "turn": 1,
+          "step": 4,
+          "name": "structured_output",
+          "callId": "tooluse_2uWOXMFYrlSoPBlaZRZ09E"
+        },
+        {
+          "event": "tool/result",
+          "seq": 37,
+          "time": 1792569242971,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_2uWOXMFYrlSoPBlaZRZ09E"
+        },
+        {
+          "event": "step/end",
+          "seq": 38,
+          "time": 1792569242972,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "turn/end",
+          "seq": 39,
+          "time": 1792569242972,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 14,
+          "time": 1792569215190,
+          "inputTokens": 3,
+          "outputTokens": 197,
+          "totalTokens": 5040,
+          "cacheWriteTokens": 4840
+        },
+        {
+          "seq": 25,
+          "time": 1792569219720,
+          "inputTokens": 7,
+          "outputTokens": 138,
+          "totalTokens": 9686,
+          "cacheReadTokens": 4840,
+          "cacheWriteTokens": 4701
+        },
+        {
+          "seq": 30,
+          "time": 1792569229099,
+          "inputTokens": 6,
+          "outputTokens": 145,
+          "totalTokens": 10445,
+          "cacheReadTokens": 9541,
+          "cacheWriteTokens": 753
+        },
+        {
+          "seq": 35,
+          "time": 1792569242946,
+          "inputTokens": 6,
+          "outputTokens": 458,
+          "totalTokens": 11525,
+          "cacheReadTokens": 10294,
+          "cacheWriteTokens": 767
+        }
+      ],
+      "structuredReports": [
+        {
+          "seq": 36,
+          "time": 1792569242947,
+          "status": "pass",
+          "summary": "All 10 tests passed with exit code 0. The implementation correctly handles all contract requirements: item registration with strict SKU/name validation, stock operations (receive, reserve, release, ship), quantity validation with overflow protection, aggregate reporting, JSON persistence, insertion order, literal name storage, and error handling that preserves storage bytes."
+        }
+      ],
+      "startedAt": 1792569210807,
+      "endedAt": 1792569242972,
+      "toolNames": [
+        "read",
+        "bash",
+        "structured_output"
+      ]
+    }
+  ],
+  "note": "Only observed native metadata. Null round/role unknown means no explicit marker; no inferred rounds or token estimates."
+}

@@ -17,6 +17,12 @@ node workspace/week2/kimdahyeon977/runner/run.mjs custom --prepare
 # Dependency-aware project planner, same generated preset in both modes.
 RALPH_SCENARIO=planner node workspace/week2/kimdahyeon977/runner/run.mjs custom
 RALPH_SCENARIO=planner node workspace/week2/kimdahyeon977/runner/run.mjs official
+
+# Additional unstaged tasks with the same shared preset.
+RALPH_SCENARIO=inventory node workspace/week2/kimdahyeon977/runner/run.mjs custom
+RALPH_SCENARIO=inventory node workspace/week2/kimdahyeon977/runner/run.mjs official
+RALPH_SCENARIO=ledger node workspace/week2/kimdahyeon977/runner/run.mjs custom
+RALPH_SCENARIO=ledger node workspace/week2/kimdahyeon977/runner/run.mjs official
 ```
 
 Each command prints its newly created private directory under `/tmp/week2-harness-runs/`. `RUN_ROOT` may select another directory within `/tmp` or this repository. `HARNESS_ROOT`, `BEDROCK_ENV`, and `BEDROCK_PATCH` override the source checkout, credential input, and model patch paths. No installs, builds, home writes, credential copies, or model requests occur during preparation. Checks remove secret environment variables and point AWS credential/config lookup at absent paths in the private run directory. Real runs inherit the parent's authenticated environment and, when present, read only Bedrock/AWS key and region entries from `/home/user/.dsh/bedrock.env` or `BEDROCK_ENV`. A larger application `.env` may be supplied: unrelated entries are neither loaded nor passed to Harness. Credential values are not copied or printed.

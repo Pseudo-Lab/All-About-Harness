@@ -14,7 +14,7 @@ export async function runRalph({ startChild, snapshotTests, runAcceptance, task,
   };
   const cancelled = () => signal.throwIfAborted();
   try {
-    if (!Number.isInteger(maxRounds) || maxRounds < 1 || maxRounds > 5) throw new Error('maxRounds must be 1..5');
+    if (!Number.isInteger(maxRounds) || maxRounds < 1 || maxRounds > 8) throw new Error('maxRounds must be 1..8');
     if (typeof task !== 'string' || !task.trim()) throw new Error('task is required');
     cancelled();
     baseline = await snapshotTests();

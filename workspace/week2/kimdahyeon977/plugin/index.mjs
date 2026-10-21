@@ -9,7 +9,7 @@ export const inject = ['tools', 'subagents'];
 export function createRuntime(ctx, config) {
   const { workspace, frozenRoots, testFiles, provider = 'spawn', maxRounds = 5 } = config;
   if (!workspace || !frozenRoots?.length || !testFiles?.length) throw new Error('workspace, frozenRoots, testFiles required');
-  if (!Number.isInteger(maxRounds) || maxRounds < 1 || maxRounds > 5) throw new Error('maxRounds must be 1..5');
+  if (!Number.isInteger(maxRounds) || maxRounds < 1 || maxRounds > 8) throw new Error('maxRounds must be 1..8');
   const controllers = new Set();
   const childRoles = new Map();
   const roleTools = {
@@ -64,7 +64,7 @@ export function createRuntime(ctx, config) {
               prompt: [{ type: 'text', text: JSON.stringify({ role, round, task, feedback, workspace,
                 frozenRoots, environment: { TODO_CLI: `${workspace}/cli.mjs` }, command: [process.execPath, '--test', '--test-reporter=tap', ...testFiles],
                 instructions: role === 'implementation'
-                  ? 'Implement only the current round stage in shared workspace. Never change frozen roots, run shell commands, or delegate. Tests are handled by the separate test role. Return ready after the current stage, or blocked for an actual environment blocker.'
+                  ? (config.implementationInstruction ?? 'Implement only the current round stage in shared workspace. Never change frozen roots, run shell commands, or delegate. Tests are handled by the separate test role. Return ready after the current stage, or blocked for an actual environment blocker.')
                   : 'Independently inspect implementation and execute the exact command once in workspace. Never edit files or delegate. Return pass only if tests ran and passed; assertion failures return fail, environment errors return blocked. Include actual test output and do not repeat manual checks after a clear suite result.' }) }],
             });
             // Install policy before returning the handle to the orchestrator.

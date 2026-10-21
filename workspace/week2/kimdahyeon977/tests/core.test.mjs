@@ -49,7 +49,7 @@ test('default budget is exactly five failed rounds with fresh children', async (
   const result = await f.run(); assert.equal(result.status, 'incomplete'); assert.equal(result.rounds.length, 5);
   assert.equal(new Set(f.disposed).size, 10); assert.equal(f.calls.length, 10);
 });
-for (const maxRounds of [0, 6, -1, 1.5]) test(`invalid round budget ${maxRounds} blocks before children`, async () => {
+for (const maxRounds of [0, 9, -1, 1.5]) test(`invalid round budget ${maxRounds} blocks before children`, async () => {
   const f = fixture({ maxRounds }); assert.equal((await f.run()).status, 'blocked'); assert.equal(f.calls.length, 0);
 });
 for (const acceptance of [undefined, {}, { ...evidence(), testsRun: 0 }, { ...evidence(), testsRun: -1 }, { ...evidence(), testsRun: '3' }, { ...evidence(), kind: 'infrastructure-error' }, { ...evidence(), kind: 'assertion-failure' }]) {

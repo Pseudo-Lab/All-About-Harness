@@ -114,7 +114,7 @@ test('generated custom Creator stops after five failed rounds with fresh dispose
   assert.ok(f.calls.every(({ round }) => round <= 5));
 });
 
-for (const maxRounds of [0, 6]) test(`generated custom Creator blocks invalid maximum ${maxRounds}`, async () => {
+for (const maxRounds of [0, 9]) test(`generated custom Creator blocks invalid maximum ${maxRounds}`, async () => {
   const f = await fixture({ maxRounds });
   const result = await f.run();
   assert.equal(result.status, 'blocked');

@@ -1,0 +1,148 @@
+TAP version 13
+# Subtest: mixed orders keep physical stock and reservations consistent across processes
+ok 1 - mixed orders keep physical stock and reservations consistent across processes
+  ---
+  duration_ms: 935.312046
+  type: 'test'
+  ...
+# Subtest: refunded orders restore capacity once while historical charge result stays stable
+ok 2 - refunded orders restore capacity once while historical charge result stays stable
+  ---
+  duration_ms: 591.932407
+  type: 'test'
+  ...
+# Subtest: multiple declined keys preserve each original response after approval
+ok 3 - multiple declined keys preserve each original response after approval
+  ---
+  duration_ms: 694.970482
+  type: 'test'
+  ...
+# Subtest: a failed decline or refund can be retried exactly once
+ok 4 - a failed decline or refund can be retried exactly once
+  ---
+  duration_ms: 2427.153131
+  type: 'test'
+  ...
+# Subtest: global key conflicts remain rejected after the first order is refunded
+ok 5 - global key conflicts remain rejected after the first order is refunded
+  ---
+  duration_ms: 893.113585
+  type: 'test'
+  ...
+# Subtest: empty reads do not create a store
+ok 6 - empty reads do not create a store
+  ---
+  duration_ms: 367.256171
+  type: 'test'
+  ...
+# Subtest: products persist in creation order and expose physical stock
+ok 7 - products persist in creation order and expose physical stock
+  ---
+  duration_ms: 312.319097
+  type: 'test'
+  ...
+# Subtest: duplicate product and invalid product arguments are atomic errors
+ok 8 - duplicate product and invalid product arguments are atomic errors
+  ---
+  duration_ms: 831.353434
+  type: 'test'
+  ...
+# Subtest: orders reserve units without reducing physical stock
+ok 9 - orders reserve units without reducing physical stock
+  ---
+  duration_ms: 365.022556
+  type: 'test'
+  ...
+# Subtest: availability accounts for all reservations and order IDs are unique
+ok 10 - availability accounts for all reservations and order IDs are unique
+  ---
+  duration_ms: 1478.887332
+  type: 'test'
+  ...
+# Subtest: unknown and malformed orders do not consume inventory
+ok 11 - unknown and malformed orders do not consume inventory
+  ---
+  duration_ms: 1586.242445
+  type: 'test'
+  ...
+# Subtest: declined payment remains reserved and retry may approve
+ok 12 - declined payment remains reserved and retry may approve
+  ---
+  duration_ms: 1235.016791
+  type: 'test'
+  ...
+# Subtest: payment retries return historical response without new events
+ok 13 - payment retries return historical response without new events
+  ---
+  duration_ms: 1692.83545
+  type: 'test'
+  ...
+# Subtest: payment keys are global and cannot be repurposed
+ok 14 - payment keys are global and cannot be repurposed
+  ---
+  duration_ms: 937.935398
+  type: 'test'
+  ...
+# Subtest: approval consumes stock once and disallows a new charge
+ok 15 - approval consumes stock once and disallows a new charge
+  ---
+  duration_ms: 621.868291
+  type: 'test'
+  ...
+# Subtest: cancel reserved order releases only its reservation
+ok 16 - cancel reserved order releases only its reservation
+  ---
+  duration_ms: 601.886622
+  type: 'test'
+  ...
+# Subtest: cancel paid order refunds stock and preserves approved payment
+ok 17 - cancel paid order refunds stock and preserves approved payment
+  ---
+  duration_ms: 1722.704566
+  type: 'test'
+  ...
+# Subtest: cancelled orders reject payment but original attempt replay survives
+ok 18 - cancelled orders reject payment but original attempt replay survives
+  ---
+  duration_ms: 670.180485
+  type: 'test'
+  ...
+# Subtest: audit has one event per committed change in sequence
+ok 19 - audit has one event per committed change in sequence
+  ---
+  duration_ms: 512.037874
+  type: 'test'
+  ...
+# Subtest: failpoint leaves no event and retry works after restart
+ok 20 - failpoint leaves no event and retry works after restart
+  ---
+  duration_ms: 943.034071
+  type: 'test'
+  ...
+# Subtest: idempotent no-op and reads still work under failpoint
+ok 21 - idempotent no-op and reads still work under failpoint
+  ---
+  duration_ms: 496.767203
+  type: 'test'
+  ...
+# Subtest: corrupted store is rejected without being overwritten
+ok 22 - corrupted store is rejected without being overwritten
+  ---
+  duration_ms: 457.910979
+  type: 'test'
+  ...
+# Subtest: invalid command forms and independent stores preserve bytes
+ok 23 - invalid command forms and independent stores preserve bytes
+  ---
+  duration_ms: 1572.502559
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 16765.30592

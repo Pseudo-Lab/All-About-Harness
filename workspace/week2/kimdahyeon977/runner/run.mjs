@@ -33,23 +33,30 @@ const scenarioFiles = {
   planner: { task: 'task-planner.txt', acceptance: ['planner.test.mjs', 'planner.md'] },
   inventory: { task: 'task-inventory.txt', acceptance: ['inventory.test.mjs', 'inventory.md'] },
   ledger: { task: 'task-ledger.txt', acceptance: ['ledger.test.mjs', 'ledger.md'] },
+  orders: { task: 'task-orders.txt', acceptance: ['orders.test.mjs', 'orders.md'], heldOut: ['orders-heldout.test.mjs'], maxRounds: 8 },
 };
 if (!Object.hasOwn(scenarioFiles, scenario)) throw new Error(`Unknown RALPH_SCENARIO: ${scenario}`);
-const { task: taskFile, acceptance: acceptanceNames } = scenarioFiles[scenario];
+const { task: taskFile, acceptance: acceptanceNames, heldOut: heldOutNames = [], maxRounds = 5 } = scenarioFiles[scenario];
 const testName = acceptanceNames[0];
 const acceptanceFiles = new Map(await Promise.all(acceptanceNames.map(async name =>
+  [name, await readFile(join(assignment, 'acceptance', name))])));
+const heldOutFiles = new Map(await Promise.all(heldOutNames.map(async name =>
   [name, await readFile(join(assignment, 'acceptance', name))])));
 const task = await readFile(join(here, taskFile));
 const creatorSource = await buildCreatorSource(mode);
 const creatorCode = join(run, 'creator.host.js');
 await writeFile(creatorCode, creatorSource, { mode: 0o600 });
-const runtimeConfig = { workspace, frozenRoots: ['acceptance'], testFiles: [`acceptance/${testName}`], maxRounds: 5, provider: 'spawn' };
+const runtimeConfig = { workspace, frozenRoots: ['acceptance'], testFiles: [`acceptance/${testName}`],
+  maxRounds, provider: 'spawn', implementationInstruction: scenario === 'orders'
+    ? 'Implement the complete contract in the shared workspace, using the stated milestones as a design guide. Never change frozen roots, run shell commands, or delegate. Tests are handled by the separate test role. Return ready after making progress, or blocked only for an actual environment blocker.'
+    : undefined };
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 for (const [name, bytes] of acceptanceFiles) {
   for (const dest of [join(workspace, 'acceptance', name), join(run, 'frozen', name)]) {
     await writeFile(dest, bytes, { mode: 0o444 });
   }
 }
+for (const [name, bytes] of heldOutFiles) await writeFile(join(run, 'frozen', name), bytes, { mode: 0o444 });
 await writeFile(join(run, 'task.txt'), task);
 
 // Copy only adapter code, never example/cli.mjs. Resolve its one Harness import
@@ -78,7 +85,7 @@ for (const id of allowed) {
 sharedRows.push(
   { id: 'ralph-workflow', name: 'cordis:group', group: true, isolate: { workflowEngine: true }, config: [
     { id: 'workflow-worker-thread', name: '@deepseek-ai/dsh-workflow-worker-thread', config: { provider: 'spawn' } },
-    { id: 'tool-ralph', name: '@deepseek-ai/dsh-tool-ralph', config: { subagentProvider: 'spawn', maxRounds: 5 } },
+    { id: 'tool-ralph', name: '@deepseek-ai/dsh-tool-ralph', config: { subagentProvider: 'spawn', maxRounds } },
   ] },
   { id: 'tool-cordis', name: '@deepseek-ai/dsh-tool-cordis' },
 );
@@ -108,8 +115,9 @@ const overlay = join(run, 'experiment.patch.json');
 await writeFile(overlay, JSON.stringify(rows, null, 2));
 const manifest = { mode, scenario, presetId, state: 'prepared-not-executed', run, workspace, dshHome: home,
   provider: 'amazon-bedrock', model: 'us.anthropic.claude-sonnet-4-5-20250929-v1:0', modelPatch: patch,
-  maxRounds: 5, cliInitiallyPresent: false,
+  maxRounds, cliInitiallyPresent: false,
   initialFiles: Object.fromEntries([...acceptanceFiles].map(([name, bytes]) => [`acceptance/${name}`, hash(bytes)])),
+  heldOutSha256: Object.fromEntries([...heldOutFiles].map(([name, bytes]) => [name, hash(bytes)])),
   taskSha256: hash(task), acceptanceSha256: hash(acceptanceFiles.get(testName)),
   presetSha256: hash(presetComposition), presetMetadataSha256: hash(presetMetadata), adapterSha256: hash(adapterSource),
   creatorSourceSha256: hash(creatorSource) };
@@ -160,11 +168,13 @@ const frozenUnchanged = (await Promise.all([...acceptanceFiles].flatMap(([name, 
     hash(await readFile(path)) === hash(bytes))))).every(Boolean);
 let acceptance = null;
 if (option !== '--check') {
-  const checked = spawnSync(process.execPath, ['--test', '--test-reporter=tap', join(run, 'frozen', testName)], {
+  const checked = spawnSync(process.execPath, ['--test', '--test-reporter=tap',
+    ...[testName, ...heldOutNames].map(name => join(run, 'frozen', name))], {
     cwd: workspace, env, encoding: 'utf8', timeout: 120000, maxBuffer: 4_000_000,
   });
   await writeFile(join(logs, 'final-acceptance.tap'), (checked.stdout ?? '') + (checked.stderr ?? ''));
-  acceptance = { exitCode: checked.status, signal: checked.signal, spawnError: Boolean(checked.error) };
+  acceptance = { exitCode: checked.status, signal: checked.signal, spawnError: Boolean(checked.error),
+    files: [testName, ...heldOutNames] };
 }
 let controllerStatus = 'unavailable';
 try {

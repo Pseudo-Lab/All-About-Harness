@@ -11,7 +11,7 @@ export function apply(ctx, config) {
   const record = async (event) => appendFile(config.events, JSON.stringify({ at: new Date().toISOString(), ...event }) + '\n');
   if (config.mode === 'official') ctx.provide('experimentLoop', {
     run(objective, exec) {
-      return dispatch(exec.agent, 'ralph', { objective, maxRounds: 5 }, exec.signal);
+      return dispatch(exec.agent, 'ralph', { objective, maxRounds: config.runtimeConfig.maxRounds }, exec.signal);
     },
   });
   async function dispatch(agent, tool, args, signal = controller.signal) {

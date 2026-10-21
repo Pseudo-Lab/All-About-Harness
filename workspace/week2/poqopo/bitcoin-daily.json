@@ -1,0 +1,29 @@
+{
+  "asset": "BTCUSDT",
+  "exchange": "Binance",
+  "interval": "1d",
+  "source": "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=2",
+  "fetchedAt": "2026-10-21T09:13:48Z",
+  "latest": {
+    "openTime": "2026-10-21T00:00:00.000Z",
+    "closeTime": "2026-10-21T23:59:59.999Z",
+    "open": 83028.14,
+    "high": 83713.91,
+    "low": 82635.32,
+    "close": 83490.31,
+    "volume": 4237.80895,
+    "quoteVolume": 351902420.8229865,
+    "trades": 792779
+  },
+  "previous": {
+    "openTime": "2026-10-20T00:00:00.000Z",
+    "closeTime": "2026-10-20T23:59:59.999Z",
+    "open": 81938.39,
+    "high": 83439.0,
+    "low": 81200.0,
+    "close": 83028.15,
+    "volume": 13954.54986,
+    "quoteVolume": 1147167745.4575615,
+    "trades": 3117823
+  }
+}

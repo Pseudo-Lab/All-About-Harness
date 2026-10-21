@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>All About Harness — Week 03 · Plugin Grouping</title>
+<style>
+:root{--ink:#19202b;--muted:#67717c;--accent:#3a59c1;--line:#d7dbe1;--soft:#f5f7fa;--scale:1}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:Arial,"Noto Sans CJK KR","Apple SD Gothic Neo",sans-serif;background:#f0f1f3;color:var(--ink)}
+#frame{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform:translate(-50%,-50%) scale(var(--scale));transform-origin:center;box-shadow:0 10px 50px rgba(27,35,48,.07);background:white}
+.slide{position:absolute;inset:0;background:#fff;display:none;overflow:hidden}
+.slide.active{display:block}
+.kicker{position:absolute;top:97px;left:88px;font-size:13px;color:var(--accent);letter-spacing:.025em;font-weight:600}
+.cover h1{position:absolute;top:217px;left:88px;font-size:61px;line-height:1.13;letter-spacing:-.025em;margin:0;font-weight:750}
+.cover .sub{position:absolute;top:353px;left:88px;font-size:25px}
+.cover .rule{position:absolute;left:89px;right:89px;top:538px;border-top:1px solid var(--line)}
+.cover .foot{position:absolute;top:559px;left:89px;font-size:16px;color:var(--muted)}
+.page-title{position:absolute;top:60px;left:85px;font-size:33px;font-weight:740;letter-spacing:-.03em;margin:0}
+.page-sub{position:absolute;top:127px;left:87px;font-size:16px;color:var(--muted);margin:0}
+.pageno{position:absolute;right:88px;bottom:34px;font-size:11px;color:var(--muted)}
+.agenda{position:absolute;top:185px;left:89px;right:89px}
+.agenda-row{height:146px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:100px 1fr;align-items:start;padding-top:22px}
+.agenda-row:last-child{border:none}
+.no{font-size:23px;font-weight:750;color:var(--accent)}
+.agenda h2{font-size:25px;margin:0 0 13px;font-weight:700}
+.agenda p{font-size:17px;color:var(--muted);margin:0}
+/* Slide 3 — concepts */
+.definitions{position:absolute;top:201px;left:89px;right:89px;border-top:1px solid var(--line)}
+.definition{display:grid;grid-template-columns:235px 1fr 265px;align-items:center;min-height:119px;border-bottom:1px solid var(--line)}
+.definition strong{font-size:23px;letter-spacing:-.01em}
+.definition .explain{font-size:19px}
+.definition code{font-family:'Liberation Mono',monospace;color:var(--accent);font-size:17px}
+.definitions .takeaway{font-size:18px;margin-top:31px;color:var(--muted)}
+/* Slide 4 — arrangement */
+.comparison{position:absolute;top:204px;left:89px;right:89px;height:440px;display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line)}
+.comparison-col{padding:25px 47px 0 2px}
+.comparison-col+ .comparison-col{padding-left:48px;padding-right:0;border-left:1px solid var(--line)}
+.comparison h2{font-size:23px;margin:0 0 9px}
+.comparison p{font-size:15px;color:var(--muted);margin:0 0 22px}
+.preset-outline{border:1px solid var(--line);height:264px;padding:19px 22px;position:relative}
+.preset-label{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.02em;margin-bottom:18px}
+.plugin-row{border:1px solid var(--line);padding:10px 14px;margin:9px 0;width:100%;font-size:17px;font-weight:650}
+.nested-group{border:1px solid var(--accent);padding:12px 18px 14px}
+.nested-group .groupname{font-size:16px;font-weight:700;margin-bottom:11px;color:var(--accent)}
+.nested-group .plugin-row{margin:6px 0;font-size:16px;padding:7px 11px}
+.comparison-foot{position:absolute;left:0;right:0;bottom:0;font-size:16px;color:var(--muted)}
+/* Slide 5 — uses */
+.benefits{position:absolute;top:192px;left:89px;right:89px}
+.benefit{min-height:125px;display:grid;grid-template-columns:94px 250px 1fr;align-items:center;border-bottom:1px solid var(--line);gap:0}
+.benefit .num{color:var(--accent);font-size:18px;font-weight:700}
+.benefit strong{font-size:22px}
+.benefit .detail{font-size:18px;line-height:1.5}
+.benefit-end{font-size:17px;color:var(--muted);padding-top:27px}
+/* Slide 6 — assignment */
+.assignment{position:absolute;top:183px;left:89px;right:89px}
+.task{display:grid;grid-template-columns:75px 1fr;min-height:115px;align-items:center;border-bottom:1px solid var(--line)}
+.task .id{color:var(--accent);font-size:18px;font-weight:750}
+.task h3{font-size:22px;font-weight:710;margin:0 0 10px}
+.task p{font-size:17px;color:var(--muted);margin:0}
+.assignment-submit{font-size:18px;margin-top:38px;display:flex;gap:29px}
+.assignment-submit strong{font-size:18px}
+.assignment-tail{font-size:16px;margin-top:28px;color:var(--muted)}
+/* Slide 7 — compose example */
+.grouping-ex{position:absolute;left:90px;right:90px;top:190px;bottom:91px;display:grid;grid-template-columns:61% 39%;grid-template-rows:1fr auto;border-top:1px solid var(--line)}
+.grouping-left{padding:23px 24px 0 8px}
+.grouping-left .headlabel{font-size:13px;color:var(--muted)}
+.grouping-left pre{font-family:'Liberation Mono',monospace;font-size:18px;line-height:1.40;margin:24px 0 0 1px;white-space:pre}
+.grouping-right{border-left:1px solid var(--line);padding:41px 0 0 38px}
+.grouping-right h2{font-size:22px;margin:0 0 32px}
+.grouping-right p{font-size:17px;margin:0 0 31px;line-height:1.4}
+.grouping-foot{grid-column:1/3;border-top:1px solid var(--line);padding:18px 0 0 8px;font-size:14px;color:var(--muted);height:54px}
+.nav{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-size:12px;color:#a4a8b0;letter-spacing:.01em;user-select:none}
+@media(max-width:700px){.nav{display:none}}
+</style>
+</head>
+<body>
+<div id="frame">
+<section class="slide cover active">
+ <div class="kicker">ALL ABOUT HARNESS / WEEK 03</div>
+ <h1>Plugin Grouping</h1>
+ <div class="sub">여러 Plugin을 묶어 하나의 Agent로</div>
+ <div class="rule"></div>
+ <div class="foot">Week 02 Review &nbsp;·&nbsp; Assignment 공유 &nbsp;·&nbsp; Week 03 과제</div>
+</section>
+<section class="slide">
+ <h1 class="page-title">오늘의 순서</h1>
+ <div class="agenda">
+  <div class="agenda-row"><div class="no">01</div><div><h2>Week 02 Review</h2><p>Preset 설명의 차이 &nbsp;·&nbsp; Claude Code 플러그인 &nbsp;·&nbsp; Plugin 구조</p></div></div>
+  <div class="agenda-row"><div class="no">02</div><div><h2>Week 02 Assignment 공유</h2><p>Custom RALPH 구현 및 공식 tool-ralph 비교</p></div></div>
+  <div class="agenda-row"><div class="no">03</div><div><h2>Week 03 Assignment</h2><p>Custom Plugin 제작 · Grouping · Agent Preset 연결</p></div></div>
+ </div><div class="pageno">02 / 07</div>
+</section>
+<section class="slide">
+ <h1 class="page-title">1. Plugin과 Plugin Group</h1>
+ <p class="page-sub">Plugin은 기능을 등록하고, Group은 여러 Plugin을 하나의 구성으로 묶는다.</p>
+ <div class="definitions">
+  <div class="definition"><strong>Plugin</strong><div class="explain">기능을 구현하고 Tool·Service 등을 등록하는 코드</div><code>search-tool.ts</code></div>
+  <div class="definition"><strong>Plugin Group</strong><div class="explain">여러 Plugin을 함께 묶어 관리하는 구성</div><code>cordis:group</code></div>
+  <div class="definition"><strong>Agent Preset</strong><div class="explain">Agent에 연결할 Plugin 구성 목록</div><code>plugins: [...]</code></div>
+  <div class="takeaway">이번 주 목표 &nbsp; Plugin 2개 이상 → Group 1개 → Agent Preset 1개</div>
+ </div><div class="pageno">03 / 07</div>
+</section>
+<section class="slide">
+ <h1 class="page-title">2. Plugin Group은 어떻게 구성할까?</h1>
+ <p class="page-sub">Plugin을 개별적으로 나열할 수도 있고, 관련된 기능을 하나의 그룹으로 묶을 수도 있다.</p>
+ <div class="comparison">
+  <div class="comparison-col">
+   <h2>그룹 없이</h2><p>Preset에 Plugin을 각각 등록</p>
+   <div class="preset-outline"><div class="preset-label">AGENT PRESET</div>
+    <div class="plugin-row">Search Plugin</div>
+    <div class="plugin-row">Summary Plugin</div>
+   </div>
+  </div>
+  <div class="comparison-col">
+   <h2>그룹으로 묶기</h2><p>관련된 Plugin을 하나의 구성 안에 배치</p>
+   <div class="preset-outline"><div class="preset-label">AGENT PRESET</div>
+    <div class="nested-group"><div class="groupname">Research Group</div>
+     <div class="plugin-row">Search Plugin</div>
+     <div class="plugin-row">Summary Plugin</div>
+    </div>
+   </div>
+  </div>
+  <div class="comparison-foot">그룹 자체가 새로운 Tool을 만드는 것은 아니야. 실제 기능은 그룹 안의 Plugin이 등록해.</div>
+ </div><div class="pageno">04 / 07</div>
+</section>
+<section class="slide">
+ <h1 class="page-title">3. 왜 Plugin을 묶을까?</h1>
+ <p class="page-sub">관련된 기능을 함께 구성하고, 원하는 Preset에 연결할 수 있다.</p>
+ <div class="benefits">
+  <div class="benefit"><div class="num">01</div><strong>역할별 구성</strong><div class="detail">검색과 요약을 Research Group으로,<br>파일 처리 기능을 File Group으로 구분</div></div>
+  <div class="benefit"><div class="num">02</div><strong>함께 관리</strong><div class="detail">하나의 그룹에 속한 Plugin을 함께<br>로드하거나 언로드하는 구성</div></div>
+  <div class="benefit"><div class="num">03</div><strong>Preset 구성</strong><div class="detail">하나의 Agent Preset 안에 여러<br>Plugin Group을 조합할 수 있음</div></div>
+  <div class="benefit-end">핵심: Plugin을 하나씩 만들고, 관련된 기능을 묶어 하나의 Agent에 연결한다.</div>
+ </div><div class="pageno">05 / 07</div>
+</section>
+<section class="slide">
+ <h1 class="page-title">4. Week 03 과제</h1>
+ <p class="page-sub">여러 Custom Plugin을 묶어 하나의 Agent Preset에서 실행하기</p>
+ <div class="assignment">
+  <div class="task"><div class="id">01</div><div><h3>Custom Plugin 2개 이상 만들기</h3><p>서로 다른 기능을 구현하기 (예: 검색 + 요약)</p></div></div>
+  <div class="task"><div class="id">02</div><div><h3>Plugin Group으로 묶기</h3><p><code>cordis:group</code> 안에 만든 Plugin들을 등록하기</p></div></div>
+  <div class="task"><div class="id">03</div><div><h3>Agent Preset에 연결하고 실행하기</h3><p>두 Plugin이 모두 정상 작동하는지 실제 호출로 확인하기</p></div></div>
+  <div class="assignment-submit"><strong>제출</strong> Plugin 코드 &nbsp;·&nbsp; Group/Preset 구성 &nbsp;·&nbsp; 실행 결과 &nbsp;·&nbsp; PR</div>
+  <div class="assignment-tail">과제 주제는 자유롭게 선택할 수 있어.</div>
+ </div><div class="pageno">06 / 07</div>
+</section>
+<section class="slide">
+ <h1 class="page-title">Week 03 · Preset 구성 예시</h1>
+ <p class="page-sub">Agent Preset의 <code>plugins</code> 목록에 Group을 추가</p>
+ <div class="grouping-ex">
+  <div class="grouping-left">
+   <div class="headlabel">AGENT PRESET · YAML 예시</div>
+   <pre>- id: preset-group-lab
+  name: '@deepseek-ai/dsh-agent-preset'
+  config:
+    id: group-lab
+    plugins:
+      - id: research-group
+        name: cordis:group
+        group: true
+        config:
+          - name: './plugins/search-tool.ts'
+          - name: './plugins/summary-tool.ts'</pre>
+  </div>
+  <div class="grouping-right">
+   <h2>확인할 것</h2>
+   <p>1. Group에 두 Plugin이 등록됐는가?</p>
+   <p>2. Agent가 두 기능을 모두 호출했는가?</p>
+   <p>3. 실행 로그와 결과가 남았는가?</p>
+  </div>
+  <div class="grouping-foot">경로와 Plugin 이름은 예시야. 실제 설치 위치와 실행 환경에 맞게 수정하면 돼.</div>
+ </div><div class="pageno">07 / 07</div>
+</section>
+</div>
+<div class="nav">← → / Space / Scroll</div>
+<script>
+const slides=Array.from(document.querySelectorAll('.slide'));
+let current=0,lock=0,touchY=0;
+function updateScale(){document.documentElement.style.setProperty('--scale',Math.min(innerWidth/1280,innerHeight/720)*0.975)}
+function goTo(next){current=Math.max(0,Math.min(slides.length-1,next));slides.forEach((s,i)=>s.classList.toggle('active',i===current))}
+addEventListener('resize',updateScale);updateScale();
+addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();goTo(current+1)}else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();goTo(current-1)}else if(e.key==='Home')goTo(0);else if(e.key==='End')goTo(slides.length-1)});
+addEventListener('wheel',e=>{e.preventDefault();if(Math.abs(e.deltaY)<8)return;const now=performance.now();if(now-lock<550)return;lock=now;goTo(current+(e.deltaY>0?1:-1))},{passive:false});
+addEventListener('touchstart',e=>{touchY=e.touches[0].clientY},{passive:true});
+addEventListener('touchend',e=>{const d=e.changedTouches[0].clientY-touchY;if(Math.abs(d)>60)goTo(current+(d<0?1:-1))},{passive:true});
+</script>
+</body>
+</html>

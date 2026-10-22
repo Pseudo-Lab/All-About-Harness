@@ -1,0 +1,194 @@
+import { createReadStream, watch, existsSync } from 'node:fs';
+import { readFile, stat } from 'node:fs/promises';
+import { EventEmitter } from 'node:events';
+import { basename } from 'node:path';
+
+export class EventFileReader extends EventEmitter {
+  constructor(filePath) {
+    super();
+    this.filePath = filePath;
+    this.events = [];
+    this.lastSeq = 0;
+    this.watchHandle = null;
+    this.reading = false;
+    this.fileSize = 0;
+    this.lastSentSeq = -1;
+    this.initialized = false;
+    this.lastProcessedOffset = 0;
+  }
+
+  async ready() {
+    if (!this.initialized) {
+      await this.loadFile();
+      this.watchFile();
+      this.initialized = true;
+    }
+  }
+
+  async init() {
+    await this.ready();
+  }
+
+  async loadFile() {
+    try {
+      const data = await readFile(this.filePath, 'utf-8');
+      const newEvents = this.parseCompleteLines(data);
+
+      // Check if file was truncated/replaced
+      if (this.events.length > 0 && newEvents.length > 0) {
+        const oldLastSeq = this.events[this.events.length - 1].seq;
+        const newLastSeq = newEvents[newEvents.length - 1].seq;
+        // If the new last seq is less than old last seq, file was truncated
+        if (newLastSeq < oldLastSeq) {
+          this.emit('reset');
+        }
+      }
+
+      this.events = newEvents;
+      if (newEvents.length > 0) {
+        this.lastSeq = newEvents[newEvents.length - 1].seq;
+      }
+
+      const fileStats = await stat(this.filePath);
+      this.fileSize = fileStats.size;
+      this.lastProcessedOffset = this.fileSize;
+    } catch (err) {
+      if (err.code !== 'ENOENT') {
+        console.error('Error reading events file:', err);
+      }
+      this.events = [];
+      this.lastSeq = 0;
+    }
+  }
+
+  parseCompleteLines(data) {
+    const newEvents = [];
+    const seenSeqs = new Set();
+    let lastSeq = -1;
+    const lines = data.split('\n');
+
+    // If the file ends with a newline, the last element will be an empty string (complete lines)
+    // If the file doesn't end with a newline, the last element is a partial line (skip it)
+    let linesToProcess;
+    if (data.endsWith('\n')) {
+      // All lines are complete (last empty element is after the newline)
+      linesToProcess = lines.slice(0, -1);
+    } else {
+      // Last line is incomplete, exclude it
+      linesToProcess = lines.slice(0, -1);
+    }
+
+    for (const line of linesToProcess) {
+      if (!line.trim()) continue;
+      try {
+        const event = JSON.parse(line);
+        // Only include events that have a valid seq number, haven't been seen before,
+        // and are in increasing order (no out-of-order events)
+        if (event && typeof event.seq === 'number' && !seenSeqs.has(event.seq) && event.seq > lastSeq) {
+          newEvents.push(event);
+          seenSeqs.add(event.seq);
+          lastSeq = event.seq;
+        }
+      } catch {
+        // Skip malformed lines
+      }
+    }
+
+    return newEvents;
+  }
+
+  watchFile() {
+    // Watch the directory for file creation if the file doesn't exist yet
+    // Or watch the file directly if it exists
+    const dir = this.filePath.substring(0, this.filePath.lastIndexOf('/'));
+    const fname = basename(this.filePath);
+    
+    this.watchHandle = watch(dir, { persistent: true }, async (eventType, filename) => {
+      if (eventType === 'change' || eventType === 'rename') {
+        // Check if our file was affected
+        // filename might be the basename or null/undefined
+        if (!filename || filename === fname) {
+          await this.checkForNewEvents();
+        }
+      }
+    });
+    
+    // Handle watch errors
+    this.watchHandle.on('error', (err) => {
+      console.error('Watch error:', err);
+    });
+  }
+
+  async checkForNewEvents() {
+    if (this.reading) return;
+    this.reading = true;
+
+    try {
+      const data = await readFile(this.filePath, 'utf-8');
+      const newEvents = this.parseCompleteLines(data);
+
+      // Check for truncation: if the last seq in new events is less than our last known seq,
+      // the file was truncated/replaced
+      if (this.events.length > 0 && newEvents.length > 0) {
+        const oldLastSeq = this.events[this.events.length - 1].seq;
+        const newLastSeq = newEvents[newEvents.length - 1].seq;
+        if (newLastSeq < oldLastSeq) {
+          // File was truncated/replaced - update state and emit reset
+          this.events = newEvents;
+          this.lastSeq = newEvents.length > 0 ? newEvents[newEvents.length - 1].seq : 0;
+          this.emit('reset');
+          // Don't emit individual events - broadcastReset will handle replay
+          this.reading = false;
+          return;
+        }
+      } else if (this.events.length > 0 && newEvents.length === 0) {
+        // File was emptied
+        this.events = [];
+        this.lastSeq = 0;
+        this.emit('reset');
+        this.reading = false;
+        return;
+      }
+
+      // Find new events: those with seq greater than our last known seq
+      for (const event of newEvents) {
+        if (event.seq > this.lastSeq) {
+          this.events.push(event);
+          this.lastSeq = event.seq;
+          this.emit('event', event);
+        }
+      }
+
+      const fileStats = await stat(this.filePath);
+      this.fileSize = fileStats.size;
+    } catch (err) {
+      if (err.code === 'ENOENT') {
+        // File was deleted
+        this.events = [];
+        this.lastSeq = 0;
+        this.emit('reset');
+      } else {
+        console.error('Error checking for new events:', err);
+      }
+    } finally {
+      this.reading = false;
+    }
+  }
+
+  async getSnapshot() {
+    return {
+      events: this.events,
+      lastSeq: this.lastSeq,
+    };
+  }
+
+  getEventsSince(lastSeq) {
+    return this.events.filter(e => e.seq > lastSeq);
+  }
+
+  shutdown() {
+    if (this.watchHandle) {
+      this.watchHandle.close();
+    }
+  }
+}

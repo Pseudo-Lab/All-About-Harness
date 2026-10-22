@@ -35,6 +35,7 @@ export async function runRalph({ startChild, snapshotTests, runAcceptance, task,
           if (!run || typeof run.dispose !== 'function') throw new Error('Invalid child handle');
           if (typeof run.id !== 'string' || !run.id || ids.has(run.id)) throw new Error('Child context must be fresh');
           ids.add(run.id);
+          await record({ event: 'child/start', round, role, childId: run.id });
           cancelled();
           const result = await run.result;
           cancelled();
@@ -46,6 +47,8 @@ export async function runRalph({ startChild, snapshotTests, runAcceptance, task,
             throw new Error('Invalid structured child result');
           }
           entry[role] = { id: run.id, status: value.status, summary: value.summary.slice(0, 4000) };
+          await record({ event: 'child/end', round, role, childId: run.id,
+            status: value.status, summary: entry[role].summary });
           if (value.status === 'blocked') throw new Error(`${role} reported blocked`);
         } catch (error) { failure = error; }
         finally {
@@ -58,6 +61,7 @@ export async function runRalph({ startChild, snapshotTests, runAcceptance, task,
       }
       cancelled();
       await check();
+      await record({ event: 'acceptance/start', round });
       try { entry.acceptance = await runAcceptance({ signal }); }
       finally { await check(); }
       cancelled();
@@ -67,6 +71,7 @@ export async function runRalph({ startChild, snapshotTests, runAcceptance, task,
         || typeof entry.acceptance.summary !== 'string') throw new Error('Invalid acceptance execution evidence');
       if (entry.acceptance.kind === 'infrastructure-error') throw new Error('Acceptance infrastructure error');
       if ((entry.acceptance.kind === 'passed') !== (entry.acceptance.exitCode === 0)) throw new Error('Inconsistent acceptance evidence');
+      await record({ event: 'acceptance/end', round, ...entry.acceptance });
       await record({ event: 'round/end', round, test: entry.test, acceptance: entry.acceptance });
       if (entry.test.status === 'pass' && entry.acceptance.exitCode === 0) return { status: 'complete', rounds, manifestHash: baseline };
       feedback = JSON.stringify({ implementation: entry.implementation, test: entry.test, acceptance: { ...entry.acceptance, summary: entry.acceptance.summary.slice(-4000) } });

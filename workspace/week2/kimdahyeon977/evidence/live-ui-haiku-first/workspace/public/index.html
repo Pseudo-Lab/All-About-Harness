@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coding RALPH Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Coding RALPH Dashboard</h1>
+      <div id="connection-status" class="connection-status disconnected">
+        <span class="status-dot"></span>
+        <span class="status-text">Disconnected</span>
+      </div>
+    </header>
+
+    <div id="content" class="content">
+      <section id="run-section" class="run-section">
+        <h2>Run Status</h2>
+        <div id="run-status" class="run-status empty">
+          <p>Waiting for events...</p>
+        </div>
+      </section>
+
+      <section id="rounds-section" class="rounds-section">
+        <h2>Rounds</h2>
+        <div id="rounds-container" class="rounds-container">
+          <!-- Rounds will be inserted here -->
+        </div>
+      </section>
+
+      <section id="timeline-section" class="timeline-section">
+        <div class="timeline-header">
+          <h2>Event Timeline</h2>
+          <div class="timeline-filters">
+            <label>
+              <input type="checkbox" id="filter-failures" name="filter-failures">
+              Show failures only
+            </label>
+          </div>
+        </div>
+        <div id="timeline" class="timeline">
+          <!-- Events will be inserted here -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

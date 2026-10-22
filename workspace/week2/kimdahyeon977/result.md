@@ -1,6 +1,15 @@
 # Week 2 — Creator Mode에서 직접 제어하는 Coding RALPH
 
-> Task 3·4 피드백을 반영한 더 큰 과제와 동일 Preset 재실험은 [프로젝트 플래너 결과](result-planner.md)에 기록했다. 아래 TODO 결과와 수치는 당시의 서로 다른 Preset으로 실행한 원본 실험 기록이다.
+> 아래 TODO 결과와 수치는 당시의 서로 다른 Preset으로 실행한 원본 실험 기록이다. 이후 실험은 별도 문서에 정리했다.
+
+## 세부 결과
+
+| 문서 | 내용 |
+|---|---|
+| [프로젝트 플래너](result-planner.md) | Task 3·4 피드백을 반영한 더 큰 과제, 동일 Preset으로 Custom·공식 비교 |
+| [세 과제 비교](result-multi-scenario.md) | 플래너·재고·CSV 장부에서 관찰된 차이와 한계 |
+| [주문·재고·결제 통합](result-orders.md) | 가장 큰 통합 과제와 실행 후 추가 테스트 |
+| [실시간 대시보드](#추가-실험-실시간-실행-대시보드) | 작은 모델(Haiku 4.5)로 RALPH 실행 흐름 UI 구현, 아래 섹션 |
 
 ## 필수 제출 항목
 
@@ -89,6 +98,28 @@ Custom은 각 Round의 구현·테스트에 **서로 다른 새 Session**을 사
 처음에는 Creator에 등록한 연결 Plugin이 파일 기반 컨트롤러를 호출했고 실제 작업은 1 Round에서 끝났다. 과제 의도를 더 명확히 충족하도록 반복 함수 자체를 Creator VM으로 옮기고 위 2 Round 실험을 추가했다. 초기 [Custom 1 Round 결과](evidence/custom/logs/controller-result.json)와 [공식 1 Round 결과](evidence/official/logs/controller-result.json)는 이력으로 보관했다.
 
 구현 중에는 출력 스키마 누락에 따른 실제 등록 실패, 중첩 Node 테스트의 `NODE_TEST_CONTEXT` 상속에 따른 실행 생략, 전역 `toolFilter`가 Preset 도구를 제한하지 못하는 문제를 수정했다. 마지막 문제의 [수정 전 기록](evidence/custom-before-fix/native-summary.json)을 보관했고, 실행 guard와 위임 도구를 제거한 작은 Preset을 적용했다. 각 문제의 회귀 테스트도 유지한다.
+
+## 추가 실험: 실시간 실행 대시보드
+
+더 크고 어려운 과제로 RALPH 자체의 실행 흐름을 보여주는 웹 대시보드를 Custom RALPH에 맡겼다. 어느 Child가 무엇을 끝냈고 무엇이 부족했는지, 어떤 테스트를 돌렸고 결과가 어땠는지, 다음 Round로 무엇을 넘겼는지를 SSE로 받아 새로고침 없이 보여줘야 한다. 하네스가 실수를 잡는지 보기 위해 모델은 Bedrock Claude Haiku 4.5를 썼다. 앱 코드는 모두 Child가 작성했고 수동으로 고치지 않았다.
+
+| 실행 | 변경 | 컨트롤러 | 호스트 테스트 |
+|---|---|---|---|
+| [`first`](evidence/live-ui-haiku-first/logs/controller-result.json) | 첫 구현 | `complete` | 8/9, 실행 후 추가 테스트에서 이벤트 순서 결함 |
+| [`repair`](evidence/live-ui-haiku-repair/logs/controller-result.json) | 순서 결함 수정 | `complete` | 10/10, 브라우저에서 HTML 삽입 결함 |
+| [`hardening`](evidence/live-ui-haiku-hardening/logs/controller-result.json) | HTML 삽입 수정, 단계 연결 화면 | `complete` | 12/12 |
+| [`layout`](evidence/live-ui-haiku-layout/logs/controller-result.json) | 파일 교체·가로 넘침 수정 | `complete` | 15/15, 모바일 가독성 문제 |
+| [`readability-blocked`](evidence/live-ui-haiku-readability-blocked/logs/controller-result.json) | 모바일 세로 배치, 접히는 보고서 | `blocked` | 16/16, 테스트 Child가 `structured_output` 미제출 |
+| [`final`](evidence/live-ui-haiku-final/logs/controller-result.json) | 코드 변경 없이 재검증 | `complete` | 16/16 |
+| [`test-details`](evidence/live-ui-haiku-test-details/logs/controller-result.json) | 호스트 단계에 실제 TAP 결과 표시, 나중에 생성된 이벤트 파일 추적 | `complete` | 19/19 |
+
+모든 실행이 1 Round에 끝났다. 결함은 수정 Round가 아니라 테스트를 추가할 때 드러났다. `first`는 고정 테스트를 통과해 `complete`였지만 실행 후 추가 테스트 하나가 실패했다. 이후에도 실제 브라우저나 모바일 화면을 확인할 때마다 새 결함이 나왔고, 결함을 재현하는 테스트를 고정해 다시 실행하면 Haiku가 한 Round 안에 고쳤다. 하네스는 고정 테스트가 보는 범위까지만 완료를 보장한다. `readability-blocked`에서는 앱이 모든 테스트를 통과했지만 테스트 Child가 정해진 형식으로 결과를 제출하지 않아 컨트롤러가 통과로 처리하지 않았다.
+
+![390px 화면, 호스트 테스트 TAP 펼침](evidence/live-ui-haiku-test-details/browser-390.png)
+
+- 최종 앱과 실행 방법: [`live-ui/`](live-ui/README.md)
+- 계약과 고정 테스트: [`live-ui.md`](acceptance/live-ui.md), [`live-ui.test.mjs`](acceptance/live-ui.test.mjs), [`live-ui.browser.test.mjs`](acceptance/live-ui.browser.test.mjs), 실행 후 추가 테스트 [`live-ui-heldout.test.mjs`](acceptance/live-ui-heldout.test.mjs)
+- 실행별 과제와 증거: `runner/task-live-ui*.txt`, `evidence/live-ui-haiku-*/` (컨트롤러 결과, TAP, 이벤트 로그, 생성 코드)
 
 ## 결론과 한계
 

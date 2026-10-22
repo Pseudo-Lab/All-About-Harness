@@ -65,7 +65,7 @@ export function createRuntime(ctx, config) {
                 frozenRoots, environment: { TODO_CLI: `${workspace}/cli.mjs` }, command: [process.execPath, '--test', '--test-reporter=tap', ...testFiles],
                 instructions: role === 'implementation'
                   ? (config.implementationInstruction ?? 'Implement only the current round stage in shared workspace. Never change frozen roots, run shell commands, or delegate. Tests are handled by the separate test role. Return ready after the current stage, or blocked for an actual environment blocker.')
-                  : 'Independently inspect implementation and execute the exact command once in workspace. Never edit files or delegate. Return pass only if tests ran and passed; assertion failures return fail, environment errors return blocked. Include actual test output and do not repeat manual checks after a clear suite result.' }) }],
+                  : 'Independently inspect implementation and execute the exact command once in workspace. Never edit files or delegate. Return pass only if tests ran and passed; assertion failures return fail, environment errors return blocked. Include actual test counts and exit code in the summary. When finished, call the structured_output tool with exactly {status, summary}; a plain text final answer is not a valid test result. Do not repeat manual checks after a clear suite result.' }) }],
             });
             // Install policy before returning the handle to the orchestrator.
             // Startup remains fail-closed through the depth-based guard above.

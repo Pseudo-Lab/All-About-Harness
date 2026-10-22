@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: two clients observe the same newly appended child and test results
+ok 1 - two clients observe the same newly appended child and test results
+  ---
+  duration_ms: 30085.569443
+  type: 'test'
+  ...
+# Subtest: truncation sends reset and replays the replacement log
+ok 2 - truncation sends reset and replays the replacement log
+  ---
+  duration_ms: 76.570108
+  type: 'test'
+  ...
+# Subtest: out-of-order records are never emitted twice
+ok 3 - out-of-order records are never emitted twice
+  ---
+  duration_ms: 69.943729
+  type: 'test'
+  ...
+# Subtest: browser treats every event string as plain text and round selection works
+ok 4 - browser treats every event string as plain text and round selection works
+  ---
+  duration_ms: 973.80692
+  type: 'test'
+  ...
+# Subtest: an open browser receives a new child result without reload
+ok 5 - an open browser receives a new child result without reload
+  ---
+  duration_ms: 693.203608
+  type: 'test'
+  ...
+# Subtest: serves a runnable dashboard and rejects unknown paths
+ok 6 - serves a runnable dashboard and rejects unknown paths
+  ---
+  duration_ms: 122.863637
+  type: 'test'
+  ...
+# Subtest: empty or missing event log produces an honest empty snapshot
+ok 7 - empty or missing event log produces an honest empty snapshot
+  ---
+  duration_ms: 74.284415
+  type: 'test'
+  ...
+# Subtest: snapshot preserves ordered real run, child, host-test, and handoff events
+ok 8 - snapshot preserves ordered real run, child, host-test, and handoff events
+  ---
+  duration_ms: 69.944335
+  type: 'test'
+  ...
+# Subtest: SSE replays history, follows appended lines, and withholds a partial line
+ok 9 - SSE replays history, follows appended lines, and withholds a partial line
+  ---
+  duration_ms: 328.530447
+  type: 'test'
+  ...
+# Subtest: Last-Event-ID resumes without replaying earlier events
+ok 10 - Last-Event-ID resumes without replaying earlier events
+  ---
+  duration_ms: 106.134455
+  type: 'test'
+  ...
+# Subtest: malformed and duplicate complete lines do not crash the stream
+ok 11 - malformed and duplicate complete lines do not crash the stream
+  ---
+  duration_ms: 80.717211
+  type: 'test'
+  ...
+# Subtest: snapshot ignores out-of-order sequence numbers
+ok 12 - snapshot ignores out-of-order sequence numbers
+  ---
+  duration_ms: 76.988788
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 34213.762401

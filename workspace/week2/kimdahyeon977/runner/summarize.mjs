@@ -110,7 +110,8 @@ export async function exportSummary(runPath, outputPath) {
   JSON.parse(outcome.toString());
   const manifest = JSON.parse((await input('manifest.json')).toString());
   const files = new Map([['logs/outcome.json', outcome]]);
-  for (const path of ['manifest.json', 'logs/controller-result.json', 'logs/final-acceptance.tap', 'logs/bootstrap.jsonl', 'workspace/cli.mjs', 'task.txt', 'creator.host.js']) {
+  for (const path of ['manifest.json', 'logs/controller-result.json', 'logs/final-acceptance.tap', 'logs/bootstrap.jsonl',
+    'live/events.jsonl', 'workspace/cli.mjs', 'workspace/server.mjs', 'task.txt', 'creator.host.js']) {
     const bytes = await input(path, true);
     if (bytes) files.set(path, bytes);
   }
@@ -122,6 +123,14 @@ export async function exportSummary(runPath, outputPath) {
     for (const entry of (await readdir(join(run, 'workspace/lib'), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
       if (!entry.isFile() || !entry.name.endsWith('.mjs')) throw new Error('Workspace lib contains an unexpected entry');
       files.set(`workspace/lib/${entry.name}`, await input(`workspace/lib/${entry.name}`));
+    }
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
+  try {
+    for (const entry of (await readdir(join(run, 'workspace/public'), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
+      if (!entry.isFile() || !/\.(html|js|css)$/.test(entry.name)) throw new Error('Workspace public contains an unexpected entry');
+      files.set(`workspace/public/${entry.name}`, await input(`workspace/public/${entry.name}`));
     }
   } catch (error) {
     if (error.code !== 'ENOENT') throw error;

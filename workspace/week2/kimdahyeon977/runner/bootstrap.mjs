@@ -8,7 +8,28 @@ export const inject = ['agents', 'sessions', 'tools', 'subagents', 'agentPresets
 export function apply(ctx, config) {
   const controller = new AbortController();
   ctx.on('dispose', () => controller.abort(new Error('Experiment disposed')));
-  const record = async (event) => appendFile(config.events, JSON.stringify({ at: new Date().toISOString(), ...event }) + '\n');
+  let liveSeq = 0;
+  const liveTypes = new Set(['run/start', 'run/end', 'run/error', 'round/start', 'round/end',
+    'child/start', 'child/end', 'acceptance/start', 'acceptance/end']);
+  const record = async (event) => {
+    const at = new Date().toISOString();
+    await appendFile(config.events, JSON.stringify({ at, ...event }) + '\n');
+    if (!config.liveEvents || !liveTypes.has(event.event)) return;
+    const live = { seq: ++liveSeq, at, event: event.event };
+    for (const key of ['round', 'role', 'childId', 'status', 'kind', 'exitCode', 'testsRun']) {
+      if (event[key] !== undefined) live[key] = event[key];
+    }
+    if (event.event === 'round/start') live.handoff = String(event.handoff ?? '').slice(0, 4000);
+    if (event.event === 'child/end') live.summary = String(event.summary ?? '').slice(0, 4000);
+    if (event.event === 'acceptance/end') {
+      const summary = String(event.summary ?? '');
+      live.passed = Number(summary.match(/^# pass (\d+)\s*$/m)?.[1] ?? 0);
+      live.failed = Number(summary.match(/^# fail (\d+)\s*$/m)?.[1] ?? 0);
+      live.summary = summary.slice(-6000);
+    }
+    if (event.event === 'round/end') live.result = event.test?.status === 'pass' && event.acceptance?.exitCode === 0 ? 'pass' : 'continue';
+    await appendFile(config.liveEvents, JSON.stringify(live) + '\n');
+  };
   if (config.mode === 'official') ctx.provide('experimentLoop', {
     run(objective, exec) {
       return dispatch(exec.agent, 'ralph', { objective, maxRounds: config.runtimeConfig.maxRounds }, exec.signal);
@@ -31,8 +52,8 @@ export function apply(ctx, config) {
       ctx.provide('ralphHost', createRuntime(ctx, { ...config.runtimeConfig, record }));
     }
     const selection = ctx.agentDefaultModel.currentSelection();
-    if (selection.provider !== 'amazon-bedrock' || selection.model !== 'us.anthropic.claude-sonnet-4-5-20250929-v1:0') {
-      throw new Error('Expected the exact week1 Sonnet 4.5 route');
+    if (selection.provider !== 'amazon-bedrock' || selection.model !== config.expectedModel) {
+      throw new Error('Unexpected Bedrock model route');
     }
     const { agent } = await ctx.agents.create({
       sessionId: `experiment-${randomUUID()}`,
@@ -56,8 +77,10 @@ export function apply(ctx, config) {
     });
     if (activation.status !== 'running') throw new Error('Creator host plugin did not activate synchronously');
     // A check exercises real mounting and define/run, but never invokes either loop.
+    if (!config.check) await record({ event: 'run/start' });
     const value = config.check ? { status: 'checked-no-model', activation } :
       await dispatch(agent, 'creator_run_loop', { objective: await readFile(config.task, 'utf8') });
+    if (!config.check) await record({ event: 'run/end', status: config.mode === 'custom' ? value.status : value.result?.status });
     await ctx.sessions.flush(agent.session);
     await writeFile(config.result, JSON.stringify({ mode: config.mode, sessionId: agent.id, preset: config.presetId, value }, null, 2) + '\n');
     await record({ event: 'experiment/end', status: config.check ? 'checked-no-model' : 'executed' });
@@ -65,6 +88,7 @@ export function apply(ctx, config) {
   }
   void run().catch(async (error) => {
     // Provider error messages may contain transport details; retain tool evidence privately.
+    await record({ event: 'run/error', status: 'blocked' });
     await record({ event: 'experiment/error', message: 'Bootstrap failed; inspect private stderr and tool events.' });
     await writeFile(config.result + '.error.txt', String(error?.stack ?? error), { mode: 0o600 });
     ctx.get('appExit')(1);

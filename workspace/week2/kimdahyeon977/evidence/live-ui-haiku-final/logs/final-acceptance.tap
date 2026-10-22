@@ -1,0 +1,106 @@
+TAP version 13
+# Subtest: two clients observe the same newly appended child and test results
+ok 1 - two clients observe the same newly appended child and test results
+  ---
+  duration_ms: 30089.40214
+  type: 'test'
+  ...
+# Subtest: truncation sends reset and replays the replacement log
+ok 2 - truncation sends reset and replays the replacement log
+  ---
+  duration_ms: 154.302679
+  type: 'test'
+  ...
+# Subtest: out-of-order records are never emitted twice
+ok 3 - out-of-order records are never emitted twice
+  ---
+  duration_ms: 122.725614
+  type: 'test'
+  ...
+# Subtest: browser treats every event string as plain text and round selection works
+ok 4 - browser treats every event string as plain text and round selection works
+  ---
+  duration_ms: 945.929761
+  type: 'test'
+  ...
+# Subtest: an open browser receives a new child result without reload
+ok 5 - an open browser receives a new child result without reload
+  ---
+  duration_ms: 724.068619
+  type: 'test'
+  ...
+# Subtest: stage flow keeps child summaries, host test details, and handoff visible
+ok 6 - stage flow keeps child summaries, host test details, and handoff visible
+  ---
+  duration_ms: 723.878093
+  type: 'test'
+  ...
+# Subtest: long child reports keep the stage flow readable at desktop and mobile widths
+ok 7 - long child reports keep the stage flow readable at desktop and mobile widths
+  ---
+  duration_ms: 1182.56077
+  type: 'test'
+  ...
+# Subtest: serves a runnable dashboard and rejects unknown paths
+ok 8 - serves a runnable dashboard and rejects unknown paths
+  ---
+  duration_ms: 125.84213
+  type: 'test'
+  ...
+# Subtest: empty or missing event log produces an honest empty snapshot
+ok 9 - empty or missing event log produces an honest empty snapshot
+  ---
+  duration_ms: 67.876316
+  type: 'test'
+  ...
+# Subtest: snapshot preserves ordered real run, child, host-test, and handoff events
+ok 10 - snapshot preserves ordered real run, child, host-test, and handoff events
+  ---
+  duration_ms: 68.681846
+  type: 'test'
+  ...
+# Subtest: SSE replays history, follows appended lines, and withholds a partial line
+ok 11 - SSE replays history, follows appended lines, and withholds a partial line
+  ---
+  duration_ms: 327.633096
+  type: 'test'
+  ...
+# Subtest: Last-Event-ID resumes without replaying earlier events
+ok 12 - Last-Event-ID resumes without replaying earlier events
+  ---
+  duration_ms: 91.04575
+  type: 'test'
+  ...
+# Subtest: malformed and duplicate complete lines do not crash the stream
+ok 13 - malformed and duplicate complete lines do not crash the stream
+  ---
+  duration_ms: 82.415394
+  type: 'test'
+  ...
+# Subtest: snapshot ignores out-of-order sequence numbers
+ok 14 - snapshot ignores out-of-order sequence numbers
+  ---
+  duration_ms: 70.530397
+  type: 'test'
+  ...
+# Subtest: reader makes a replacement log available immediately after truncation
+ok 15 - reader makes a replacement log available immediately after truncation
+  ---
+  duration_ms: 5.173676
+  type: 'test'
+  ...
+# Subtest: SSE sends reset before exactly one copy of each replacement event
+ok 16 - SSE sends reset before exactly one copy of each replacement event
+  ---
+  duration_ms: 5.039106
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 34321.997453

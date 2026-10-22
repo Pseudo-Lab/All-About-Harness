@@ -28,6 +28,19 @@ test('implementation then distinct test child, disposal, and real acceptance pre
   assert.match(f.calls[1].feedback, /implementation evidence round 1/);
 });
 
+test('records child and host test progress before a round completes', async () => {
+  const observed = [];
+  const f = fixture({ record: async item => { observed.push(item); } });
+  assert.equal((await f.run()).status, 'complete');
+  assert.deepEqual(observed.map(item => item.event), [
+    'round/start', 'child/start', 'child/end', 'child/start', 'child/end',
+    'acceptance/start', 'acceptance/end', 'round/end',
+  ]);
+  assert.equal(observed[1].role, 'implementation');
+  assert.equal(observed[3].role, 'test');
+  assert.equal(observed[6].testsRun, 3);
+});
+
 test('assertion failure hands previous implementation and failure evidence into next round', async () => {
   let executions = 0;
   const f = fixture({ runAcceptance: async () => ({ ...evidence(++executions === 1 ? 1 : 0), summary: 'assertion actual 2 expected 3' }) });

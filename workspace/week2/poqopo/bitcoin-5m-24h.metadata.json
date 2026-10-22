@@ -1,0 +1,30 @@
+{
+  "asset": "BTCUSDT",
+  "exchange": "Binance",
+  "interval": "5m",
+  "period": "latest 24 hours",
+  "candleCount": 288,
+  "fetchedAt": "2026-10-21T09:15:53Z",
+  "source": "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=5m&limit=288",
+  "arraySchema": [
+    "openTimeMs",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "closeTimeMs",
+    "quoteVolume",
+    "tradeCount",
+    "takerBuyBaseVolume",
+    "takerBuyQuoteVolume",
+    "unused"
+  ],
+  "summary": {
+    "firstOpen": 81577.01,
+    "latestClose": 83584.52,
+    "periodHigh": 83713.91,
+    "periodLow": 81322.22,
+    "baseVolume": 12914.81485
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "mode": "custom",
+  "sessionId": "experiment-a428e10f-ab93-416c-a2d9-d6c232d9d82a",
+  "preset": "experiment-ralph",
+  "value": {
+    "status": "complete",
+    "rounds": [
+      {
+        "round": 1,
+        "handoff": "",
+        "implementation": {
+          "id": "1666a40b-53ee-45a0-a585-42953b5f4c1a",
+          "status": "ready",
+          "summary": "Implemented fixes for both defects:\n\n1. **EventFileReader truncation handling (lib/file-reader.mjs)**: Fixed checkForNewEvents() to immediately load replacement records after file truncation by setting this.events and this.lastSeq before emitting reset event. This ensures /api/snapshot returns the replacement data immediately, fixing the live-ui.test.mjs regression.\n\n2. **Stage flow responsive layout (public/style.css)**: Constrained the stage-flow to round content width with flexbox properly configured for text wrapping. Changed stage-item to flex: 1 with min-width: 0 for flexible shrinking, added max-width: 350px for expansion control, and improved text wrapping in stage-summary and stage-id. Removed overflow-x: auto and added overflow: hidden to prevent horizontal scrolling. Updated mobile media query for stage-item to use min-width: 0. This fixes the live-ui.browser.test.mjs regression at both 1440px and 390px viewports.\n\nBoth frozen suites should now pass."
+        },
+        "test": {
+          "id": "2b06fd64-9260-42da-ab96-a1d112f0e01a",
+          "status": "pass",
+          "summary": "Frozen test suite passed with exit code 0. All 12 tests passed, including both regression tests:\n\n1. **EventFileReader truncation fix (Test #12)**: Reader now makes replacement log available immediately after truncation. The fix in file-reader.mjs (lines 138-141) updates this.events and this.lastSeq before emitting the reset event, ensuring /api/snapshot returns replacement data immediately.\n\n2. **Stage flow responsive layout fix (Test #4)**: Long child reports no longer cause excessive horizontal scrolling. The CSS fixes in style.css (lines 241-251, 254-262) constrain stage-flow to round content width with proper flexbox wrapping and text overflow handling, keeping all three stage labels, statuses, IDs, summaries, host counts, and failure details accessible without page-level horizontal scrolling at both 1440px and 390px viewports.\n\nTest execution details:\n- Exit code: 0\n- Total tests: 12\n- Pass: 12, Fail: 0\n- Duration: 3,841ms\n- Both previously failing regression tests now pass\n- No blocking issues found"
+        },
+        "acceptance": {
+          "exitCode": 0,
+          "testsRun": 12,
+          "kind": "passed",
+          "summary": "TAP version 13\n# Subtest: browser treats every event string as plain text and round selection works\nok 1 - browser treats every event string as plain text and round selection works\n  ---\n  duration_ms: 983.679699\n  type: 'test'\n  ...\n# Subtest: an open browser receives a new child result without reload\nok 2 - an open browser receives a new child result without reload\n  ---\n  duration_ms: 659.47472\n  type: 'test'\n  ...\n# Subtest: stage flow keeps child summaries, host test details, and handoff visible\nok 3 - stage flow keeps child summaries, host test details, and handoff visible\n  ---\n  duration_ms: 677.31217\n  type: 'test'\n  ...\n# Subtest: long child reports keep the stage flow readable at desktop and mobile widths\nok 4 - long child reports keep the stage flow readable at desktop and mobile widths\n  ---\n  duration_ms: 808.778284\n  type: 'test'\n  ...\n# Subtest: serves a runnable dashboard and rejects unknown paths\nok 5 - serves a runnable dashboard and rejects unknown paths\n  ---\n  duration_ms: 125.742602\n  type: 'test'\n  ...\n# Subtest: empty or missing event log produces an honest empty snapshot\nok 6 - empty or missing event log produces an honest empty snapshot\n  ---\n  duration_ms: 68.503298\n  type: 'test'\n  ...\n# Subtest: snapshot preserves ordered real run, child, host-test, and handoff events\nok 7 - snapshot preserves ordered real run, child, host-test, and handoff events\n  ---\n  duration_ms: 84.282973\n  type: 'test'\n  ...\n# Subtest: SSE replays history, follows appended lines, and withholds a partial line\nok 8 - SSE replays history, follows appended lines, and withholds a partial line\n  ---\n  duration_ms: 330.247618\n  type: 'test'\n  ...\n# Subtest: Last-Event-ID resumes without replaying earlier events\nok 9 - Last-Event-ID resumes without replaying earlier events\n  ---\n  duration_ms: 100.785644\n  type: 'test'\n  ...\n# Subtest: malformed and duplicate complete lines do not crash the stream\nok 10 - malformed and duplicate complete lines do not crash the stream\n  ---\n  duration_ms: 87.25005\n  type: 'test'\n  ...\n# Subtest: snapshot ignores out-of-order sequence numbers\nok 11 - snapshot ignores out-of-order sequence numbers\n  ---\n  duration_ms: 74.934734\n  type: 'test'\n  ...\n# Subtest: reader makes a replacement log available immediately after truncation\nok 12 - reader makes a replacement log available immediately after truncation\n  ---\n  duration_ms: 5.263085\n  type: 'test'\n  ...\n1..12\n# tests 12\n# suites 0\n# pass 12\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 3851.828947\n"
+        }
+      }
+    ],
+    "manifestHash": "4c8b4140c9db72ad716445a09aeb5bd56e60880d75f5a25b6bb863458765a8dd"
+  }
+}

@@ -1,0 +1,29 @@
+# Shared Creator and official RALPH experiment preset.
+- id: persona
+  name: '@deepseek-ai/dsh-persona'
+  config:
+    prefix: >-
+      You are a coding agent. Follow the assigned implementation or verification
+      role. Do not delegate or start nested loops.
+    suffix: Your working directory is {{cwd}}.
+- id: tool-bash
+  name: '@deepseek-ai/dsh-tool-bash'
+- id: tool-fs
+  name: '@deepseek-ai/dsh-tool-fs'
+- id: ralph-workflow
+  name: cordis:group
+  group: true
+  isolate:
+    workflowEngine: true
+  config:
+    - id: workflow-worker-thread
+      name: '@deepseek-ai/dsh-workflow-worker-thread'
+      config:
+        provider: spawn
+    - id: tool-ralph
+      name: '@deepseek-ai/dsh-tool-ralph'
+      config:
+        subagentProvider: spawn
+        maxRounds: 8
+- id: tool-cordis
+  name: '@deepseek-ai/dsh-tool-cordis'

@@ -1,0 +1,31 @@
+{
+  "mode": "custom",
+  "sessionId": "experiment-e10cdf1b-a192-4396-b14c-f5088ccbe439",
+  "preset": "experiment-ralph",
+  "value": {
+    "status": "complete",
+    "rounds": [
+      {
+        "round": 1,
+        "handoff": "",
+        "implementation": {
+          "id": "8a07eaa2-ef44-49c8-9851-1c10d53456ea",
+          "status": "ready",
+          "summary": "Implemented complete dependency-free Node.js ESM order, inventory, and payment CLI with the following structure:\n\n**cli.mjs**: Main CLI entry point that:\n- Parses commands from arguments\n- Loads store and builds state from events\n- Executes command handlers\n- Commits new events atomically with failpoint support\n- Outputs JSON results or exits with errors\n\n**lib/command.mjs**: Command parser with validation for:\n- Identifiers (SKU, ID, KEY matching ^[A-Z][A-Z0-9-]{0,15}$)\n- Stock (0-1,000,000)\n- Price (1-1,000,000,000 cents)\n- Quantities (positive without leading zeros)\n\n**lib/storage.mjs**: Atomic storage layer:\n- Loads and validates store structure and event sequences\n- Saves via temp file + atomic rename\n- Returns empty store for missing files\n- Rejects corruption without overwriting\n\n**lib/state.mjs**: Event sourcing with replay:\n- Builds current state from event log\n- Tracks products (stock, reserved, price)\n- Tracks orders (status, payment)\n- Tracks payment keys for idempotency\n- Maintains creation order for products and orders\n\n**lib/handlers.mjs**: Command handlers implementing:\n- Product add/list with reservation tracking\n- Order create/get/list with availability checks\n- Payment with idempotency (declined/approved)\n- Cancellation with idempotency (reserved→cancelled, paid→refunded)\n- Audit returning {seq, type, id} events\n\nAll contract requirements implemented: inventory management, order reservation, payment idempotency with historical responses, cancellation/refund, event replay, atomic commits, and failpoint simulation."
+        },
+        "test": {
+          "id": "c8c718aa-ee68-4ce8-a659-40320f18d967",
+          "status": "pass",
+          "summary": "All 18 tests passed with exit code 0. The complete dependency-free Node.js ESM CLI implementation correctly handles products, orders, payments with idempotency, cancellations/refunds, event replay, atomic commits, and failpoint simulation. No acceptance files were modified."
+        },
+        "acceptance": {
+          "exitCode": 0,
+          "testsRun": 18,
+          "kind": "passed",
+          "summary": "TAP version 13\n# Subtest: empty reads do not create a store\nok 1 - empty reads do not create a store\n  ---\n  duration_ms: 263.543636\n  type: 'test'\n  ...\n# Subtest: products persist in creation order and expose physical stock\nok 2 - products persist in creation order and expose physical stock\n  ---\n  duration_ms: 222.033397\n  type: 'test'\n  ...\n# Subtest: duplicate product and invalid product arguments are atomic errors\nok 3 - duplicate product and invalid product arguments are atomic errors\n  ---\n  duration_ms: 750.727851\n  type: 'test'\n  ...\n# Subtest: orders reserve units without reducing physical stock\nok 4 - orders reserve units without reducing physical stock\n  ---\n  duration_ms: 286.239971\n  type: 'test'\n  ...\n# Subtest: availability accounts for all reservations and order IDs are unique\nok 5 - availability accounts for all reservations and order IDs are unique\n  ---\n  duration_ms: 361.316612\n  type: 'test'\n  ...\n# Subtest: unknown and malformed orders do not consume inventory\nok 6 - unknown and malformed orders do not consume inventory\n  ---\n  duration_ms: 643.032062\n  type: 'test'\n  ...\n# Subtest: declined payment remains reserved and retry may approve\nok 7 - declined payment remains reserved and retry may approve\n  ---\n  duration_ms: 467.688674\n  type: 'test'\n  ...\n# Subtest: payment retries return historical response without new events\nok 8 - payment retries return historical response without new events\n  ---\n  duration_ms: 486.447767\n  type: 'test'\n  ...\n# Subtest: payment keys are global and cannot be repurposed\nok 9 - payment keys are global and cannot be repurposed\n  ---\n  duration_ms: 502.424614\n  type: 'test'\n  ...\n# Subtest: approval consumes stock once and disallows a new charge\nok 10 - approval consumes stock once and disallows a new charge\n  ---\n  duration_ms: 420.450209\n  type: 'test'\n  ...\n# Subtest: cancel reserved order releases only its reservation\nok 11 - cancel reserved order releases only its reservation\n  ---\n  duration_ms: 486.9519\n  type: 'test'\n  ...\n# Subtest: cancel paid order refunds stock and preserves approved payment\nok 12 - cancel paid order refunds stock and preserves approved payment\n  ---\n  duration_ms: 459.559839\n  type: 'test'\n  ...\n# Subtest: cancelled orders reject payment but original attempt replay survives\nok 13 - cancelled orders reject payment but original attempt replay survives\n  ---\n  duration_ms: 504.696472\n  type: 'test'\n  ...\n# Subtest: audit has one event per committed change in sequence\nok 14 - audit has one event per committed change in sequence\n  ---\n  duration_ms: 591.237798\n  type: 'test'\n  ...\n# Subtest: failpoint leaves no event and retry works after restart\nok 15 - failpoint leaves no event and retry works after restart\n  ---\n  duration_ms: 615.690641\n  type: 'test'\n  ...\n# Subtest: idempotent no-op and reads still work under failpoint\nok 16 - idempotent no-op and reads still work under failpoint\n  ---\n  duration_ms: 312.702044\n  type: 'test'\n  ...\n# Subtest: corrupted store is rejected without being overwritten\nok 17 - corrupted store is rejected without being overwritten\n  ---\n  duration_ms: 191.420876\n  type: 'test'\n  ...\n# Subtest: invalid command forms and independent stores preserve bytes\nok 18 - invalid command forms and independent stores preserve bytes\n  ---\n  duration_ms: 868.811923\n  type: 'test'\n  ...\n1..18\n# tests 18\n# suites 0\n# pass 18\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 8539.449236\n"
+        }
+      }
+    ],
+    "manifestHash": "e46321eb14c5a24f96afeae5828fc065525b0d00d1b806bd39d7e7ef8102dcec"
+  }
+}

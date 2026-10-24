@@ -1,0 +1,124 @@
+TAP version 13
+# Subtest: two clients observe the same newly appended child and test results
+ok 1 - two clients observe the same newly appended child and test results
+  ---
+  duration_ms: 30091.037116
+  type: 'test'
+  ...
+# Subtest: truncation sends reset and replays the replacement log
+ok 2 - truncation sends reset and replays the replacement log
+  ---
+  duration_ms: 103.954324
+  type: 'test'
+  ...
+# Subtest: out-of-order records are never emitted twice
+ok 3 - out-of-order records are never emitted twice
+  ---
+  duration_ms: 75.934925
+  type: 'test'
+  ...
+# Subtest: browser treats every event string as plain text and round selection works
+ok 4 - browser treats every event string as plain text and round selection works
+  ---
+  duration_ms: 1029.357246
+  type: 'test'
+  ...
+# Subtest: an open browser receives a new child result without reload
+ok 5 - an open browser receives a new child result without reload
+  ---
+  duration_ms: 740.488985
+  type: 'test'
+  ...
+# Subtest: stage flow keeps child summaries, host test details, and handoff visible
+ok 6 - stage flow keeps child summaries, host test details, and handoff visible
+  ---
+  duration_ms: 693.274272
+  type: 'test'
+  ...
+# Subtest: long child reports keep the stage flow readable at desktop and mobile widths
+ok 7 - long child reports keep the stage flow readable at desktop and mobile widths
+  ---
+  duration_ms: 991.369458
+  type: 'test'
+  ...
+# Subtest: host stage exposes the actual test names and failure details
+ok 8 - host stage exposes the actual test names and failure details
+  ---
+  duration_ms: 722.766346
+  type: 'test'
+  ...
+# Subtest: serves a runnable dashboard and rejects unknown paths
+ok 9 - serves a runnable dashboard and rejects unknown paths
+  ---
+  duration_ms: 135.517405
+  type: 'test'
+  ...
+# Subtest: empty or missing event log produces an honest empty snapshot
+ok 10 - empty or missing event log produces an honest empty snapshot
+  ---
+  duration_ms: 72.465537
+  type: 'test'
+  ...
+# Subtest: snapshot preserves ordered real run, child, host-test, and handoff events
+ok 11 - snapshot preserves ordered real run, child, host-test, and handoff events
+  ---
+  duration_ms: 78.39859
+  type: 'test'
+  ...
+# Subtest: SSE replays history, follows appended lines, and withholds a partial line
+ok 12 - SSE replays history, follows appended lines, and withholds a partial line
+  ---
+  duration_ms: 347.784564
+  type: 'test'
+  ...
+# Subtest: Last-Event-ID resumes without replaying earlier events
+ok 13 - Last-Event-ID resumes without replaying earlier events
+  ---
+  duration_ms: 127.091537
+  type: 'test'
+  ...
+# Subtest: malformed and duplicate complete lines do not crash the stream
+ok 14 - malformed and duplicate complete lines do not crash the stream
+  ---
+  duration_ms: 92.010829
+  type: 'test'
+  ...
+# Subtest: snapshot ignores out-of-order sequence numbers
+ok 15 - snapshot ignores out-of-order sequence numbers
+  ---
+  duration_ms: 83.580767
+  type: 'test'
+  ...
+# Subtest: reader makes a replacement log available immediately after truncation
+ok 16 - reader makes a replacement log available immediately after truncation
+  ---
+  duration_ms: 6.613385
+  type: 'test'
+  ...
+# Subtest: SSE sends reset before exactly one copy of each replacement event
+ok 17 - SSE sends reset before exactly one copy of each replacement event
+  ---
+  duration_ms: 6.270983
+  type: 'test'
+  ...
+# Subtest: a missing event file can be created while a client is connected
+ok 18 - a missing event file can be created while a client is connected
+  ---
+  duration_ms: 15086.682654
+  type: 'test'
+  ...
+# Subtest: atomic event file replacement resets and follows the new file
+ok 19 - atomic event file replacement resets and follows the new file
+  ---
+  duration_ms: 79.993111
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 34250.487631

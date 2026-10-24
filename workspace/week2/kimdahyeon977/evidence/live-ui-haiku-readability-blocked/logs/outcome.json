@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "signal": null,
+  "checkOnly": false,
+  "controllerStatus": "blocked",
+  "frozenUnchanged": true,
+  "acceptance": {
+    "exitCode": 0,
+    "signal": null,
+    "spawnError": false,
+    "files": [
+      "live-ui.test.mjs",
+      "live-ui.browser.test.mjs",
+      "live-ui-heldout.test.mjs"
+    ]
+  }
+}

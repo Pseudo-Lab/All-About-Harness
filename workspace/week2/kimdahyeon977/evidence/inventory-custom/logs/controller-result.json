@@ -1,0 +1,31 @@
+{
+  "mode": "custom",
+  "sessionId": "experiment-62f84e23-2316-4487-ad32-1077f14eac3f",
+  "preset": "experiment-ralph",
+  "value": {
+    "status": "complete",
+    "rounds": [
+      {
+        "round": 1,
+        "handoff": "",
+        "implementation": {
+          "id": "311f0e41-2e20-43be-8c1e-34911c1d90f3",
+          "status": "ready",
+          "summary": "Implemented complete dependency-free Node.js ESM inventory CLI system with cli.mjs, lib/store.mjs, and lib/inventory.mjs. The implementation covers all contract requirements: item registration with strict SKU/name validation, stock operations (receive, reserve, release, ship), quantity validation with overflow protection, aggregate reporting, JSON persistence, and error handling that preserves storage bytes. The system maintains insertion order, stores literal names, handles empty reads without creating files, and validates all state transitions before mutations."
+        },
+        "test": {
+          "id": "ff9b9c98-3cc0-4cec-a6b0-4ab5d7a1ceef",
+          "status": "pass",
+          "summary": "All 10 tests passed with exit code 0. The implementation correctly handles all contract requirements: item registration with strict SKU/name validation, stock operations (receive, reserve, release, ship), quantity validation with overflow protection, aggregate reporting, JSON persistence, insertion order, literal name storage, and error handling that preserves storage bytes."
+        },
+        "acceptance": {
+          "exitCode": 0,
+          "testsRun": 10,
+          "kind": "passed",
+          "summary": "TAP version 13\n# Subtest: empty reads do not create a store\nok 1 - empty reads do not create a store\n  ---\n  duration_ms: 175.099249\n  type: 'test'\n  ...\n# Subtest: items persist in insertion order and retain literal names\nok 2 - items persist in insertion order and retain literal names\n  ---\n  duration_ms: 363.276957\n  type: 'test'\n  ...\n# Subtest: receipts increase stock and persist across processes\nok 3 - receipts increase stock and persist across processes\n  ---\n  duration_ms: 355.896747\n  type: 'test'\n  ...\n# Subtest: reservations use only available stock\nok 4 - reservations use only available stock\n  ---\n  duration_ms: 384.801921\n  type: 'test'\n  ...\n# Subtest: release restores availability without changing on-hand stock\nok 5 - release restores availability without changing on-hand stock\n  ---\n  duration_ms: 405.615223\n  type: 'test'\n  ...\n# Subtest: shipment consumes reserved and on-hand stock together\nok 6 - shipment consumes reserved and on-hand stock together\n  ---\n  duration_ms: 455.983381\n  type: 'test'\n  ...\n# Subtest: report aggregates on-hand, reserved, and available counts\nok 7 - report aggregates on-hand, reserved, and available counts\n  ---\n  duration_ms: 592.622494\n  type: 'test'\n  ...\n# Subtest: invalid quantities and overflow preserve persisted bytes\nok 8 - invalid quantities and overflow preserve persisted bytes\n  ---\n  duration_ms: 944.714858\n  type: 'test'\n  ...\n# Subtest: invalid shapes, identifiers, and missing items preserve storage\nok 9 - invalid shapes, identifiers, and missing items preserve storage\n  ---\n  duration_ms: 1193.829074\n  type: 'test'\n  ...\n# Subtest: separate store paths remain isolated\nok 10 - separate store paths remain isolated\n  ---\n  duration_ms: 312.27282\n  type: 'test'\n  ...\n1..10\n# tests 10\n# suites 0\n# pass 10\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 5335.087854\n"
+        }
+      }
+    ],
+    "manifestHash": "b2a751ffa99b2edbc718abd1e6060bfbceb92c91a4020075fa87184c952eab8e"
+  }
+}

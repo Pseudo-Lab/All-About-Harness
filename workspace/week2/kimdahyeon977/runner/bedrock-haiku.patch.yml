@@ -1,0 +1,9 @@
+# Lighter coding model for the live UI experiment. Credentials come from the process environment.
+- id: agent-default-model
+  config:
+    provider: amazon-bedrock
+    model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+- id: llm-pi-ai
+  config:
+    providers:
+      amazon-bedrock: {}

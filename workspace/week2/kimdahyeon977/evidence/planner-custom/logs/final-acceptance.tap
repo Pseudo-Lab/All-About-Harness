@@ -1,0 +1,76 @@
+TAP version 13
+# Subtest: empty store lists no projects without creating a file
+ok 1 - empty store lists no projects without creating a file
+  ---
+  duration_ms: 67.886758
+  type: 'test'
+  ...
+# Subtest: projects persist literal names and increasing IDs across processes
+ok 2 - projects persist literal names and increasing IDs across processes
+  ---
+  duration_ms: 137.236922
+  type: 'test'
+  ...
+# Subtest: tasks persist in creation order and are scoped to their project
+ok 3 - tasks persist in creation order and are scoped to their project
+  ---
+  duration_ms: 274.945171
+  type: 'test'
+  ...
+# Subtest: invalid creation and command shapes never create or alter storage
+ok 4 - invalid creation and command shapes never create or alter storage
+  ---
+  duration_ms: 513.892531
+  type: 'test'
+  ...
+# Subtest: dependencies block ready work until prerequisites are done
+ok 5 - dependencies block ready work until prerequisites are done
+  ---
+  duration_ms: 225.100482
+  type: 'test'
+  ...
+# Subtest: dependency validation rejects duplicates, self links, cross-project links and cycles
+ok 6 - dependency validation rejects duplicates, self links, cross-project links and cycles
+  ---
+  duration_ms: 560.24244
+  type: 'test'
+  ...
+# Subtest: ready lists only open tasks whose entire dependency set is done
+ok 7 - ready lists only open tasks whose entire dependency set is done
+  ---
+  duration_ms: 472.672551
+  type: 'test'
+  ...
+# Subtest: completion is blocked by unfinished prerequisites, persists, and is idempotent
+ok 8 - completion is blocked by unfinished prerequisites, persists, and is idempotent
+  ---
+  duration_ms: 346.519618
+  type: 'test'
+  ...
+# Subtest: reports derive counts and ready IDs from the persisted graph
+ok 9 - reports derive counts and ready IDs from the persisted graph
+  ---
+  duration_ms: 310.468663
+  type: 'test'
+  ...
+# Subtest: projects and separate storage files stay isolated
+ok 10 - projects and separate storage files stay isolated
+  ---
+  duration_ms: 344.402183
+  type: 'test'
+  ...
+# Subtest: invalid IDs and unknown tasks preserve persisted bytes
+ok 11 - invalid IDs and unknown tasks preserve persisted bytes
+  ---
+  duration_ms: 846.074428
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4198.704141

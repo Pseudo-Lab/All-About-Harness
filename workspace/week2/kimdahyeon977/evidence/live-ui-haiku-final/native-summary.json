@@ -1,0 +1,1270 @@
+{
+  "schemaVersion": 1,
+  "mode": "custom",
+  "sessions": [
+    {
+      "id": "experiment-e8266556-6dd0-4a61-8ee2-2354fd566adc",
+      "createdAt": 1792633186904,
+      "delegationDepth": 0,
+      "role": "controller",
+      "round": null,
+      "childSessionIds": [
+        "6c771f26-3f4e-46b5-a4f9-b6198c536398",
+        "66be44f8-4834-4c93-81e5-4c2490297b13"
+      ],
+      "timeline": [
+        {
+          "event": "subagent/catalog",
+          "seq": 3,
+          "time": 1792633187051,
+          "childId": "6c771f26-3f4e-46b5-a4f9-b6198c536398",
+          "round": 1,
+          "role": "implementation"
+        },
+        {
+          "event": "subagent/catalog",
+          "seq": 4,
+          "time": 1792633235407,
+          "childId": "66be44f8-4834-4c93-81e5-4c2490297b13",
+          "round": 1,
+          "role": "test"
+        }
+      ],
+      "usage": [],
+      "structuredReports": [],
+      "startedAt": null,
+      "endedAt": null,
+      "toolNames": []
+    },
+    {
+      "id": "6c771f26-3f4e-46b5-a4f9-b6198c536398",
+      "parentSession": "experiment-e8266556-6dd0-4a61-8ee2-2354fd566adc",
+      "createdAt": 1792633187022,
+      "origin": "subagent",
+      "delegationDepth": 1,
+      "role": "implementation",
+      "round": 1,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 4,
+          "time": 1792633187048,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 7,
+          "time": 1792633187067,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 15,
+          "time": 1792633189042,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_7bjMhivQFxyXzgShK5oBDV"
+        },
+        {
+          "event": "tool/result",
+          "seq": 16,
+          "time": 1792633189054,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_7bjMhivQFxyXzgShK5oBDV"
+        },
+        {
+          "event": "step/end",
+          "seq": 17,
+          "time": 1792633189055,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 18,
+          "time": 1792633189064,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 20,
+          "time": 1792633190552,
+          "turn": 1,
+          "step": 2,
+          "name": "read",
+          "callId": "tooluse_RNOGvtxKtrvD1qjsjhwojO"
+        },
+        {
+          "event": "tool/result",
+          "seq": 21,
+          "time": 1792633190575,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_RNOGvtxKtrvD1qjsjhwojO"
+        },
+        {
+          "event": "step/end",
+          "seq": 22,
+          "time": 1792633190575,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 23,
+          "time": 1792633190582,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 25,
+          "time": 1792633192551,
+          "turn": 1,
+          "step": 3,
+          "name": "read",
+          "callId": "tooluse_ySdyeSvrw5yP3vn7b2f4O2"
+        },
+        {
+          "event": "tool/result",
+          "seq": 26,
+          "time": 1792633192563,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_ySdyeSvrw5yP3vn7b2f4O2"
+        },
+        {
+          "event": "step/end",
+          "seq": 27,
+          "time": 1792633192563,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 28,
+          "time": 1792633192574,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 30,
+          "time": 1792633194280,
+          "turn": 1,
+          "step": 4,
+          "name": "read",
+          "callId": "tooluse_2PmeWfmybLwgMP6uUFNJxJ"
+        },
+        {
+          "event": "tool/result",
+          "seq": 31,
+          "time": 1792633194297,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_2PmeWfmybLwgMP6uUFNJxJ"
+        },
+        {
+          "event": "step/end",
+          "seq": 32,
+          "time": 1792633194297,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "step/start",
+          "seq": 33,
+          "time": 1792633194305,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "tool/call",
+          "seq": 35,
+          "time": 1792633196528,
+          "turn": 1,
+          "step": 5,
+          "name": "read",
+          "callId": "tooluse_ofAnEwIM9SaiIpz87bHonI"
+        },
+        {
+          "event": "tool/result",
+          "seq": 36,
+          "time": 1792633196565,
+          "turn": 1,
+          "step": 5,
+          "callId": "tooluse_ofAnEwIM9SaiIpz87bHonI"
+        },
+        {
+          "event": "step/end",
+          "seq": 37,
+          "time": 1792633196566,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "step/start",
+          "seq": 38,
+          "time": 1792633196574,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "tool/call",
+          "seq": 40,
+          "time": 1792633198912,
+          "turn": 1,
+          "step": 6,
+          "name": "read",
+          "callId": "tooluse_zcw3So8KyNqhiGNMUu5Ntw"
+        },
+        {
+          "event": "tool/result",
+          "seq": 41,
+          "time": 1792633198929,
+          "turn": 1,
+          "step": 6,
+          "callId": "tooluse_zcw3So8KyNqhiGNMUu5Ntw"
+        },
+        {
+          "event": "step/end",
+          "seq": 42,
+          "time": 1792633198929,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "step/start",
+          "seq": 43,
+          "time": 1792633198937,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "tool/call",
+          "seq": 45,
+          "time": 1792633201090,
+          "turn": 1,
+          "step": 7,
+          "name": "read",
+          "callId": "tooluse_rdvpcOIT94b7yl16r3luRm"
+        },
+        {
+          "event": "tool/result",
+          "seq": 46,
+          "time": 1792633201123,
+          "turn": 1,
+          "step": 7,
+          "callId": "tooluse_rdvpcOIT94b7yl16r3luRm"
+        },
+        {
+          "event": "step/end",
+          "seq": 47,
+          "time": 1792633201124,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "step/start",
+          "seq": 48,
+          "time": 1792633201137,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "tool/call",
+          "seq": 50,
+          "time": 1792633203525,
+          "turn": 1,
+          "step": 8,
+          "name": "read",
+          "callId": "tooluse_SY15pjsn7UvJ3EJg4Po4Am"
+        },
+        {
+          "event": "tool/result",
+          "seq": 51,
+          "time": 1792633203548,
+          "turn": 1,
+          "step": 8,
+          "callId": "tooluse_SY15pjsn7UvJ3EJg4Po4Am"
+        },
+        {
+          "event": "step/end",
+          "seq": 52,
+          "time": 1792633203549,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "step/start",
+          "seq": 53,
+          "time": 1792633203557,
+          "turn": 1,
+          "step": 9
+        },
+        {
+          "event": "tool/call",
+          "seq": 55,
+          "time": 1792633205919,
+          "turn": 1,
+          "step": 9,
+          "name": "read",
+          "callId": "tooluse_ymrZyltVgjgsvkQld3btCC"
+        },
+        {
+          "event": "tool/result",
+          "seq": 56,
+          "time": 1792633205935,
+          "turn": 1,
+          "step": 9,
+          "callId": "tooluse_ymrZyltVgjgsvkQld3btCC"
+        },
+        {
+          "event": "step/end",
+          "seq": 57,
+          "time": 1792633205935,
+          "turn": 1,
+          "step": 9
+        },
+        {
+          "event": "step/start",
+          "seq": 58,
+          "time": 1792633205948,
+          "turn": 1,
+          "step": 10
+        },
+        {
+          "event": "tool/call",
+          "seq": 60,
+          "time": 1792633208231,
+          "turn": 1,
+          "step": 10,
+          "name": "read",
+          "callId": "tooluse_m9XAH1SzNQwCpTzuhSNvW3"
+        },
+        {
+          "event": "tool/result",
+          "seq": 61,
+          "time": 1792633208263,
+          "turn": 1,
+          "step": 10,
+          "callId": "tooluse_m9XAH1SzNQwCpTzuhSNvW3"
+        },
+        {
+          "event": "step/end",
+          "seq": 62,
+          "time": 1792633208264,
+          "turn": 1,
+          "step": 10
+        },
+        {
+          "event": "step/start",
+          "seq": 63,
+          "time": 1792633208273,
+          "turn": 1,
+          "step": 11
+        },
+        {
+          "event": "tool/call",
+          "seq": 65,
+          "time": 1792633210974,
+          "turn": 1,
+          "step": 11,
+          "name": "read",
+          "callId": "tooluse_rK45ImKW4Wqm4e0N4PgzaS"
+        },
+        {
+          "event": "tool/result",
+          "seq": 66,
+          "time": 1792633211000,
+          "turn": 1,
+          "step": 11,
+          "callId": "tooluse_rK45ImKW4Wqm4e0N4PgzaS"
+        },
+        {
+          "event": "step/end",
+          "seq": 67,
+          "time": 1792633211001,
+          "turn": 1,
+          "step": 11
+        },
+        {
+          "event": "step/start",
+          "seq": 68,
+          "time": 1792633211011,
+          "turn": 1,
+          "step": 12
+        },
+        {
+          "event": "tool/call",
+          "seq": 70,
+          "time": 1792633213619,
+          "turn": 1,
+          "step": 12,
+          "name": "read",
+          "callId": "tooluse_WLHu1qmOZ9eVxDaBc511nR"
+        },
+        {
+          "event": "tool/result",
+          "seq": 71,
+          "time": 1792633213652,
+          "turn": 1,
+          "step": 12,
+          "callId": "tooluse_WLHu1qmOZ9eVxDaBc511nR"
+        },
+        {
+          "event": "step/end",
+          "seq": 72,
+          "time": 1792633213654,
+          "turn": 1,
+          "step": 12
+        },
+        {
+          "event": "step/start",
+          "seq": 73,
+          "time": 1792633213665,
+          "turn": 1,
+          "step": 13
+        },
+        {
+          "event": "tool/call",
+          "seq": 75,
+          "time": 1792633216285,
+          "turn": 1,
+          "step": 13,
+          "name": "read",
+          "callId": "tooluse_3lBsWWZXdHOtIPqitl1pmw"
+        },
+        {
+          "event": "tool/result",
+          "seq": 76,
+          "time": 1792633216293,
+          "turn": 1,
+          "step": 13,
+          "callId": "tooluse_3lBsWWZXdHOtIPqitl1pmw"
+        },
+        {
+          "event": "step/end",
+          "seq": 77,
+          "time": 1792633216294,
+          "turn": 1,
+          "step": 13
+        },
+        {
+          "event": "step/start",
+          "seq": 78,
+          "time": 1792633216303,
+          "turn": 1,
+          "step": 14
+        },
+        {
+          "event": "tool/call",
+          "seq": 80,
+          "time": 1792633218514,
+          "turn": 1,
+          "step": 14,
+          "name": "read",
+          "callId": "tooluse_Wz2RYqV17N1Nq62eoNq9aE"
+        },
+        {
+          "event": "tool/result",
+          "seq": 81,
+          "time": 1792633218531,
+          "turn": 1,
+          "step": 14,
+          "callId": "tooluse_Wz2RYqV17N1Nq62eoNq9aE"
+        },
+        {
+          "event": "step/end",
+          "seq": 82,
+          "time": 1792633218531,
+          "turn": 1,
+          "step": 14
+        },
+        {
+          "event": "step/start",
+          "seq": 83,
+          "time": 1792633218537,
+          "turn": 1,
+          "step": 15
+        },
+        {
+          "event": "tool/call",
+          "seq": 85,
+          "time": 1792633220788,
+          "turn": 1,
+          "step": 15,
+          "name": "read",
+          "callId": "tooluse_yntNXASt2mqpj0lxX5D9Q6"
+        },
+        {
+          "event": "tool/result",
+          "seq": 86,
+          "time": 1792633220809,
+          "turn": 1,
+          "step": 15,
+          "callId": "tooluse_yntNXASt2mqpj0lxX5D9Q6"
+        },
+        {
+          "event": "step/end",
+          "seq": 87,
+          "time": 1792633220810,
+          "turn": 1,
+          "step": 15
+        },
+        {
+          "event": "step/start",
+          "seq": 88,
+          "time": 1792633220822,
+          "turn": 1,
+          "step": 16
+        },
+        {
+          "event": "tool/call",
+          "seq": 90,
+          "time": 1792633223631,
+          "turn": 1,
+          "step": 16,
+          "name": "read",
+          "callId": "tooluse_Wyb7sl8uACIUDQFGAzyuhN"
+        },
+        {
+          "event": "tool/result",
+          "seq": 91,
+          "time": 1792633223670,
+          "turn": 1,
+          "step": 16,
+          "callId": "tooluse_Wyb7sl8uACIUDQFGAzyuhN"
+        },
+        {
+          "event": "step/end",
+          "seq": 92,
+          "time": 1792633223672,
+          "turn": 1,
+          "step": 16
+        },
+        {
+          "event": "step/start",
+          "seq": 93,
+          "time": 1792633223681,
+          "turn": 1,
+          "step": 17
+        },
+        {
+          "event": "tool/call",
+          "seq": 95,
+          "time": 1792633235311,
+          "turn": 1,
+          "step": 17,
+          "name": "structured_output",
+          "callId": "tooluse_ZHbbGKieErCpm483B6YQjH"
+        },
+        {
+          "event": "tool/result",
+          "seq": 96,
+          "time": 1792633235334,
+          "turn": 1,
+          "step": 17,
+          "callId": "tooluse_ZHbbGKieErCpm483B6YQjH"
+        },
+        {
+          "event": "step/end",
+          "seq": 97,
+          "time": 1792633235335,
+          "turn": 1,
+          "step": 17
+        },
+        {
+          "event": "turn/end",
+          "seq": 98,
+          "time": 1792633235335,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 14,
+          "time": 1792633189039,
+          "inputTokens": 3,
+          "outputTokens": 97,
+          "totalTokens": 4637,
+          "cacheWriteTokens": 4537
+        },
+        {
+          "seq": 19,
+          "time": 1792633190551,
+          "inputTokens": 7,
+          "outputTokens": 79,
+          "totalTokens": 4766,
+          "cacheReadTokens": 4537,
+          "cacheWriteTokens": 143
+        },
+        {
+          "seq": 24,
+          "time": 1792633192550,
+          "inputTokens": 7,
+          "outputTokens": 93,
+          "totalTokens": 4907,
+          "cacheReadTokens": 4680,
+          "cacheWriteTokens": 127
+        },
+        {
+          "seq": 29,
+          "time": 1792633194279,
+          "inputTokens": 7,
+          "outputTokens": 97,
+          "totalTokens": 5056,
+          "cacheReadTokens": 4807,
+          "cacheWriteTokens": 145
+        },
+        {
+          "seq": 34,
+          "time": 1792633196527,
+          "inputTokens": 5,
+          "outputTokens": 96,
+          "totalTokens": 9131,
+          "cacheReadTokens": 4952,
+          "cacheWriteTokens": 4078
+        },
+        {
+          "seq": 39,
+          "time": 1792633198911,
+          "inputTokens": 5,
+          "outputTokens": 88,
+          "totalTokens": 12445,
+          "cacheReadTokens": 9030,
+          "cacheWriteTokens": 3322
+        },
+        {
+          "seq": 44,
+          "time": 1792633201089,
+          "inputTokens": 5,
+          "outputTokens": 91,
+          "totalTokens": 14133,
+          "cacheReadTokens": 12352,
+          "cacheWriteTokens": 1685
+        },
+        {
+          "seq": 49,
+          "time": 1792633203524,
+          "inputTokens": 5,
+          "outputTokens": 82,
+          "totalTokens": 16470,
+          "cacheReadTokens": 14037,
+          "cacheWriteTokens": 2346
+        },
+        {
+          "seq": 54,
+          "time": 1792633205918,
+          "inputTokens": 5,
+          "outputTokens": 88,
+          "totalTokens": 17810,
+          "cacheReadTokens": 16383,
+          "cacheWriteTokens": 1334
+        },
+        {
+          "seq": 59,
+          "time": 1792633208228,
+          "inputTokens": 5,
+          "outputTokens": 96,
+          "totalTokens": 18643,
+          "cacheReadTokens": 17717,
+          "cacheWriteTokens": 825
+        },
+        {
+          "seq": 64,
+          "time": 1792633210972,
+          "inputTokens": 5,
+          "outputTokens": 96,
+          "totalTokens": 20817,
+          "cacheReadTokens": 18542,
+          "cacheWriteTokens": 2174
+        },
+        {
+          "seq": 69,
+          "time": 1792633213618,
+          "inputTokens": 5,
+          "outputTokens": 96,
+          "totalTokens": 25942,
+          "cacheReadTokens": 20716,
+          "cacheWriteTokens": 5125
+        },
+        {
+          "seq": 74,
+          "time": 1792633216283,
+          "inputTokens": 5,
+          "outputTokens": 106,
+          "totalTokens": 27520,
+          "cacheReadTokens": 25841,
+          "cacheWriteTokens": 1568
+        },
+        {
+          "seq": 79,
+          "time": 1792633218513,
+          "inputTokens": 7,
+          "outputTokens": 91,
+          "totalTokens": 27661,
+          "cacheReadTokens": 27409,
+          "cacheWriteTokens": 154
+        },
+        {
+          "seq": 84,
+          "time": 1792633220787,
+          "inputTokens": 7,
+          "outputTokens": 93,
+          "totalTokens": 27806,
+          "cacheReadTokens": 27563,
+          "cacheWriteTokens": 143
+        },
+        {
+          "seq": 89,
+          "time": 1792633223629,
+          "inputTokens": 7,
+          "outputTokens": 107,
+          "totalTokens": 27966,
+          "cacheReadTokens": 27706,
+          "cacheWriteTokens": 146
+        },
+        {
+          "seq": 94,
+          "time": 1792633235310,
+          "inputTokens": 5,
+          "outputTokens": 1166,
+          "totalTokens": 34924,
+          "cacheReadTokens": 27852,
+          "cacheWriteTokens": 5901
+        }
+      ],
+      "structuredReports": [
+        {
+          "seq": 95,
+          "time": 1792633235311,
+          "status": "ready",
+          "summary": "Coding RALPH dashboard implementation complete and verified. Server with EventFileReader and EventStream properly handles event log streaming and SSE subscriptions. Browser dashboard with full XSS protection, responsive stage flow visualization, round selection, and real-time updates via SSE. All core contracts implemented: HTTP endpoints (health, snapshot, events), complete/partial line handling, truncation detection, Last-Event-ID resumption, dark mode support, and mobile/desktop responsive design. Implementation ready for frozen test suite execution."
+        }
+      ],
+      "startedAt": 1792633187048,
+      "endedAt": 1792633235335,
+      "toolNames": [
+        "read",
+        "structured_output"
+      ]
+    },
+    {
+      "id": "66be44f8-4834-4c93-81e5-4c2490297b13",
+      "parentSession": "experiment-e8266556-6dd0-4a61-8ee2-2354fd566adc",
+      "createdAt": 1792633235366,
+      "origin": "subagent",
+      "delegationDepth": 1,
+      "role": "test",
+      "round": 1,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 4,
+          "time": 1792633235405,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 7,
+          "time": 1792633235424,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 15,
+          "time": 1792633237565,
+          "turn": 1,
+          "step": 1,
+          "name": "bash",
+          "callId": "tooluse_kqBQyButLFSqbfUcseSl3y"
+        },
+        {
+          "event": "tool/result",
+          "seq": 16,
+          "time": 1792633237714,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_kqBQyButLFSqbfUcseSl3y"
+        },
+        {
+          "event": "step/end",
+          "seq": 17,
+          "time": 1792633237715,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 18,
+          "time": 1792633237722,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 20,
+          "time": 1792633239353,
+          "turn": 1,
+          "step": 2,
+          "name": "read",
+          "callId": "tooluse_k0qPXz8nuInsbneOdDuOYS"
+        },
+        {
+          "event": "tool/result",
+          "seq": 21,
+          "time": 1792633239373,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_k0qPXz8nuInsbneOdDuOYS"
+        },
+        {
+          "event": "step/end",
+          "seq": 22,
+          "time": 1792633239374,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 23,
+          "time": 1792633239379,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 25,
+          "time": 1792633240955,
+          "turn": 1,
+          "step": 3,
+          "name": "bash",
+          "callId": "tooluse_pmBR7eB83gq9UeY2UWzio7"
+        },
+        {
+          "event": "tool/result",
+          "seq": 26,
+          "time": 1792633241087,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_pmBR7eB83gq9UeY2UWzio7"
+        },
+        {
+          "event": "step/end",
+          "seq": 27,
+          "time": 1792633241087,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 28,
+          "time": 1792633241094,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 30,
+          "time": 1792633243198,
+          "turn": 1,
+          "step": 4,
+          "name": "read",
+          "callId": "tooluse_cbn3Kf36S8vv4fV4sMWVjQ"
+        },
+        {
+          "event": "tool/call",
+          "seq": 31,
+          "time": 1792633243199,
+          "turn": 1,
+          "step": 4,
+          "name": "read",
+          "callId": "tooluse_WLtdMDfPSEnxisaBYmMNPF"
+        },
+        {
+          "event": "tool/call",
+          "seq": 32,
+          "time": 1792633243199,
+          "turn": 1,
+          "step": 4,
+          "name": "read",
+          "callId": "tooluse_I3SUl4OL7wpy1ESPmLL3Il"
+        },
+        {
+          "event": "tool/call",
+          "seq": 33,
+          "time": 1792633243199,
+          "turn": 1,
+          "step": 4,
+          "name": "read",
+          "callId": "tooluse_ULyZa4V44bVeOHwu7rlk2Q"
+        },
+        {
+          "event": "tool/result",
+          "seq": 34,
+          "time": 1792633243239,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_cbn3Kf36S8vv4fV4sMWVjQ"
+        },
+        {
+          "event": "tool/result",
+          "seq": 35,
+          "time": 1792633243244,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_WLtdMDfPSEnxisaBYmMNPF"
+        },
+        {
+          "event": "tool/result",
+          "seq": 36,
+          "time": 1792633243250,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_I3SUl4OL7wpy1ESPmLL3Il"
+        },
+        {
+          "event": "tool/result",
+          "seq": 37,
+          "time": 1792633243264,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_ULyZa4V44bVeOHwu7rlk2Q"
+        },
+        {
+          "event": "step/end",
+          "seq": 38,
+          "time": 1792633243265,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "step/start",
+          "seq": 39,
+          "time": 1792633243289,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "tool/call",
+          "seq": 41,
+          "time": 1792633246117,
+          "turn": 1,
+          "step": 5,
+          "name": "read",
+          "callId": "tooluse_1tCRiHF3GuczhuUoiMpMEM"
+        },
+        {
+          "event": "tool/call",
+          "seq": 42,
+          "time": 1792633246118,
+          "turn": 1,
+          "step": 5,
+          "name": "read",
+          "callId": "tooluse_agcr4wNQHx6tbMA3ZdX9hM"
+        },
+        {
+          "event": "tool/result",
+          "seq": 43,
+          "time": 1792633246148,
+          "turn": 1,
+          "step": 5,
+          "callId": "tooluse_1tCRiHF3GuczhuUoiMpMEM"
+        },
+        {
+          "event": "tool/result",
+          "seq": 44,
+          "time": 1792633246154,
+          "turn": 1,
+          "step": 5,
+          "callId": "tooluse_agcr4wNQHx6tbMA3ZdX9hM"
+        },
+        {
+          "event": "step/end",
+          "seq": 45,
+          "time": 1792633246154,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "step/start",
+          "seq": 46,
+          "time": 1792633246165,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "tool/call",
+          "seq": 48,
+          "time": 1792633248748,
+          "turn": 1,
+          "step": 6,
+          "name": "bash",
+          "callId": "tooluse_vgvZVuY0w5lTtfxp2I8Dff"
+        },
+        {
+          "event": "tool/result",
+          "seq": 49,
+          "time": 1792633248899,
+          "turn": 1,
+          "step": 6,
+          "callId": "tooluse_vgvZVuY0w5lTtfxp2I8Dff"
+        },
+        {
+          "event": "step/end",
+          "seq": 50,
+          "time": 1792633248900,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "step/start",
+          "seq": 51,
+          "time": 1792633248908,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "tool/call",
+          "seq": 53,
+          "time": 1792633251416,
+          "turn": 1,
+          "step": 7,
+          "name": "bash",
+          "callId": "tooluse_1zDgDTa0hqQ4DgobgqOXpC"
+        },
+        {
+          "event": "tool/result",
+          "seq": 54,
+          "time": 1792633255479,
+          "turn": 1,
+          "step": 7,
+          "callId": "tooluse_1zDgDTa0hqQ4DgobgqOXpC"
+        },
+        {
+          "event": "step/end",
+          "seq": 55,
+          "time": 1792633255480,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "step/start",
+          "seq": 56,
+          "time": 1792633255489,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "tool/call",
+          "seq": 58,
+          "time": 1792633258451,
+          "turn": 1,
+          "step": 8,
+          "name": "bash",
+          "callId": "tooluse_d96CyuXw4PTqJdfIOa33VW"
+        },
+        {
+          "event": "tool/result",
+          "seq": 59,
+          "time": 1792633262458,
+          "turn": 1,
+          "step": 8,
+          "callId": "tooluse_d96CyuXw4PTqJdfIOa33VW"
+        },
+        {
+          "event": "step/end",
+          "seq": 60,
+          "time": 1792633262458,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "step/start",
+          "seq": 61,
+          "time": 1792633262468,
+          "turn": 1,
+          "step": 9
+        },
+        {
+          "event": "tool/call",
+          "seq": 63,
+          "time": 1792633265174,
+          "turn": 1,
+          "step": 9,
+          "name": "bash",
+          "callId": "tooluse_4b5GVDVu1GneyvuKnf6Qv1"
+        },
+        {
+          "event": "tool/result",
+          "seq": 64,
+          "time": 1792633265324,
+          "turn": 1,
+          "step": 9,
+          "callId": "tooluse_4b5GVDVu1GneyvuKnf6Qv1"
+        },
+        {
+          "event": "step/end",
+          "seq": 65,
+          "time": 1792633265325,
+          "turn": 1,
+          "step": 9
+        },
+        {
+          "event": "step/start",
+          "seq": 66,
+          "time": 1792633265331,
+          "turn": 1,
+          "step": 10
+        },
+        {
+          "event": "tool/call",
+          "seq": 68,
+          "time": 1792633274396,
+          "turn": 1,
+          "step": 10,
+          "name": "structured_output",
+          "callId": "tooluse_ISv8BNOHxdCTvlbuoKUL7Q"
+        },
+        {
+          "event": "tool/result",
+          "seq": 69,
+          "time": 1792633274414,
+          "turn": 1,
+          "step": 10,
+          "callId": "tooluse_ISv8BNOHxdCTvlbuoKUL7Q"
+        },
+        {
+          "event": "step/end",
+          "seq": 70,
+          "time": 1792633274414,
+          "turn": 1,
+          "step": 10
+        },
+        {
+          "event": "turn/end",
+          "seq": 71,
+          "time": 1792633274415,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 14,
+          "time": 1792633237564,
+          "inputTokens": 3,
+          "outputTokens": 163,
+          "totalTokens": 5095,
+          "cacheWriteTokens": 4929
+        },
+        {
+          "seq": 19,
+          "time": 1792633239353,
+          "inputTokens": 6,
+          "outputTokens": 82,
+          "totalTokens": 5373,
+          "cacheReadTokens": 4929,
+          "cacheWriteTokens": 356
+        },
+        {
+          "seq": 24,
+          "time": 1792633240954,
+          "inputTokens": 7,
+          "outputTokens": 95,
+          "totalTokens": 5518,
+          "cacheReadTokens": 5285,
+          "cacheWriteTokens": 131
+        },
+        {
+          "seq": 29,
+          "time": 1792633243198,
+          "inputTokens": 6,
+          "outputTokens": 270,
+          "totalTokens": 5971,
+          "cacheReadTokens": 5416,
+          "cacheWriteTokens": 279
+        },
+        {
+          "seq": 40,
+          "time": 1792633246116,
+          "inputTokens": 7,
+          "outputTokens": 162,
+          "totalTokens": 18321,
+          "cacheReadTokens": 5695,
+          "cacheWriteTokens": 12457
+        },
+        {
+          "seq": 47,
+          "time": 1792633248747,
+          "inputTokens": 7,
+          "outputTokens": 120,
+          "totalTokens": 25681,
+          "cacheReadTokens": 18152,
+          "cacheWriteTokens": 7402
+        },
+        {
+          "seq": 52,
+          "time": 1792633251415,
+          "inputTokens": 6,
+          "outputTokens": 178,
+          "totalTokens": 26015,
+          "cacheReadTokens": 25554,
+          "cacheWriteTokens": 277
+        },
+        {
+          "seq": 57,
+          "time": 1792633258450,
+          "inputTokens": 6,
+          "outputTokens": 176,
+          "totalTokens": 27065,
+          "cacheReadTokens": 25831,
+          "cacheWriteTokens": 1052
+        },
+        {
+          "seq": 62,
+          "time": 1792633265173,
+          "inputTokens": 6,
+          "outputTokens": 208,
+          "totalTokens": 27291,
+          "cacheReadTokens": 26883,
+          "cacheWriteTokens": 194
+        },
+        {
+          "seq": 67,
+          "time": 1792633274395,
+          "inputTokens": 6,
+          "outputTokens": 863,
+          "totalTokens": 28243,
+          "cacheReadTokens": 27077,
+          "cacheWriteTokens": 297
+        }
+      ],
+      "structuredReports": [
+        {
+          "seq": 68,
+          "time": 1792633274396,
+          "status": "pass",
+          "summary": "Coding RALPH live dashboard verification complete. Executed frozen test suite: 13 tests, 13 passed, 0 failed, exit code 0. All core components verified: server with HTTP/SSE endpoints, EventFileReader with file truncation and ordering, EventStream with proper subscription/replay, browser dashboard with XSS protection and responsive stage flow visualization, dark mode support. All contracts implemented: health/snapshot/events endpoints, Last-Event-ID resumption, reset broadcasts, complete/partial line handling, sequence deduplication, desktop/mobile responsive layout (390px-1440px), expandable long reports, round/failure filters, real-time SSE updates. Application ready."
+        }
+      ],
+      "startedAt": 1792633235405,
+      "endedAt": 1792633274415,
+      "toolNames": [
+        "bash",
+        "read",
+        "structured_output"
+      ]
+    }
+  ],
+  "note": "Only observed native metadata. Null round/role unknown means no explicit marker; no inferred rounds or token estimates."
+}

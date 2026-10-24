@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: two clients observe the same newly appended child and test results
+ok 1 - two clients observe the same newly appended child and test results
+  ---
+  duration_ms: 30097.467694
+  type: 'test'
+  ...
+# Subtest: truncation sends reset and replays the replacement log
+ok 2 - truncation sends reset and replays the replacement log
+  ---
+  duration_ms: 91.973386
+  type: 'test'
+  ...
+# Subtest: out-of-order records are never emitted twice
+ok 3 - out-of-order records are never emitted twice
+  ---
+  duration_ms: 70.60569
+  type: 'test'
+  ...
+# Subtest: serves a runnable dashboard and rejects unknown paths
+ok 4 - serves a runnable dashboard and rejects unknown paths
+  ---
+  duration_ms: 136.924602
+  type: 'test'
+  ...
+# Subtest: empty or missing event log produces an honest empty snapshot
+ok 5 - empty or missing event log produces an honest empty snapshot
+  ---
+  duration_ms: 65.459258
+  type: 'test'
+  ...
+# Subtest: snapshot preserves ordered real run, child, host-test, and handoff events
+ok 6 - snapshot preserves ordered real run, child, host-test, and handoff events
+  ---
+  duration_ms: 72.841508
+  type: 'test'
+  ...
+# Subtest: SSE replays history, follows appended lines, and withholds a partial line
+ok 7 - SSE replays history, follows appended lines, and withholds a partial line
+  ---
+  duration_ms: 333.754053
+  type: 'test'
+  ...
+# Subtest: Last-Event-ID resumes without replaying earlier events
+ok 8 - Last-Event-ID resumes without replaying earlier events
+  ---
+  duration_ms: 90.024517
+  type: 'test'
+  ...
+# Subtest: malformed and duplicate complete lines do not crash the stream
+ok 9 - malformed and duplicate complete lines do not crash the stream
+  ---
+  duration_ms: 75.395213
+  type: 'test'
+  ...
+# Subtest: snapshot ignores out-of-order sequence numbers
+ok 10 - snapshot ignores out-of-order sequence numbers
+  ---
+  duration_ms: 73.09999
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 34259.362136

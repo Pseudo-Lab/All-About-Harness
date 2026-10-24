@@ -1,0 +1,9 @@
+# Route only. AWS credentials and region come from the process environment.
+- id: agent-default-model
+  config:
+    provider: amazon-bedrock
+    model: us.anthropic.claude-sonnet-4-5-20250929-v1:0
+- id: llm-pi-ai
+  config:
+    providers:
+      amazon-bedrock: {}

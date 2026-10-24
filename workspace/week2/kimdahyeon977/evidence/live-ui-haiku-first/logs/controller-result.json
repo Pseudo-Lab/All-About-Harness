@@ -1,0 +1,31 @@
+{
+  "mode": "custom",
+  "sessionId": "experiment-d6ae4c12-8750-43da-a74c-7fe1efcb0133",
+  "preset": "experiment-ralph",
+  "value": {
+    "status": "complete",
+    "rounds": [
+      {
+        "round": 1,
+        "handoff": "",
+        "implementation": {
+          "id": "3309d728-647e-4913-a9e3-33ceca802398",
+          "status": "ready",
+          "summary": "Implemented complete live Coding RALPH dashboard: server.mjs with HTTP server and SSE streaming, lib/file-reader.mjs for append-only event file reading with partial-line handling and deduplication, lib/event-stream.mjs for SSE subscription management, and public assets (index.html, app.js, style.css) with responsive dashboard UI. All components handle edge cases: malformed JSON, duplicate sequences, file truncation/reset, partial lines, path traversal protection, and proper error handling. Ready for test execution."
+        },
+        "test": {
+          "id": "fb67a52c-f556-46a9-b56c-2215f23ff0a9",
+          "status": "pass",
+          "summary": "Test suite execution complete. All 6 visible tests PASS with exit code 0. Implementation includes: server.mjs with HTTP server and SSE streaming, lib/file-reader.mjs for append-only event reading with proper truncation detection and file existence handling, lib/event-stream.mjs for SSE subscriptions with Last-Event-ID resumption support, and public assets (index.html, app.js, style.css) for responsive dashboard. Fixed issues: (1) file watcher no longer crashes on missing files, (2) event tracking now correctly handles file changes without false reset triggers, (3) Last-Event-ID resumption works correctly with explicit type normalization."
+        },
+        "acceptance": {
+          "exitCode": 0,
+          "testsRun": 6,
+          "kind": "passed",
+          "summary": "TAP version 13\n# Subtest: serves a runnable dashboard and rejects unknown paths\nok 1 - serves a runnable dashboard and rejects unknown paths\n  ---\n  duration_ms: 126.008353\n  type: 'test'\n  ...\n# Subtest: empty or missing event log produces an honest empty snapshot\nok 2 - empty or missing event log produces an honest empty snapshot\n  ---\n  duration_ms: 70.209597\n  type: 'test'\n  ...\n# Subtest: snapshot preserves ordered real run, child, host-test, and handoff events\nok 3 - snapshot preserves ordered real run, child, host-test, and handoff events\n  ---\n  duration_ms: 76.102091\n  type: 'test'\n  ...\n# Subtest: SSE replays history, follows appended lines, and withholds a partial line\nok 4 - SSE replays history, follows appended lines, and withholds a partial line\n  ---\n  duration_ms: 350.29754\n  type: 'test'\n  ...\n# Subtest: Last-Event-ID resumes without replaying earlier events\nok 5 - Last-Event-ID resumes without replaying earlier events\n  ---\n  duration_ms: 77.094128\n  type: 'test'\n  ...\n# Subtest: malformed and duplicate complete lines do not crash the stream\nok 6 - malformed and duplicate complete lines do not crash the stream\n  ---\n  duration_ms: 68.587433\n  type: 'test'\n  ...\n1..6\n# tests 6\n# suites 0\n# pass 6\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 3829.719574\n"
+        }
+      }
+    ],
+    "manifestHash": "b8f477c5d8e30485708cd93bc5e823547d97f995fb25b127b312a84c579b6912"
+  }
+}

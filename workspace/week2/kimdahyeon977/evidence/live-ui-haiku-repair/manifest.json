@@ -1,0 +1,29 @@
+{
+  "mode": "custom",
+  "scenario": "live_ui_repair",
+  "presetId": "experiment-ralph",
+  "state": "prepared-not-executed",
+  "run": "/tmp/week2-harness-runs/custom-d0KL9t",
+  "workspace": "/tmp/week2-harness-runs/custom-d0KL9t/workspace",
+  "dshHome": "/tmp/week2-harness-runs/custom-d0KL9t/dsh-home",
+  "provider": "amazon-bedrock",
+  "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "modelPatch": "/home/dhkim/All-About-Harness/workspace/week2/kimdahyeon977/runner/bedrock-haiku.patch.yml",
+  "liveEvents": "/tmp/week2-harness-runs/custom-d0KL9t/live/events.jsonl",
+  "seedWorkspace": "/tmp/week2-harness-runs/custom-CfDjFb/workspace",
+  "maxRounds": 8,
+  "cliInitiallyPresent": false,
+  "initialFiles": {
+    "acceptance/live-ui.test.mjs": "6e3e27486e1ce93698e68d717fb3f84a3ea39b2cb6858e3fae02c86caebd9051",
+    "acceptance/live-ui.md": "2624c933194fb7a3bbeb58a7546ccae9b4d23f60ce916655bb2cb5a596f92616"
+  },
+  "heldOutSha256": {
+    "live-ui-heldout.test.mjs": "35465d23b8eafe55e04f589bf4b35fa0a15748c2abab0fe975e1125b2c990d39"
+  },
+  "taskSha256": "226936ddc7e7308a005a2f1a32697ee94de947d5c9515de19ccd8694da119353",
+  "acceptanceSha256": "6e3e27486e1ce93698e68d717fb3f84a3ea39b2cb6858e3fae02c86caebd9051",
+  "presetSha256": "424b9bc5bdee90bde43231028c910c2758efa00bb76626e0a0433544619730f5",
+  "presetMetadataSha256": "64e564439a8358a6bcad7d8b5684e9b9fac2297f966341ef61f5067c389d0522",
+  "adapterSha256": "5ebb5b2dd1362a1fcbcd8d4246d9ed9d941cfdc2bae80b4fba034c074b1b8d1f",
+  "creatorSourceSha256": "e011cf8a2b8322fd2ad046e6f6c5af372be5d4283f7879a19b119150505bc687"
+}

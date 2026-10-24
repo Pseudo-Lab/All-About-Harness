@@ -1,0 +1,24 @@
+{
+  "mode": "custom",
+  "scenario": "planner",
+  "presetId": "experiment-ralph",
+  "state": "prepared-not-executed",
+  "run": "/tmp/week2-harness-runs/custom-nL6XgH",
+  "workspace": "/tmp/week2-harness-runs/custom-nL6XgH/workspace",
+  "dshHome": "/tmp/week2-harness-runs/custom-nL6XgH/dsh-home",
+  "provider": "amazon-bedrock",
+  "model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+  "modelPatch": "/tmp/all-about-harness-bedrock-run.patch.yml",
+  "maxRounds": 5,
+  "cliInitiallyPresent": false,
+  "initialFiles": {
+    "acceptance/planner.test.mjs": "07bb2fa333ae590d66a3320b72fa6b89f6aabcf213a10679d0ea375e4ba5f398",
+    "acceptance/planner.md": "da8d21f57c28ff4ae4d1cf26719afe21b86842b86f1203748bd88580e83b1dbc"
+  },
+  "taskSha256": "fd9b9e82642b442b96c7285c3875d861e3a40cd3b589022b0b36b4d4950b7c83",
+  "acceptanceSha256": "07bb2fa333ae590d66a3320b72fa6b89f6aabcf213a10679d0ea375e4ba5f398",
+  "presetSha256": "f4af4c353d23e3544184696a2311927cb9a571f7a2b0847c2889239260eb20a7",
+  "presetMetadataSha256": "64e564439a8358a6bcad7d8b5684e9b9fac2297f966341ef61f5067c389d0522",
+  "adapterSha256": "e841a9b3e72fd7ae54b55f8f201b2190fe9a03d1ad26f11640a5716d82784003",
+  "creatorSourceSha256": "61e0d1864f95b5b1349bc9e3400818647530a11448a120f745da4f2bc507d2bf"
+}

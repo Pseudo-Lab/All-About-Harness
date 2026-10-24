@@ -1,0 +1,24 @@
+{
+  "mode": "custom",
+  "scenario": "ledger",
+  "presetId": "experiment-ralph",
+  "state": "prepared-not-executed",
+  "run": "/tmp/week2-harness-runs/custom-HrC4L4",
+  "workspace": "/tmp/week2-harness-runs/custom-HrC4L4/workspace",
+  "dshHome": "/tmp/week2-harness-runs/custom-HrC4L4/dsh-home",
+  "provider": "amazon-bedrock",
+  "model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+  "modelPatch": "/home/dhkim/All-About-Harness/workspace/week2/kimdahyeon977/runner/bedrock.patch.yml",
+  "maxRounds": 5,
+  "cliInitiallyPresent": false,
+  "initialFiles": {
+    "acceptance/ledger.test.mjs": "9ecd6b08ba5dcaca06c61a7be3fc3bfeb1b7f548aafd260987a86754da29986b",
+    "acceptance/ledger.md": "27e17eaad2af9b1d5f36db4e012dbc4f3ab107a1aaced724e955992289143789"
+  },
+  "taskSha256": "c5b7883bdf331821b25c6be303a740e21c00ef9cc0010e557687fd68b27924e1",
+  "acceptanceSha256": "9ecd6b08ba5dcaca06c61a7be3fc3bfeb1b7f548aafd260987a86754da29986b",
+  "presetSha256": "f4af4c353d23e3544184696a2311927cb9a571f7a2b0847c2889239260eb20a7",
+  "presetMetadataSha256": "64e564439a8358a6bcad7d8b5684e9b9fac2297f966341ef61f5067c389d0522",
+  "adapterSha256": "e841a9b3e72fd7ae54b55f8f201b2190fe9a03d1ad26f11640a5716d82784003",
+  "creatorSourceSha256": "61e0d1864f95b5b1349bc9e3400818647530a11448a120f745da4f2bc507d2bf"
+}

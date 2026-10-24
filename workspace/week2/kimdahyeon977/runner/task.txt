@@ -1,0 +1,8 @@
+Implement a dependency-free Node.js ESM TODO CLI at ./cli.mjs.
+Support: node cli.mjs add TITLE, list, and complete ID. Persist JSON at TODO_FILE.
+Print JSON on success: add returns {id,title,completed:false}; list returns an array; complete returns the item with completed:true.
+IDs are positive safe integers, stable across processes, and strictly increasing on successful adds.
+Preserve literal titles. Reject empty or whitespace-only titles, extra arguments, unknown commands, malformed or missing IDs, and nonexistent IDs with a nonzero exit code. Errors must not create storage or change existing storage bytes or consume IDs. Completion is repeatable. TODO_FILE isolates stores.
+The CLI is initially absent. Implement the CLI yourself. Never modify acceptance/ or any test files. Do not access any reference example solution or other experiment workspace.
+Run the frozen tests with: TODO_CLI="$PWD/cli.mjs" node --test --test-reporter=tap acceptance/todo.test.mjs
+Use fresh-agent iterative execution for this task, at most five implementation rounds. After implementation, independently inspect and test the actual CLI. Treat a test failure as work remaining. Report concrete evidence or a concrete blocker.

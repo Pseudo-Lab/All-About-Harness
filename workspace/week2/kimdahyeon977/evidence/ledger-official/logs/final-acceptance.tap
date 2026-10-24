@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: empty reads do not create a store
+ok 1 - empty reads do not create a store
+  ---
+  duration_ms: 106.688304
+  type: 'test'
+  ...
+# Subtest: valid imports persist rows and cents in first-import order
+ok 2 - valid imports persist rows and cents in first-import order
+  ---
+  duration_ms: 124.078832
+  type: 'test'
+  ...
+# Subtest: identical re-import is idempotent without changing store bytes
+ok 3 - identical re-import is idempotent without changing store bytes
+  ---
+  duration_ms: 145.747462
+  type: 'test'
+  ...
+# Subtest: new rows and matching duplicate IDs can arrive in a later file
+ok 4 - new rows and matching duplicate IDs can arrive in a later file
+  ---
+  duration_ms: 188.790591
+  type: 'test'
+  ...
+# Subtest: conflicting duplicate aborts the entire import
+ok 5 - conflicting duplicate aborts the entire import
+  ---
+  duration_ms: 203.375385
+  type: 'test'
+  ...
+# Subtest: invalid CSV records and dates reject atomically
+ok 6 - invalid CSV records and dates reject atomically
+  ---
+  duration_ms: 611.529683
+  type: 'test'
+  ...
+# Subtest: quoted commas and escaped quotes survive CSV parsing
+ok 7 - quoted commas and escaped quotes survive CSV parsing
+  ---
+  duration_ms: 139.428653
+  type: 'test'
+  ...
+# Subtest: summaries aggregate signed cents over inclusive date ranges
+ok 8 - summaries aggregate signed cents over inclusive date ranges
+  ---
+  duration_ms: 352.402251
+  type: 'test'
+  ...
+# Subtest: delete returns the removed row and later deletion fails
+ok 9 - delete returns the removed row and later deletion fails
+  ---
+  duration_ms: 289.826918
+  type: 'test'
+  ...
+# Subtest: invalid commands and independent store paths preserve state
+ok 10 - invalid commands and independent store paths preserve state
+  ---
+  duration_ms: 823.855018
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3099.972967

@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: new storage lists an empty JSON array
+ok 1 - new storage lists an empty JSON array
+  ---
+  duration_ms: 29.152359
+  type: 'test'
+  ...
+# Subtest: adds persist literal titles across processes with stable increasing IDs
+ok 2 - adds persist literal titles across processes with stable increasing IDs
+  ---
+  duration_ms: 101.812262
+  type: 'test'
+  ...
+# Subtest: completion persists, is repeatable, and preserves IDs and other todos
+ok 3 - completion persists, is repeatable, and preserves IDs and other todos
+  ---
+  duration_ms: 265.267771
+  type: 'test'
+  ...
+# Subtest: invalid input never creates storage
+ok 4 - invalid input never creates storage
+  ---
+  duration_ms: 603.607707
+  type: 'test'
+  ...
+# Subtest: invalid input preserves storage bytes, todos, and the next ID
+ok 5 - invalid input preserves storage bytes, todos, and the next ID
+  ---
+  duration_ms: 1243.947397
+  type: 'test'
+  ...
+# Subtest: TODO_FILE isolates independent stores
+ok 6 - TODO_FILE isolates independent stores
+  ---
+  duration_ms: 152.148545
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2458.480151

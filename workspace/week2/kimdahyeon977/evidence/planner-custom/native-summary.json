@@ -1,0 +1,1305 @@
+{
+  "schemaVersion": 1,
+  "mode": "custom",
+  "sessions": [
+    {
+      "id": "experiment-79a5b390-4b8e-4084-98c6-a6a0cdeb3d46",
+      "createdAt": 1792559315219,
+      "delegationDepth": 0,
+      "role": "controller",
+      "round": null,
+      "childSessionIds": [
+        "980eed11-cee8-4380-8bbc-212b9be6662a",
+        "80e70df5-1517-4320-9c02-7da887992fae",
+        "9b60fd90-c7cc-4c65-abf7-050c6ab648c5",
+        "9983f953-699d-439c-aea7-c2238f273e7a"
+      ],
+      "timeline": [
+        {
+          "event": "subagent/catalog",
+          "seq": 3,
+          "time": 1792559315533,
+          "childId": "980eed11-cee8-4380-8bbc-212b9be6662a",
+          "round": 1,
+          "role": "implementation"
+        },
+        {
+          "event": "subagent/catalog",
+          "seq": 4,
+          "time": 1792559388210,
+          "childId": "80e70df5-1517-4320-9c02-7da887992fae",
+          "round": 1,
+          "role": "test"
+        },
+        {
+          "event": "subagent/catalog",
+          "seq": 5,
+          "time": 1792559436479,
+          "childId": "9b60fd90-c7cc-4c65-abf7-050c6ab648c5",
+          "round": 2,
+          "role": "implementation"
+        },
+        {
+          "event": "subagent/catalog",
+          "seq": 6,
+          "time": 1792559476585,
+          "childId": "9983f953-699d-439c-aea7-c2238f273e7a",
+          "round": 2,
+          "role": "test"
+        }
+      ],
+      "usage": [],
+      "structuredReports": [],
+      "startedAt": null,
+      "endedAt": null,
+      "toolNames": []
+    },
+    {
+      "id": "980eed11-cee8-4380-8bbc-212b9be6662a",
+      "parentSession": "experiment-79a5b390-4b8e-4084-98c6-a6a0cdeb3d46",
+      "createdAt": 1792559315494,
+      "origin": "subagent",
+      "delegationDepth": 1,
+      "role": "implementation",
+      "round": 1,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 4,
+          "time": 1792559315527,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 7,
+          "time": 1792559315558,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 15,
+          "time": 1792559319240,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_tOyyhG3GBWUg43rL9Kgqos"
+        },
+        {
+          "event": "tool/result",
+          "seq": 16,
+          "time": 1792559319261,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_tOyyhG3GBWUg43rL9Kgqos"
+        },
+        {
+          "event": "step/end",
+          "seq": 17,
+          "time": 1792559319262,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 18,
+          "time": 1792559319274,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 20,
+          "time": 1792559321838,
+          "turn": 1,
+          "step": 2,
+          "name": "read",
+          "callId": "tooluse_ix1rMahfWIpauurS2E4B7o"
+        },
+        {
+          "event": "tool/result",
+          "seq": 21,
+          "time": 1792559321863,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_ix1rMahfWIpauurS2E4B7o"
+        },
+        {
+          "event": "step/end",
+          "seq": 22,
+          "time": 1792559321864,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 23,
+          "time": 1792559321879,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 25,
+          "time": 1792559325347,
+          "turn": 1,
+          "step": 3,
+          "name": "read",
+          "callId": "tooluse_JVgJckJaxTInsSr9fBmhY1"
+        },
+        {
+          "event": "tool/result",
+          "seq": 26,
+          "time": 1792559325357,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_JVgJckJaxTInsSr9fBmhY1"
+        },
+        {
+          "event": "step/end",
+          "seq": 27,
+          "time": 1792559325357,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 28,
+          "time": 1792559325365,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 30,
+          "time": 1792559328481,
+          "turn": 1,
+          "step": 4,
+          "name": "read",
+          "callId": "tooluse_S3zdRMiTSZTi2dO8cuXlkA"
+        },
+        {
+          "event": "tool/result",
+          "seq": 31,
+          "time": 1792559328509,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_S3zdRMiTSZTi2dO8cuXlkA"
+        },
+        {
+          "event": "step/end",
+          "seq": 32,
+          "time": 1792559328509,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "step/start",
+          "seq": 33,
+          "time": 1792559328529,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "tool/call",
+          "seq": 35,
+          "time": 1792559337835,
+          "turn": 1,
+          "step": 5,
+          "name": "write",
+          "callId": "tooluse_RwLOAfD1z20Alm6aqkGKm1"
+        },
+        {
+          "event": "tool/result",
+          "seq": 36,
+          "time": 1792559337887,
+          "turn": 1,
+          "step": 5,
+          "callId": "tooluse_RwLOAfD1z20Alm6aqkGKm1"
+        },
+        {
+          "event": "step/end",
+          "seq": 37,
+          "time": 1792559337888,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "step/start",
+          "seq": 38,
+          "time": 1792559337899,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "tool/call",
+          "seq": 40,
+          "time": 1792559362164,
+          "turn": 1,
+          "step": 6,
+          "name": "write",
+          "callId": "tooluse_Xkvp6cN003QTWbMpVwH9Pe"
+        },
+        {
+          "event": "tool/result",
+          "seq": 41,
+          "time": 1792559362198,
+          "turn": 1,
+          "step": 6,
+          "callId": "tooluse_Xkvp6cN003QTWbMpVwH9Pe"
+        },
+        {
+          "event": "step/end",
+          "seq": 42,
+          "time": 1792559362198,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "step/start",
+          "seq": 43,
+          "time": 1792559362210,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "tool/call",
+          "seq": 45,
+          "time": 1792559375091,
+          "turn": 1,
+          "step": 7,
+          "name": "write",
+          "callId": "tooluse_an5RjyWvKPeN8ybqlhs3dS"
+        },
+        {
+          "event": "tool/result",
+          "seq": 46,
+          "time": 1792559375121,
+          "turn": 1,
+          "step": 7,
+          "callId": "tooluse_an5RjyWvKPeN8ybqlhs3dS"
+        },
+        {
+          "event": "step/end",
+          "seq": 47,
+          "time": 1792559375122,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "step/start",
+          "seq": 48,
+          "time": 1792559375133,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "tool/call",
+          "seq": 50,
+          "time": 1792559388125,
+          "turn": 1,
+          "step": 8,
+          "name": "structured_output",
+          "callId": "tooluse_7b9vo6Ri1xYPtFBWmpyJLX"
+        },
+        {
+          "event": "tool/result",
+          "seq": 51,
+          "time": 1792559388140,
+          "turn": 1,
+          "step": 8,
+          "callId": "tooluse_7b9vo6Ri1xYPtFBWmpyJLX"
+        },
+        {
+          "event": "step/end",
+          "seq": 52,
+          "time": 1792559388141,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "turn/end",
+          "seq": 53,
+          "time": 1792559388142,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 14,
+          "time": 1792559319236,
+          "inputTokens": 3,
+          "outputTokens": 104,
+          "totalTokens": 4898,
+          "cacheWriteTokens": 4791
+        },
+        {
+          "seq": 19,
+          "time": 1792559321837,
+          "inputTokens": 5,
+          "outputTokens": 61,
+          "totalTokens": 5587,
+          "cacheReadTokens": 4791,
+          "cacheWriteTokens": 730
+        },
+        {
+          "seq": 24,
+          "time": 1792559325346,
+          "inputTokens": 5,
+          "outputTokens": 78,
+          "totalTokens": 9726,
+          "cacheReadTokens": 5521,
+          "cacheWriteTokens": 4122
+        },
+        {
+          "seq": 29,
+          "time": 1792559328478,
+          "inputTokens": 7,
+          "outputTokens": 63,
+          "totalTokens": 9842,
+          "cacheReadTokens": 9643,
+          "cacheWriteTokens": 129
+        },
+        {
+          "seq": 34,
+          "time": 1792559337834,
+          "inputTokens": 7,
+          "outputTokens": 473,
+          "totalTokens": 10365,
+          "cacheReadTokens": 9772,
+          "cacheWriteTokens": 113
+        },
+        {
+          "seq": 39,
+          "time": 1792559362161,
+          "inputTokens": 5,
+          "outputTokens": 2110,
+          "totalTokens": 12537,
+          "cacheReadTokens": 9885,
+          "cacheWriteTokens": 537
+        },
+        {
+          "seq": 44,
+          "time": 1792559375090,
+          "inputTokens": 5,
+          "outputTokens": 1141,
+          "totalTokens": 13741,
+          "cacheReadTokens": 10422,
+          "cacheWriteTokens": 2173
+        },
+        {
+          "seq": 49,
+          "time": 1792559388125,
+          "inputTokens": 5,
+          "outputTokens": 561,
+          "totalTokens": 14362,
+          "cacheReadTokens": 12595,
+          "cacheWriteTokens": 1201
+        }
+      ],
+      "structuredReports": [
+        {
+          "seq": 50,
+          "time": 1792559388125,
+          "status": "ready",
+          "summary": "Round 3 implementation complete. Created cli.mjs, lib/store.mjs, and lib/planner.mjs with full functionality: project add/list/report, task add/list/depend/ready/complete. Includes ID validation, dependency validation (self/duplicate/cross-project/cycle rejection), readiness computation, idempotent completion, and store isolation. All features from rounds 1-3 implemented according to the frozen acceptance contract."
+        }
+      ],
+      "startedAt": 1792559315527,
+      "endedAt": 1792559388142,
+      "toolNames": [
+        "read",
+        "write",
+        "structured_output"
+      ]
+    },
+    {
+      "id": "80e70df5-1517-4320-9c02-7da887992fae",
+      "parentSession": "experiment-79a5b390-4b8e-4084-98c6-a6a0cdeb3d46",
+      "createdAt": 1792559388177,
+      "origin": "subagent",
+      "delegationDepth": 1,
+      "role": "test",
+      "round": 1,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 4,
+          "time": 1792559388207,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 7,
+          "time": 1792559388226,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 15,
+          "time": 1792559391721,
+          "turn": 1,
+          "step": 1,
+          "name": "bash",
+          "callId": "tooluse_HIPOA31ESUcwvfDITHobhD"
+        },
+        {
+          "event": "tool/result",
+          "seq": 16,
+          "time": 1792559395405,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_HIPOA31ESUcwvfDITHobhD"
+        },
+        {
+          "event": "step/end",
+          "seq": 17,
+          "time": 1792559395406,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 18,
+          "time": 1792559395416,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 20,
+          "time": 1792559400222,
+          "turn": 1,
+          "step": 2,
+          "name": "read",
+          "callId": "tooluse_GTqiGxY45sYa5xBuqo6Xn0"
+        },
+        {
+          "event": "tool/result",
+          "seq": 21,
+          "time": 1792559400232,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_GTqiGxY45sYa5xBuqo6Xn0"
+        },
+        {
+          "event": "step/end",
+          "seq": 22,
+          "time": 1792559400232,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 23,
+          "time": 1792559400239,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 25,
+          "time": 1792559403603,
+          "turn": 1,
+          "step": 3,
+          "name": "read",
+          "callId": "tooluse_8ZhZfv16JZbrbIWkf5D1yk"
+        },
+        {
+          "event": "tool/result",
+          "seq": 26,
+          "time": 1792559403614,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_8ZhZfv16JZbrbIWkf5D1yk"
+        },
+        {
+          "event": "step/end",
+          "seq": 27,
+          "time": 1792559403615,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 28,
+          "time": 1792559403624,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 30,
+          "time": 1792559406338,
+          "turn": 1,
+          "step": 4,
+          "name": "read",
+          "callId": "tooluse_6OcbcGiRocWeD8HM7xv0t2"
+        },
+        {
+          "event": "tool/result",
+          "seq": 31,
+          "time": 1792559406350,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_6OcbcGiRocWeD8HM7xv0t2"
+        },
+        {
+          "event": "step/end",
+          "seq": 32,
+          "time": 1792559406351,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "step/start",
+          "seq": 33,
+          "time": 1792559406359,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "tool/call",
+          "seq": 35,
+          "time": 1792559410766,
+          "turn": 1,
+          "step": 5,
+          "name": "bash",
+          "callId": "tooluse_o8vDokoVkfCeHtHG1m12tG"
+        },
+        {
+          "event": "tool/result",
+          "seq": 36,
+          "time": 1792559410924,
+          "turn": 1,
+          "step": 5,
+          "callId": "tooluse_o8vDokoVkfCeHtHG1m12tG"
+        },
+        {
+          "event": "step/end",
+          "seq": 37,
+          "time": 1792559410925,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "step/start",
+          "seq": 38,
+          "time": 1792559410940,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "tool/call",
+          "seq": 40,
+          "time": 1792559417178,
+          "turn": 1,
+          "step": 6,
+          "name": "bash",
+          "callId": "tooluse_nTmKDFBD7clu6RGroKM1hE"
+        },
+        {
+          "event": "tool/result",
+          "seq": 41,
+          "time": 1792559417347,
+          "turn": 1,
+          "step": 6,
+          "callId": "tooluse_nTmKDFBD7clu6RGroKM1hE"
+        },
+        {
+          "event": "step/end",
+          "seq": 42,
+          "time": 1792559417347,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "step/start",
+          "seq": 43,
+          "time": 1792559417355,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "tool/call",
+          "seq": 45,
+          "time": 1792559422932,
+          "turn": 1,
+          "step": 7,
+          "name": "bash",
+          "callId": "tooluse_MRPptAwRD8q7ahCSbP6wSq"
+        },
+        {
+          "event": "tool/result",
+          "seq": 46,
+          "time": 1792559423225,
+          "turn": 1,
+          "step": 7,
+          "callId": "tooluse_MRPptAwRD8q7ahCSbP6wSq"
+        },
+        {
+          "event": "step/end",
+          "seq": 47,
+          "time": 1792559423226,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "step/start",
+          "seq": 48,
+          "time": 1792559423241,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "tool/call",
+          "seq": 50,
+          "time": 1792559432066,
+          "turn": 1,
+          "step": 8,
+          "name": "structured_output",
+          "callId": "tooluse_AqB1nwqrXbSUNw5gM74pck"
+        },
+        {
+          "event": "tool/result",
+          "seq": 51,
+          "time": 1792559432079,
+          "turn": 1,
+          "step": 8,
+          "callId": "tooluse_AqB1nwqrXbSUNw5gM74pck"
+        },
+        {
+          "event": "step/end",
+          "seq": 52,
+          "time": 1792559432079,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "turn/end",
+          "seq": 53,
+          "time": 1792559432080,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 14,
+          "time": 1792559391721,
+          "inputTokens": 3,
+          "outputTokens": 144,
+          "totalTokens": 5296,
+          "cacheWriteTokens": 5149
+        },
+        {
+          "seq": 19,
+          "time": 1792559400221,
+          "inputTokens": 6,
+          "outputTokens": 165,
+          "totalTokens": 6541,
+          "cacheReadTokens": 5149,
+          "cacheWriteTokens": 1221
+        },
+        {
+          "seq": 24,
+          "time": 1792559403602,
+          "inputTokens": 5,
+          "outputTokens": 126,
+          "totalTokens": 6986,
+          "cacheReadTokens": 6370,
+          "cacheWriteTokens": 485
+        },
+        {
+          "seq": 29,
+          "time": 1792559406337,
+          "inputTokens": 5,
+          "outputTokens": 93,
+          "totalTokens": 7402,
+          "cacheReadTokens": 6855,
+          "cacheWriteTokens": 449
+        },
+        {
+          "seq": 34,
+          "time": 1792559410764,
+          "inputTokens": 5,
+          "outputTokens": 180,
+          "totalTokens": 7841,
+          "cacheReadTokens": 7304,
+          "cacheWriteTokens": 352
+        },
+        {
+          "seq": 39,
+          "time": 1792559417178,
+          "inputTokens": 6,
+          "outputTokens": 206,
+          "totalTokens": 8574,
+          "cacheReadTokens": 7656,
+          "cacheWriteTokens": 706
+        },
+        {
+          "seq": 44,
+          "time": 1792559422931,
+          "inputTokens": 6,
+          "outputTokens": 255,
+          "totalTokens": 8845,
+          "cacheReadTokens": 8362,
+          "cacheWriteTokens": 222
+        },
+        {
+          "seq": 49,
+          "time": 1792559432065,
+          "inputTokens": 6,
+          "outputTokens": 303,
+          "totalTokens": 9226,
+          "cacheReadTokens": 8584,
+          "cacheWriteTokens": 333
+        }
+      ],
+      "structuredReports": [
+        {
+          "seq": 50,
+          "time": 1792559432066,
+          "status": "fail",
+          "summary": "Test suite executed: 10 passed, 1 failed (exit code 1). Failure: test \"invalid IDs and unknown tasks preserve persisted bytes\" at line 191 - ID \"1e0\" should be rejected but is incorrectly accepted. The validateId function in lib/planner.mjs uses Number(str) which parses scientific notation \"1e0\" as 1, but IDs must be in canonical integer format (digits only). Fix: add regex check /^[1-9][0-9]*$/ before Number conversion to reject non-canonical formats like \"1e0\", \"1.5\", \"1x\" while accepting \"1\", \"42\", etc."
+        }
+      ],
+      "startedAt": 1792559388207,
+      "endedAt": 1792559432080,
+      "toolNames": [
+        "bash",
+        "read",
+        "structured_output"
+      ]
+    },
+    {
+      "id": "9b60fd90-c7cc-4c65-abf7-050c6ab648c5",
+      "parentSession": "experiment-79a5b390-4b8e-4084-98c6-a6a0cdeb3d46",
+      "createdAt": 1792559436453,
+      "origin": "subagent",
+      "delegationDepth": 1,
+      "role": "implementation",
+      "round": 2,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 4,
+          "time": 1792559436477,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 7,
+          "time": 1792559436490,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 15,
+          "time": 1792559439837,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_azJye8khQ7CZiLesHdecNx"
+        },
+        {
+          "event": "tool/result",
+          "seq": 16,
+          "time": 1792559439852,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_azJye8khQ7CZiLesHdecNx"
+        },
+        {
+          "event": "step/end",
+          "seq": 17,
+          "time": 1792559439853,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 18,
+          "time": 1792559439863,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 20,
+          "time": 1792559442212,
+          "turn": 1,
+          "step": 2,
+          "name": "read",
+          "callId": "tooluse_b20u8RH80TlxkMqnhC3krd"
+        },
+        {
+          "event": "tool/result",
+          "seq": 21,
+          "time": 1792559442244,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_b20u8RH80TlxkMqnhC3krd"
+        },
+        {
+          "event": "step/end",
+          "seq": 22,
+          "time": 1792559442244,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 23,
+          "time": 1792559442254,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 25,
+          "time": 1792559444638,
+          "turn": 1,
+          "step": 3,
+          "name": "read",
+          "callId": "tooluse_Ttckoj6ohW6ElJd1xj7hF9"
+        },
+        {
+          "event": "tool/result",
+          "seq": 26,
+          "time": 1792559444690,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_Ttckoj6ohW6ElJd1xj7hF9"
+        },
+        {
+          "event": "step/end",
+          "seq": 27,
+          "time": 1792559444690,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 28,
+          "time": 1792559444706,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 30,
+          "time": 1792559450135,
+          "turn": 1,
+          "step": 4,
+          "name": "read",
+          "callId": "tooluse_TGaYT7JDJqyBTdPNixAQLn"
+        },
+        {
+          "event": "tool/result",
+          "seq": 31,
+          "time": 1792559450158,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_TGaYT7JDJqyBTdPNixAQLn"
+        },
+        {
+          "event": "step/end",
+          "seq": 32,
+          "time": 1792559450159,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "step/start",
+          "seq": 33,
+          "time": 1792559450171,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "tool/call",
+          "seq": 35,
+          "time": 1792559456811,
+          "turn": 1,
+          "step": 5,
+          "name": "edit",
+          "callId": "tooluse_2BhtUnAsd3vVqZItfXSrcM"
+        },
+        {
+          "event": "tool/result",
+          "seq": 36,
+          "time": 1792559456840,
+          "turn": 1,
+          "step": 5,
+          "callId": "tooluse_2BhtUnAsd3vVqZItfXSrcM"
+        },
+        {
+          "event": "step/end",
+          "seq": 37,
+          "time": 1792559456841,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "step/start",
+          "seq": 38,
+          "time": 1792559456849,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "tool/call",
+          "seq": 40,
+          "time": 1792559463166,
+          "turn": 1,
+          "step": 6,
+          "name": "read",
+          "callId": "tooluse_3SQG0T3t5Bvhf6OTZtXKRQ"
+        },
+        {
+          "event": "tool/result",
+          "seq": 41,
+          "time": 1792559463179,
+          "turn": 1,
+          "step": 6,
+          "callId": "tooluse_3SQG0T3t5Bvhf6OTZtXKRQ"
+        },
+        {
+          "event": "step/end",
+          "seq": 42,
+          "time": 1792559463180,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "step/start",
+          "seq": 43,
+          "time": 1792559463189,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "tool/call",
+          "seq": 45,
+          "time": 1792559476530,
+          "turn": 1,
+          "step": 7,
+          "name": "structured_output",
+          "callId": "tooluse_sZlvFKtOzo7sEOgkJv3fZS"
+        },
+        {
+          "event": "tool/result",
+          "seq": 46,
+          "time": 1792559476541,
+          "turn": 1,
+          "step": 7,
+          "callId": "tooluse_sZlvFKtOzo7sEOgkJv3fZS"
+        },
+        {
+          "event": "step/end",
+          "seq": 47,
+          "time": 1792559476541,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "turn/end",
+          "seq": 48,
+          "time": 1792559476541,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 14,
+          "time": 1792559439836,
+          "inputTokens": 3,
+          "outputTokens": 104,
+          "totalTokens": 6469,
+          "cacheReadTokens": 3571,
+          "cacheWriteTokens": 2791
+        },
+        {
+          "seq": 19,
+          "time": 1792559442211,
+          "inputTokens": 5,
+          "outputTokens": 56,
+          "totalTokens": 7153,
+          "cacheReadTokens": 6362,
+          "cacheWriteTokens": 730
+        },
+        {
+          "seq": 24,
+          "time": 1792559444637,
+          "inputTokens": 5,
+          "outputTokens": 59,
+          "totalTokens": 8603,
+          "cacheReadTokens": 7092,
+          "cacheWriteTokens": 1447
+        },
+        {
+          "seq": 29,
+          "time": 1792559450134,
+          "inputTokens": 5,
+          "outputTokens": 191,
+          "totalTokens": 11499,
+          "cacheReadTokens": 8539,
+          "cacheWriteTokens": 2764
+        },
+        {
+          "seq": 34,
+          "time": 1792559456809,
+          "inputTokens": 5,
+          "outputTokens": 353,
+          "totalTokens": 12171,
+          "cacheReadTokens": 11303,
+          "cacheWriteTokens": 510
+        },
+        {
+          "seq": 39,
+          "time": 1792559463164,
+          "inputTokens": 5,
+          "outputTokens": 235,
+          "totalTokens": 12453,
+          "cacheReadTokens": 11813,
+          "cacheWriteTokens": 400
+        },
+        {
+          "seq": 44,
+          "time": 1792559476529,
+          "inputTokens": 5,
+          "outputTokens": 586,
+          "totalTokens": 13488,
+          "cacheReadTokens": 12213,
+          "cacheWriteTokens": 684
+        }
+      ],
+      "structuredReports": [
+        {
+          "seq": 45,
+          "time": 1792559476530,
+          "status": "ready",
+          "summary": "Fixed validateId function in lib/planner.mjs to reject non-canonical integer formats. Added regex check /^[1-9][0-9]*$/ before Number conversion to ensure only canonical integer strings (digits only, no leading zeros) are accepted. This fix rejects \"1e0\", \"1.5\", \"1x\" while accepting \"1\", \"42\", etc. All functionality from rounds 1-3 (project add/list/report, task add/list/depend/ready/complete, dependency validation, readiness, completion) remains intact. The implementation now fully satisfies the frozen acceptance contract."
+        }
+      ],
+      "startedAt": 1792559436477,
+      "endedAt": 1792559476541,
+      "toolNames": [
+        "read",
+        "edit",
+        "structured_output"
+      ]
+    },
+    {
+      "id": "9983f953-699d-439c-aea7-c2238f273e7a",
+      "parentSession": "experiment-79a5b390-4b8e-4084-98c6-a6a0cdeb3d46",
+      "createdAt": 1792559476555,
+      "origin": "subagent",
+      "delegationDepth": 1,
+      "role": "test",
+      "round": 2,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 4,
+          "time": 1792559476583,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 7,
+          "time": 1792559476597,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 15,
+          "time": 1792559479575,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_6MH7aVxz7H24ulUxcfouOo"
+        },
+        {
+          "event": "tool/result",
+          "seq": 16,
+          "time": 1792559479619,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_6MH7aVxz7H24ulUxcfouOo"
+        },
+        {
+          "event": "step/end",
+          "seq": 17,
+          "time": 1792559479622,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 18,
+          "time": 1792559479642,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 20,
+          "time": 1792559483779,
+          "turn": 1,
+          "step": 2,
+          "name": "bash",
+          "callId": "tooluse_3SUWnEJdVM0r1oybke6oqp"
+        },
+        {
+          "event": "tool/result",
+          "seq": 21,
+          "time": 1792559489112,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_3SUWnEJdVM0r1oybke6oqp"
+        },
+        {
+          "event": "step/end",
+          "seq": 22,
+          "time": 1792559489113,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 23,
+          "time": 1792559489131,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 25,
+          "time": 1792559493493,
+          "turn": 1,
+          "step": 3,
+          "name": "bash",
+          "callId": "tooluse_0fJ1UuRVE5n5OX7nhV7DlR"
+        },
+        {
+          "event": "tool/result",
+          "seq": 26,
+          "time": 1792559499087,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_0fJ1UuRVE5n5OX7nhV7DlR"
+        },
+        {
+          "event": "step/end",
+          "seq": 27,
+          "time": 1792559499088,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 28,
+          "time": 1792559499102,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 30,
+          "time": 1792559508984,
+          "turn": 1,
+          "step": 4,
+          "name": "structured_output",
+          "callId": "tooluse_6XS9ks7lufOjGblVWcaJTV"
+        },
+        {
+          "event": "tool/result",
+          "seq": 31,
+          "time": 1792559508998,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_6XS9ks7lufOjGblVWcaJTV"
+        },
+        {
+          "event": "step/end",
+          "seq": 32,
+          "time": 1792559508999,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "turn/end",
+          "seq": 33,
+          "time": 1792559509000,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 14,
+          "time": 1792559479574,
+          "inputTokens": 3,
+          "outputTokens": 84,
+          "totalTokens": 7041,
+          "cacheReadTokens": 3770,
+          "cacheWriteTokens": 3184
+        },
+        {
+          "seq": 19,
+          "time": 1792559483778,
+          "inputTokens": 5,
+          "outputTokens": 193,
+          "totalTokens": 9989,
+          "cacheReadTokens": 6954,
+          "cacheWriteTokens": 2837
+        },
+        {
+          "seq": 24,
+          "time": 1792559493492,
+          "inputTokens": 6,
+          "outputTokens": 153,
+          "totalTokens": 10865,
+          "cacheReadTokens": 9791,
+          "cacheWriteTokens": 915
+        },
+        {
+          "seq": 29,
+          "time": 1792559508983,
+          "inputTokens": 6,
+          "outputTokens": 456,
+          "totalTokens": 12052,
+          "cacheReadTokens": 10706,
+          "cacheWriteTokens": 884
+        }
+      ],
+      "structuredReports": [
+        {
+          "seq": 30,
+          "time": 1792559508984,
+          "status": "pass",
+          "summary": "All 11 tests passed with exit code 0. The validateId fix successfully rejects non-canonical integer formats like \"1e0\" using regex /^[1-9][0-9]*$/ before Number conversion. Full implementation complete: project add/list/report, task add/list/depend/ready/complete, ID validation, dependency validation (duplicate/self/cross-project/cycle rejection), readiness computation, idempotent completion, and store isolation all satisfy the frozen acceptance contract."
+        }
+      ],
+      "startedAt": 1792559476583,
+      "endedAt": 1792559509000,
+      "toolNames": [
+        "read",
+        "bash",
+        "structured_output"
+      ]
+    }
+  ],
+  "note": "Only observed native metadata. Null round/role unknown means no explicit marker; no inferred rounds or token estimates."
+}

@@ -1,0 +1,1632 @@
+{
+  "schemaVersion": 1,
+  "mode": "custom",
+  "sessions": [
+    {
+      "id": "experiment-fce95867-6392-458d-ae28-992014d9ec5e",
+      "createdAt": 1792243342555,
+      "delegationDepth": 0,
+      "role": "controller",
+      "round": null,
+      "childSessionIds": [
+        "74d67e9b-6908-496a-8c33-e532b5720820",
+        "bfc3f01a-aa57-4c1c-a7f3-1eef7da6fb0e"
+      ],
+      "timeline": [
+        {
+          "event": "subagent/catalog",
+          "seq": 3,
+          "time": 1792243342740,
+          "childId": "74d67e9b-6908-496a-8c33-e532b5720820",
+          "round": 1,
+          "role": "implementation"
+        },
+        {
+          "event": "subagent/catalog",
+          "seq": 4,
+          "time": 1792243440210,
+          "childId": "bfc3f01a-aa57-4c1c-a7f3-1eef7da6fb0e",
+          "round": 1,
+          "role": "test"
+        }
+      ],
+      "usage": [],
+      "startedAt": null,
+      "endedAt": null,
+      "toolNames": []
+    },
+    {
+      "id": "74d67e9b-6908-496a-8c33-e532b5720820",
+      "parentSession": "experiment-fce95867-6392-458d-ae28-992014d9ec5e",
+      "createdAt": 1792243342722,
+      "origin": "subagent",
+      "delegationDepth": 1,
+      "role": "implementation",
+      "round": 1,
+      "childSessionIds": [
+        "67dcd1cb-2ba6-45a9-9c24-7327c00f3001",
+        "46800a1b-9476-4af7-81e9-1e5f6d84bcc2"
+      ],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 3,
+          "time": 1792243342737,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 6,
+          "time": 1792243342752,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 14,
+          "time": 1792243346008,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_hzri5jJ70mZOvqTCfgkyCz"
+        },
+        {
+          "event": "tool/result",
+          "seq": 15,
+          "time": 1792243346025,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_hzri5jJ70mZOvqTCfgkyCz"
+        },
+        {
+          "event": "step/end",
+          "seq": 16,
+          "time": 1792243346025,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 17,
+          "time": 1792243346051,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 19,
+          "time": 1792243357756,
+          "turn": 1,
+          "step": 2,
+          "name": "write",
+          "callId": "tooluse_4HMhTRH6Ehdr8sNzIZ1ukR"
+        },
+        {
+          "event": "tool/result",
+          "seq": 20,
+          "time": 1792243357765,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_4HMhTRH6Ehdr8sNzIZ1ukR"
+        },
+        {
+          "event": "step/end",
+          "seq": 21,
+          "time": 1792243357765,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 22,
+          "time": 1792243357779,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 24,
+          "time": 1792243362700,
+          "turn": 1,
+          "step": 3,
+          "name": "subagent",
+          "callId": "tooluse_ctOcCbJUsqze0ZE2sY8uP9"
+        },
+        {
+          "event": "subagent/catalog",
+          "seq": 25,
+          "time": 1792243362720,
+          "childId": "67dcd1cb-2ba6-45a9-9c24-7327c00f3001"
+        },
+        {
+          "event": "tool/result",
+          "seq": 26,
+          "time": 1792243375521,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_ctOcCbJUsqze0ZE2sY8uP9"
+        },
+        {
+          "event": "step/end",
+          "seq": 27,
+          "time": 1792243375521,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 28,
+          "time": 1792243375541,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 30,
+          "time": 1792243383031,
+          "turn": 1,
+          "step": 4,
+          "name": "subagent",
+          "callId": "tooluse_CfIvnByMPA78q7zyD0T22X"
+        },
+        {
+          "event": "subagent/catalog",
+          "seq": 31,
+          "time": 1792243383055,
+          "childId": "46800a1b-9476-4af7-81e9-1e5f6d84bcc2"
+        },
+        {
+          "event": "tool/result",
+          "seq": 32,
+          "time": 1792243428943,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_CfIvnByMPA78q7zyD0T22X"
+        },
+        {
+          "event": "step/end",
+          "seq": 33,
+          "time": 1792243428943,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "step/start",
+          "seq": 34,
+          "time": 1792243428950,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "tool/call",
+          "seq": 36,
+          "time": 1792243431730,
+          "turn": 1,
+          "step": 5,
+          "name": "read",
+          "callId": "tooluse_OsfIZn3F6GZtW0Q2gHtuKf"
+        },
+        {
+          "event": "tool/result",
+          "seq": 37,
+          "time": 1792243431739,
+          "turn": 1,
+          "step": 5,
+          "callId": "tooluse_OsfIZn3F6GZtW0Q2gHtuKf"
+        },
+        {
+          "event": "step/end",
+          "seq": 38,
+          "time": 1792243431739,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "step/start",
+          "seq": 39,
+          "time": 1792243431749,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "tool/call",
+          "seq": 41,
+          "time": 1792243440184,
+          "turn": 1,
+          "step": 6,
+          "name": "structured_output",
+          "callId": "tooluse_bzi7RX17aIuEHzr32LiL0P"
+        },
+        {
+          "event": "tool/result",
+          "seq": 42,
+          "time": 1792243440187,
+          "turn": 1,
+          "step": 6,
+          "callId": "tooluse_bzi7RX17aIuEHzr32LiL0P"
+        },
+        {
+          "event": "step/end",
+          "seq": 43,
+          "time": 1792243440187,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "turn/end",
+          "seq": 44,
+          "time": 1792243440187,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 13,
+          "time": 1792243346007,
+          "inputTokens": 3,
+          "outputTokens": 93,
+          "totalTokens": 5673,
+          "cacheWriteTokens": 5577
+        },
+        {
+          "seq": 18,
+          "time": 1792243357755,
+          "inputTokens": 5,
+          "outputTokens": 919,
+          "totalTokens": 8522,
+          "cacheReadTokens": 5577,
+          "cacheWriteTokens": 2021
+        },
+        {
+          "seq": 23,
+          "time": 1792243362699,
+          "inputTokens": 5,
+          "outputTokens": 175,
+          "totalTokens": 8756,
+          "cacheReadTokens": 7598,
+          "cacheWriteTokens": 978
+        },
+        {
+          "seq": 29,
+          "time": 1792243383029,
+          "inputTokens": 6,
+          "outputTokens": 478,
+          "totalTokens": 9527,
+          "cacheReadTokens": 8576,
+          "cacheWriteTokens": 467
+        },
+        {
+          "seq": 35,
+          "time": 1792243431730,
+          "inputTokens": 5,
+          "outputTokens": 74,
+          "totalTokens": 10019,
+          "cacheReadTokens": 9043,
+          "cacheWriteTokens": 897
+        },
+        {
+          "seq": 40,
+          "time": 1792243440183,
+          "inputTokens": 5,
+          "outputTokens": 324,
+          "totalTokens": 11468,
+          "cacheReadTokens": 9940,
+          "cacheWriteTokens": 1199
+        }
+      ],
+      "startedAt": 1792243342737,
+      "endedAt": 1792243440187,
+      "toolNames": [
+        "read",
+        "write",
+        "subagent",
+        "structured_output"
+      ]
+    },
+    {
+      "id": "67dcd1cb-2ba6-45a9-9c24-7327c00f3001",
+      "parentSession": "74d67e9b-6908-496a-8c33-e532b5720820",
+      "createdAt": 1792243362704,
+      "origin": "subagent",
+      "delegationDepth": 2,
+      "role": "unknown",
+      "round": null,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 3,
+          "time": 1792243362717,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 6,
+          "time": 1792243362749,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 15,
+          "time": 1792243366688,
+          "turn": 1,
+          "step": 1,
+          "name": "bash",
+          "callId": "tooluse_Yz0zesTgkXYjdJ0bYkeOEQ"
+        },
+        {
+          "event": "tool/result",
+          "seq": 16,
+          "time": 1792243368891,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_Yz0zesTgkXYjdJ0bYkeOEQ"
+        },
+        {
+          "event": "step/end",
+          "seq": 17,
+          "time": 1792243368892,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 18,
+          "time": 1792243368903,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/end",
+          "seq": 20,
+          "time": 1792243375492,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "turn/end",
+          "seq": 21,
+          "time": 1792243375493,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 14,
+          "time": 1792243366688,
+          "inputTokens": 3,
+          "outputTokens": 144,
+          "totalTokens": 13906,
+          "cacheWriteTokens": 13759
+        },
+        {
+          "seq": 19,
+          "time": 1792243375491,
+          "inputTokens": 6,
+          "outputTokens": 284,
+          "totalTokens": 14601,
+          "cacheReadTokens": 13759,
+          "cacheWriteTokens": 552
+        }
+      ],
+      "startedAt": 1792243362717,
+      "endedAt": 1792243375493,
+      "toolNames": [
+        "bash"
+      ]
+    },
+    {
+      "id": "46800a1b-9476-4af7-81e9-1e5f6d84bcc2",
+      "parentSession": "74d67e9b-6908-496a-8c33-e532b5720820",
+      "createdAt": 1792243383035,
+      "origin": "subagent",
+      "delegationDepth": 2,
+      "role": "unknown",
+      "round": null,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 3,
+          "time": 1792243383049,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 6,
+          "time": 1792243383079,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 15,
+          "time": 1792243387987,
+          "turn": 1,
+          "step": 1,
+          "name": "bash",
+          "callId": "tooluse_i9dWvV7n9KJOn4nxQl9j0A"
+        },
+        {
+          "event": "tool/result",
+          "seq": 16,
+          "time": 1792243388075,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_i9dWvV7n9KJOn4nxQl9j0A"
+        },
+        {
+          "event": "step/end",
+          "seq": 17,
+          "time": 1792243388076,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 18,
+          "time": 1792243388086,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 20,
+          "time": 1792243391671,
+          "turn": 1,
+          "step": 2,
+          "name": "bash",
+          "callId": "tooluse_oYP1vWkw4ytw9nrKE6lfEO"
+        },
+        {
+          "event": "tool/result",
+          "seq": 21,
+          "time": 1792243391806,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_oYP1vWkw4ytw9nrKE6lfEO"
+        },
+        {
+          "event": "step/end",
+          "seq": 22,
+          "time": 1792243391806,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 23,
+          "time": 1792243391817,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 25,
+          "time": 1792243395154,
+          "turn": 1,
+          "step": 3,
+          "name": "bash",
+          "callId": "tooluse_5VgWB4beQ07TBQTb1pN7s2"
+        },
+        {
+          "event": "tool/result",
+          "seq": 26,
+          "time": 1792243395282,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_5VgWB4beQ07TBQTb1pN7s2"
+        },
+        {
+          "event": "step/end",
+          "seq": 27,
+          "time": 1792243395282,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 28,
+          "time": 1792243395293,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 30,
+          "time": 1792243399554,
+          "turn": 1,
+          "step": 4,
+          "name": "read",
+          "callId": "tooluse_2BdBKIsGfG4p87yOoMw8aL"
+        },
+        {
+          "event": "tool/result",
+          "seq": 31,
+          "time": 1792243399560,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_2BdBKIsGfG4p87yOoMw8aL"
+        },
+        {
+          "event": "step/end",
+          "seq": 32,
+          "time": 1792243399560,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "step/start",
+          "seq": 33,
+          "time": 1792243399572,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "tool/call",
+          "seq": 35,
+          "time": 1792243404093,
+          "turn": 1,
+          "step": 5,
+          "name": "bash",
+          "callId": "tooluse_slOfuj7gOuhmvmmzngSQG5"
+        },
+        {
+          "event": "tool/result",
+          "seq": 36,
+          "time": 1792243404204,
+          "turn": 1,
+          "step": 5,
+          "callId": "tooluse_slOfuj7gOuhmvmmzngSQG5"
+        },
+        {
+          "event": "step/end",
+          "seq": 37,
+          "time": 1792243404204,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "step/start",
+          "seq": 38,
+          "time": 1792243404215,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "tool/call",
+          "seq": 40,
+          "time": 1792243412279,
+          "turn": 1,
+          "step": 6,
+          "name": "bash",
+          "callId": "tooluse_RT0H0lgRwNJLdn9dgoke0u"
+        },
+        {
+          "event": "tool/result",
+          "seq": 41,
+          "time": 1792243412582,
+          "turn": 1,
+          "step": 6,
+          "callId": "tooluse_RT0H0lgRwNJLdn9dgoke0u"
+        },
+        {
+          "event": "step/end",
+          "seq": 42,
+          "time": 1792243412583,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "step/start",
+          "seq": 43,
+          "time": 1792243412592,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "tool/call",
+          "seq": 45,
+          "time": 1792243416145,
+          "turn": 1,
+          "step": 7,
+          "name": "bash",
+          "callId": "tooluse_3mu3a6AnWjX90FaCKjV78r"
+        },
+        {
+          "event": "tool/result",
+          "seq": 46,
+          "time": 1792243416281,
+          "turn": 1,
+          "step": 7,
+          "callId": "tooluse_3mu3a6AnWjX90FaCKjV78r"
+        },
+        {
+          "event": "step/end",
+          "seq": 47,
+          "time": 1792243416281,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "step/start",
+          "seq": 48,
+          "time": 1792243416293,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "tool/call",
+          "seq": 50,
+          "time": 1792243420147,
+          "turn": 1,
+          "step": 8,
+          "name": "bash",
+          "callId": "tooluse_8UwKZC92FmSEAxGnLPaivm"
+        },
+        {
+          "event": "tool/result",
+          "seq": 51,
+          "time": 1792243420278,
+          "turn": 1,
+          "step": 8,
+          "callId": "tooluse_8UwKZC92FmSEAxGnLPaivm"
+        },
+        {
+          "event": "step/end",
+          "seq": 52,
+          "time": 1792243420278,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "step/start",
+          "seq": 53,
+          "time": 1792243420290,
+          "turn": 1,
+          "step": 9
+        },
+        {
+          "event": "step/end",
+          "seq": 55,
+          "time": 1792243428936,
+          "turn": 1,
+          "step": 9
+        },
+        {
+          "event": "turn/end",
+          "seq": 56,
+          "time": 1792243428937,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 14,
+          "time": 1792243387986,
+          "inputTokens": 3,
+          "outputTokens": 106,
+          "totalTokens": 14170,
+          "cacheReadTokens": 12866,
+          "cacheWriteTokens": 1195
+        },
+        {
+          "seq": 19,
+          "time": 1792243391671,
+          "inputTokens": 6,
+          "outputTokens": 115,
+          "totalTokens": 14303,
+          "cacheReadTokens": 14061,
+          "cacheWriteTokens": 121
+        },
+        {
+          "seq": 24,
+          "time": 1792243395153,
+          "inputTokens": 6,
+          "outputTokens": 116,
+          "totalTokens": 14433,
+          "cacheReadTokens": 14182,
+          "cacheWriteTokens": 129
+        },
+        {
+          "seq": 29,
+          "time": 1792243399553,
+          "inputTokens": 6,
+          "outputTokens": 107,
+          "totalTokens": 14863,
+          "cacheReadTokens": 14311,
+          "cacheWriteTokens": 439
+        },
+        {
+          "seq": 34,
+          "time": 1792243404092,
+          "inputTokens": 5,
+          "outputTokens": 147,
+          "totalTokens": 16135,
+          "cacheReadTokens": 14750,
+          "cacheWriteTokens": 1233
+        },
+        {
+          "seq": 39,
+          "time": 1792243412278,
+          "inputTokens": 6,
+          "outputTokens": 564,
+          "totalTokens": 16739,
+          "cacheReadTokens": 15983,
+          "cacheWriteTokens": 186
+        },
+        {
+          "seq": 44,
+          "time": 1792243416144,
+          "inputTokens": 6,
+          "outputTokens": 103,
+          "totalTokens": 17128,
+          "cacheReadTokens": 16169,
+          "cacheWriteTokens": 850
+        },
+        {
+          "seq": 49,
+          "time": 1792243420147,
+          "inputTokens": 6,
+          "outputTokens": 138,
+          "totalTokens": 17320,
+          "cacheReadTokens": 17019,
+          "cacheWriteTokens": 157
+        },
+        {
+          "seq": 54,
+          "time": 1792243428936,
+          "inputTokens": 6,
+          "outputTokens": 410,
+          "totalTokens": 17771,
+          "cacheReadTokens": 17176,
+          "cacheWriteTokens": 179
+        }
+      ],
+      "startedAt": 1792243383049,
+      "endedAt": 1792243428937,
+      "toolNames": [
+        "bash",
+        "read"
+      ]
+    },
+    {
+      "id": "bfc3f01a-aa57-4c1c-a7f3-1eef7da6fb0e",
+      "parentSession": "experiment-fce95867-6392-458d-ae28-992014d9ec5e",
+      "createdAt": 1792243440196,
+      "origin": "subagent",
+      "delegationDepth": 1,
+      "role": "test",
+      "round": 1,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 3,
+          "time": 1792243440208,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 6,
+          "time": 1792243440217,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 14,
+          "time": 1792243444236,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_20bFU34inL1whhlp9Qw3Yd"
+        },
+        {
+          "event": "tool/result",
+          "seq": 15,
+          "time": 1792243444242,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_20bFU34inL1whhlp9Qw3Yd"
+        },
+        {
+          "event": "step/end",
+          "seq": 16,
+          "time": 1792243444242,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 17,
+          "time": 1792243444254,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 19,
+          "time": 1792243447885,
+          "turn": 1,
+          "step": 2,
+          "name": "bash",
+          "callId": "tooluse_EsmjJVTkn2oXrVr9NweppB"
+        },
+        {
+          "event": "tool/result",
+          "seq": 20,
+          "time": 1792243450043,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_EsmjJVTkn2oXrVr9NweppB"
+        },
+        {
+          "event": "step/end",
+          "seq": 21,
+          "time": 1792243450043,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 22,
+          "time": 1792243450052,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 24,
+          "time": 1792243453928,
+          "turn": 1,
+          "step": 3,
+          "name": "bash",
+          "callId": "tooluse_DJ3BQQxPBena2CweSUScwR"
+        },
+        {
+          "event": "tool/result",
+          "seq": 25,
+          "time": 1792243454058,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_DJ3BQQxPBena2CweSUScwR"
+        },
+        {
+          "event": "step/end",
+          "seq": 26,
+          "time": 1792243454058,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 27,
+          "time": 1792243454069,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 29,
+          "time": 1792243457116,
+          "turn": 1,
+          "step": 4,
+          "name": "bash",
+          "callId": "tooluse_x2o09Q5VZHbGngjg0F1PxH"
+        },
+        {
+          "event": "tool/result",
+          "seq": 30,
+          "time": 1792243457223,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_x2o09Q5VZHbGngjg0F1PxH"
+        },
+        {
+          "event": "step/end",
+          "seq": 31,
+          "time": 1792243457223,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "step/start",
+          "seq": 32,
+          "time": 1792243457232,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "tool/call",
+          "seq": 34,
+          "time": 1792243460627,
+          "turn": 1,
+          "step": 5,
+          "name": "bash",
+          "callId": "tooluse_NZ7FRHR4Nf7T3GlTJ16Mph"
+        },
+        {
+          "event": "tool/result",
+          "seq": 35,
+          "time": 1792243460744,
+          "turn": 1,
+          "step": 5,
+          "callId": "tooluse_NZ7FRHR4Nf7T3GlTJ16Mph"
+        },
+        {
+          "event": "step/end",
+          "seq": 36,
+          "time": 1792243460745,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "step/start",
+          "seq": 37,
+          "time": 1792243460754,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "tool/call",
+          "seq": 39,
+          "time": 1792243464251,
+          "turn": 1,
+          "step": 6,
+          "name": "bash",
+          "callId": "tooluse_PBWQ0dArqK0UfD37A5gtuN"
+        },
+        {
+          "event": "tool/result",
+          "seq": 40,
+          "time": 1792243464344,
+          "turn": 1,
+          "step": 6,
+          "callId": "tooluse_PBWQ0dArqK0UfD37A5gtuN"
+        },
+        {
+          "event": "step/end",
+          "seq": 41,
+          "time": 1792243464344,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "step/start",
+          "seq": 42,
+          "time": 1792243464353,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "tool/call",
+          "seq": 44,
+          "time": 1792243467959,
+          "turn": 1,
+          "step": 7,
+          "name": "bash",
+          "callId": "tooluse_dxz6UTurfsGz6Ef1x668Vq"
+        },
+        {
+          "event": "tool/result",
+          "seq": 45,
+          "time": 1792243468066,
+          "turn": 1,
+          "step": 7,
+          "callId": "tooluse_dxz6UTurfsGz6Ef1x668Vq"
+        },
+        {
+          "event": "step/end",
+          "seq": 46,
+          "time": 1792243468066,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "step/start",
+          "seq": 47,
+          "time": 1792243468076,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "tool/call",
+          "seq": 49,
+          "time": 1792243470886,
+          "turn": 1,
+          "step": 8,
+          "name": "bash",
+          "callId": "tooluse_pls3uGlEClUH5K3uCFmknu"
+        },
+        {
+          "event": "tool/result",
+          "seq": 50,
+          "time": 1792243470970,
+          "turn": 1,
+          "step": 8,
+          "callId": "tooluse_pls3uGlEClUH5K3uCFmknu"
+        },
+        {
+          "event": "step/end",
+          "seq": 51,
+          "time": 1792243470970,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "step/start",
+          "seq": 52,
+          "time": 1792243470980,
+          "turn": 1,
+          "step": 9
+        },
+        {
+          "event": "tool/call",
+          "seq": 54,
+          "time": 1792243475639,
+          "turn": 1,
+          "step": 9,
+          "name": "bash",
+          "callId": "tooluse_R5w82c8v987mj7XBP8BICh"
+        },
+        {
+          "event": "tool/result",
+          "seq": 55,
+          "time": 1792243475766,
+          "turn": 1,
+          "step": 9,
+          "callId": "tooluse_R5w82c8v987mj7XBP8BICh"
+        },
+        {
+          "event": "step/end",
+          "seq": 56,
+          "time": 1792243475767,
+          "turn": 1,
+          "step": 9
+        },
+        {
+          "event": "step/start",
+          "seq": 57,
+          "time": 1792243475784,
+          "turn": 1,
+          "step": 10
+        },
+        {
+          "event": "tool/call",
+          "seq": 59,
+          "time": 1792243479392,
+          "turn": 1,
+          "step": 10,
+          "name": "bash",
+          "callId": "tooluse_HO6c2yD8CXAfeu4oDZlEIb"
+        },
+        {
+          "event": "tool/result",
+          "seq": 60,
+          "time": 1792243479489,
+          "turn": 1,
+          "step": 10,
+          "callId": "tooluse_HO6c2yD8CXAfeu4oDZlEIb"
+        },
+        {
+          "event": "step/end",
+          "seq": 61,
+          "time": 1792243479489,
+          "turn": 1,
+          "step": 10
+        },
+        {
+          "event": "step/start",
+          "seq": 62,
+          "time": 1792243479499,
+          "turn": 1,
+          "step": 11
+        },
+        {
+          "event": "tool/call",
+          "seq": 64,
+          "time": 1792243482797,
+          "turn": 1,
+          "step": 11,
+          "name": "bash",
+          "callId": "tooluse_2k1IFx9p6idQIfCVDl6MdJ"
+        },
+        {
+          "event": "tool/result",
+          "seq": 65,
+          "time": 1792243482921,
+          "turn": 1,
+          "step": 11,
+          "callId": "tooluse_2k1IFx9p6idQIfCVDl6MdJ"
+        },
+        {
+          "event": "step/end",
+          "seq": 66,
+          "time": 1792243482922,
+          "turn": 1,
+          "step": 11
+        },
+        {
+          "event": "step/start",
+          "seq": 67,
+          "time": 1792243482930,
+          "turn": 1,
+          "step": 12
+        },
+        {
+          "event": "tool/call",
+          "seq": 69,
+          "time": 1792243485894,
+          "turn": 1,
+          "step": 12,
+          "name": "bash",
+          "callId": "tooluse_3m5m2JMdCfpCe5qf8n6sVa"
+        },
+        {
+          "event": "tool/result",
+          "seq": 70,
+          "time": 1792243486003,
+          "turn": 1,
+          "step": 12,
+          "callId": "tooluse_3m5m2JMdCfpCe5qf8n6sVa"
+        },
+        {
+          "event": "step/end",
+          "seq": 71,
+          "time": 1792243486004,
+          "turn": 1,
+          "step": 12
+        },
+        {
+          "event": "step/start",
+          "seq": 72,
+          "time": 1792243486013,
+          "turn": 1,
+          "step": 13
+        },
+        {
+          "event": "tool/call",
+          "seq": 74,
+          "time": 1792243489126,
+          "turn": 1,
+          "step": 13,
+          "name": "bash",
+          "callId": "tooluse_7ycwKiZbWbqX7UOWR5w41M"
+        },
+        {
+          "event": "tool/result",
+          "seq": 75,
+          "time": 1792243489254,
+          "turn": 1,
+          "step": 13,
+          "callId": "tooluse_7ycwKiZbWbqX7UOWR5w41M"
+        },
+        {
+          "event": "step/end",
+          "seq": 76,
+          "time": 1792243489255,
+          "turn": 1,
+          "step": 13
+        },
+        {
+          "event": "step/start",
+          "seq": 77,
+          "time": 1792243489265,
+          "turn": 1,
+          "step": 14
+        },
+        {
+          "event": "tool/call",
+          "seq": 79,
+          "time": 1792243492746,
+          "turn": 1,
+          "step": 14,
+          "name": "bash",
+          "callId": "tooluse_PMVKqkYuZgP9zCPKmd1wZm"
+        },
+        {
+          "event": "tool/result",
+          "seq": 80,
+          "time": 1792243492866,
+          "turn": 1,
+          "step": 14,
+          "callId": "tooluse_PMVKqkYuZgP9zCPKmd1wZm"
+        },
+        {
+          "event": "step/end",
+          "seq": 81,
+          "time": 1792243492866,
+          "turn": 1,
+          "step": 14
+        },
+        {
+          "event": "step/start",
+          "seq": 82,
+          "time": 1792243492875,
+          "turn": 1,
+          "step": 15
+        },
+        {
+          "event": "tool/call",
+          "seq": 84,
+          "time": 1792243495766,
+          "turn": 1,
+          "step": 15,
+          "name": "bash",
+          "callId": "tooluse_EbzndEGbcbjr2JD1uQoOOW"
+        },
+        {
+          "event": "tool/result",
+          "seq": 85,
+          "time": 1792243495875,
+          "turn": 1,
+          "step": 15,
+          "callId": "tooluse_EbzndEGbcbjr2JD1uQoOOW"
+        },
+        {
+          "event": "step/end",
+          "seq": 86,
+          "time": 1792243495875,
+          "turn": 1,
+          "step": 15
+        },
+        {
+          "event": "step/start",
+          "seq": 87,
+          "time": 1792243495884,
+          "turn": 1,
+          "step": 16
+        },
+        {
+          "event": "tool/call",
+          "seq": 89,
+          "time": 1792243498745,
+          "turn": 1,
+          "step": 16,
+          "name": "bash",
+          "callId": "tooluse_KbRSj5Yj6XD9kjsUs6IJF0"
+        },
+        {
+          "event": "tool/result",
+          "seq": 90,
+          "time": 1792243498858,
+          "turn": 1,
+          "step": 16,
+          "callId": "tooluse_KbRSj5Yj6XD9kjsUs6IJF0"
+        },
+        {
+          "event": "step/end",
+          "seq": 91,
+          "time": 1792243498858,
+          "turn": 1,
+          "step": 16
+        },
+        {
+          "event": "step/start",
+          "seq": 92,
+          "time": 1792243498867,
+          "turn": 1,
+          "step": 17
+        },
+        {
+          "event": "tool/call",
+          "seq": 94,
+          "time": 1792243502261,
+          "turn": 1,
+          "step": 17,
+          "name": "bash",
+          "callId": "tooluse_VzwP8s8w9m2aywJPjHQYDJ"
+        },
+        {
+          "event": "tool/result",
+          "seq": 95,
+          "time": 1792243502377,
+          "turn": 1,
+          "step": 17,
+          "callId": "tooluse_VzwP8s8w9m2aywJPjHQYDJ"
+        },
+        {
+          "event": "step/end",
+          "seq": 96,
+          "time": 1792243502378,
+          "turn": 1,
+          "step": 17
+        },
+        {
+          "event": "step/start",
+          "seq": 97,
+          "time": 1792243502387,
+          "turn": 1,
+          "step": 18
+        },
+        {
+          "event": "tool/call",
+          "seq": 99,
+          "time": 1792243506545,
+          "turn": 1,
+          "step": 18,
+          "name": "bash",
+          "callId": "tooluse_RCBb2IINT3nvKq2PR3wEFP"
+        },
+        {
+          "event": "tool/result",
+          "seq": 100,
+          "time": 1792243508951,
+          "turn": 1,
+          "step": 18,
+          "callId": "tooluse_RCBb2IINT3nvKq2PR3wEFP"
+        },
+        {
+          "event": "step/end",
+          "seq": 101,
+          "time": 1792243508951,
+          "turn": 1,
+          "step": 18
+        },
+        {
+          "event": "step/start",
+          "seq": 102,
+          "time": 1792243508960,
+          "turn": 1,
+          "step": 19
+        },
+        {
+          "event": "tool/call",
+          "seq": 104,
+          "time": 1792243512246,
+          "turn": 1,
+          "step": 19,
+          "name": "bash",
+          "callId": "tooluse_yAqhl21bzu11Ew4iBzS6tU"
+        },
+        {
+          "event": "tool/result",
+          "seq": 105,
+          "time": 1792243512335,
+          "turn": 1,
+          "step": 19,
+          "callId": "tooluse_yAqhl21bzu11Ew4iBzS6tU"
+        },
+        {
+          "event": "step/end",
+          "seq": 106,
+          "time": 1792243512335,
+          "turn": 1,
+          "step": 19
+        },
+        {
+          "event": "step/start",
+          "seq": 107,
+          "time": 1792243512344,
+          "turn": 1,
+          "step": 20
+        },
+        {
+          "event": "tool/call",
+          "seq": 109,
+          "time": 1792243524645,
+          "turn": 1,
+          "step": 20,
+          "name": "structured_output",
+          "callId": "tooluse_QRnbxWCFLo0KbrkDjuv7jy"
+        },
+        {
+          "event": "tool/result",
+          "seq": 110,
+          "time": 1792243524649,
+          "turn": 1,
+          "step": 20,
+          "callId": "tooluse_QRnbxWCFLo0KbrkDjuv7jy"
+        },
+        {
+          "event": "step/end",
+          "seq": 111,
+          "time": 1792243524649,
+          "turn": 1,
+          "step": 20
+        },
+        {
+          "event": "turn/end",
+          "seq": 112,
+          "time": 1792243524649,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 13,
+          "time": 1792243444235,
+          "inputTokens": 3,
+          "outputTokens": 74,
+          "totalTokens": 6176,
+          "cacheWriteTokens": 6099
+        },
+        {
+          "seq": 18,
+          "time": 1792243447884,
+          "inputTokens": 5,
+          "outputTokens": 148,
+          "totalTokens": 7449,
+          "cacheReadTokens": 6099,
+          "cacheWriteTokens": 1197
+        },
+        {
+          "seq": 23,
+          "time": 1792243453928,
+          "inputTokens": 6,
+          "outputTokens": 149,
+          "totalTokens": 8009,
+          "cacheReadTokens": 7296,
+          "cacheWriteTokens": 558
+        },
+        {
+          "seq": 28,
+          "time": 1792243457115,
+          "inputTokens": 6,
+          "outputTokens": 117,
+          "totalTokens": 8140,
+          "cacheReadTokens": 7854,
+          "cacheWriteTokens": 163
+        },
+        {
+          "seq": 33,
+          "time": 1792243460627,
+          "inputTokens": 6,
+          "outputTokens": 116,
+          "totalTokens": 8284,
+          "cacheReadTokens": 8017,
+          "cacheWriteTokens": 145
+        },
+        {
+          "seq": 38,
+          "time": 1792243464249,
+          "inputTokens": 6,
+          "outputTokens": 127,
+          "totalTokens": 8440,
+          "cacheReadTokens": 8162,
+          "cacheWriteTokens": 145
+        },
+        {
+          "seq": 43,
+          "time": 1792243467958,
+          "inputTokens": 6,
+          "outputTokens": 138,
+          "totalTokens": 8617,
+          "cacheReadTokens": 8307,
+          "cacheWriteTokens": 166
+        },
+        {
+          "seq": 48,
+          "time": 1792243470885,
+          "inputTokens": 6,
+          "outputTokens": 96,
+          "totalTokens": 8747,
+          "cacheReadTokens": 8473,
+          "cacheWriteTokens": 172
+        },
+        {
+          "seq": 53,
+          "time": 1792243475638,
+          "inputTokens": 6,
+          "outputTokens": 176,
+          "totalTokens": 8959,
+          "cacheReadTokens": 8645,
+          "cacheWriteTokens": 132
+        },
+        {
+          "seq": 58,
+          "time": 1792243479391,
+          "inputTokens": 6,
+          "outputTokens": 127,
+          "totalTokens": 9144,
+          "cacheReadTokens": 8777,
+          "cacheWriteTokens": 234
+        },
+        {
+          "seq": 63,
+          "time": 1792243482796,
+          "inputTokens": 6,
+          "outputTokens": 127,
+          "totalTokens": 9299,
+          "cacheReadTokens": 9011,
+          "cacheWriteTokens": 155
+        },
+        {
+          "seq": 68,
+          "time": 1792243485894,
+          "inputTokens": 6,
+          "outputTokens": 131,
+          "totalTokens": 9492,
+          "cacheReadTokens": 9166,
+          "cacheWriteTokens": 189
+        },
+        {
+          "seq": 73,
+          "time": 1792243489126,
+          "inputTokens": 6,
+          "outputTokens": 112,
+          "totalTokens": 9632,
+          "cacheReadTokens": 9355,
+          "cacheWriteTokens": 159
+        },
+        {
+          "seq": 78,
+          "time": 1792243492746,
+          "inputTokens": 6,
+          "outputTokens": 135,
+          "totalTokens": 9812,
+          "cacheReadTokens": 9514,
+          "cacheWriteTokens": 157
+        },
+        {
+          "seq": 83,
+          "time": 1792243495766,
+          "inputTokens": 6,
+          "outputTokens": 128,
+          "totalTokens": 9970,
+          "cacheReadTokens": 9671,
+          "cacheWriteTokens": 165
+        },
+        {
+          "seq": 88,
+          "time": 1792243498744,
+          "inputTokens": 6,
+          "outputTokens": 126,
+          "totalTokens": 10120,
+          "cacheReadTokens": 9836,
+          "cacheWriteTokens": 152
+        },
+        {
+          "seq": 93,
+          "time": 1792243502261,
+          "inputTokens": 6,
+          "outputTokens": 124,
+          "totalTokens": 10267,
+          "cacheReadTokens": 9988,
+          "cacheWriteTokens": 149
+        },
+        {
+          "seq": 98,
+          "time": 1792243506544,
+          "inputTokens": 6,
+          "outputTokens": 182,
+          "totalTokens": 10472,
+          "cacheReadTokens": 10137,
+          "cacheWriteTokens": 147
+        },
+        {
+          "seq": 103,
+          "time": 1792243512245,
+          "inputTokens": 6,
+          "outputTokens": 130,
+          "totalTokens": 10724,
+          "cacheReadTokens": 10284,
+          "cacheWriteTokens": 304
+        },
+        {
+          "seq": 108,
+          "time": 1792243524644,
+          "inputTokens": 6,
+          "outputTokens": 584,
+          "totalTokens": 11340,
+          "cacheReadTokens": 10588,
+          "cacheWriteTokens": 162
+        }
+      ],
+      "startedAt": 1792243440208,
+      "endedAt": 1792243524649,
+      "toolNames": [
+        "read",
+        "bash",
+        "structured_output"
+      ]
+    }
+  ],
+  "note": "Only observed native metadata. Null round/role unknown means no explicit marker; no inferred rounds or token estimates."
+}

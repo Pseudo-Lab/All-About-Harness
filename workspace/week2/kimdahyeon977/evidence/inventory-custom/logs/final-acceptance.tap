@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: empty reads do not create a store
+ok 1 - empty reads do not create a store
+  ---
+  duration_ms: 180.015318
+  type: 'test'
+  ...
+# Subtest: items persist in insertion order and retain literal names
+ok 2 - items persist in insertion order and retain literal names
+  ---
+  duration_ms: 333.697014
+  type: 'test'
+  ...
+# Subtest: receipts increase stock and persist across processes
+ok 3 - receipts increase stock and persist across processes
+  ---
+  duration_ms: 381.181067
+  type: 'test'
+  ...
+# Subtest: reservations use only available stock
+ok 4 - reservations use only available stock
+  ---
+  duration_ms: 319.314759
+  type: 'test'
+  ...
+# Subtest: release restores availability without changing on-hand stock
+ok 5 - release restores availability without changing on-hand stock
+  ---
+  duration_ms: 354.736066
+  type: 'test'
+  ...
+# Subtest: shipment consumes reserved and on-hand stock together
+ok 6 - shipment consumes reserved and on-hand stock together
+  ---
+  duration_ms: 441.589837
+  type: 'test'
+  ...
+# Subtest: report aggregates on-hand, reserved, and available counts
+ok 7 - report aggregates on-hand, reserved, and available counts
+  ---
+  duration_ms: 395.478337
+  type: 'test'
+  ...
+# Subtest: invalid quantities and overflow preserve persisted bytes
+ok 8 - invalid quantities and overflow preserve persisted bytes
+  ---
+  duration_ms: 987.141002
+  type: 'test'
+  ...
+# Subtest: invalid shapes, identifiers, and missing items preserve storage
+ok 9 - invalid shapes, identifiers, and missing items preserve storage
+  ---
+  duration_ms: 1110.620391
+  type: 'test'
+  ...
+# Subtest: separate store paths remain isolated
+ok 10 - separate store paths remain isolated
+  ---
+  duration_ms: 392.959599
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5057.980843

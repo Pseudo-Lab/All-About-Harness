@@ -1,0 +1,30 @@
+{
+  "mode": "custom",
+  "scenario": "live_ui_layout",
+  "presetId": "experiment-ralph",
+  "state": "prepared-not-executed",
+  "run": "/tmp/week2-harness-runs/custom-dQWcGs",
+  "workspace": "/tmp/week2-harness-runs/custom-dQWcGs/workspace",
+  "dshHome": "/tmp/week2-harness-runs/custom-dQWcGs/dsh-home",
+  "provider": "amazon-bedrock",
+  "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "modelPatch": "/home/dhkim/All-About-Harness/workspace/week2/kimdahyeon977/runner/bedrock-haiku.patch.yml",
+  "liveEvents": "/tmp/week2-harness-runs/custom-dQWcGs/live/events.jsonl",
+  "seedWorkspace": "/tmp/week2-harness-runs/custom-lohmfd/workspace",
+  "maxRounds": 8,
+  "cliInitiallyPresent": false,
+  "initialFiles": {
+    "acceptance/live-ui.test.mjs": "f272d1423db2b873272c97112469b82c96fbfadc20dc61cf06e6b389e6587ba3",
+    "acceptance/live-ui.browser.test.mjs": "58589e9448489b4ade344d68c6e90ce74c8871222893f2031a06c2447166bcee",
+    "acceptance/live-ui.md": "2624c933194fb7a3bbeb58a7546ccae9b4d23f60ce916655bb2cb5a596f92616"
+  },
+  "heldOutSha256": {
+    "live-ui-heldout.test.mjs": "35465d23b8eafe55e04f589bf4b35fa0a15748c2abab0fe975e1125b2c990d39"
+  },
+  "taskSha256": "c8bb19ad0ca23a2fb6972892192b65b17c26fc421467f81dac2d8cbb191c5bb9",
+  "acceptanceSha256": "f272d1423db2b873272c97112469b82c96fbfadc20dc61cf06e6b389e6587ba3",
+  "presetSha256": "424b9bc5bdee90bde43231028c910c2758efa00bb76626e0a0433544619730f5",
+  "presetMetadataSha256": "64e564439a8358a6bcad7d8b5684e9b9fac2297f966341ef61f5067c389d0522",
+  "adapterSha256": "5ebb5b2dd1362a1fcbcd8d4246d9ed9d941cfdc2bae80b4fba034c074b1b8d1f",
+  "creatorSourceSha256": "e011cf8a2b8322fd2ad046e6f6c5af372be5d4283f7879a19b119150505bc687"
+}

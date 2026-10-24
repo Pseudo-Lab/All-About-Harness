@@ -1,0 +1,226 @@
+TAP version 13
+# Subtest: implementation then distinct test child, disposal, and real acceptance precede complete
+ok 1 - implementation then distinct test child, disposal, and real acceptance precede complete
+  ---
+  duration_ms: 2.110988
+  type: 'test'
+  ...
+# Subtest: assertion failure hands previous implementation and failure evidence into next round
+ok 2 - assertion failure hands previous implementation and failure evidence into next round
+  ---
+  duration_ms: 0.587931
+  type: 'test'
+  ...
+# Subtest: test-child failure cannot be overruled by host pass
+ok 3 - test-child failure cannot be overruled by host pass
+  ---
+  duration_ms: 0.669176
+  type: 'test'
+  ...
+# Subtest: default budget is exactly five failed rounds with fresh children
+ok 4 - default budget is exactly five failed rounds with fresh children
+  ---
+  duration_ms: 1.177263
+  type: 'test'
+  ...
+# Subtest: invalid round budget 0 blocks before children
+ok 5 - invalid round budget 0 blocks before children
+  ---
+  duration_ms: 0.187547
+  type: 'test'
+  ...
+# Subtest: invalid round budget 6 blocks before children
+ok 6 - invalid round budget 6 blocks before children
+  ---
+  duration_ms: 0.159514
+  type: 'test'
+  ...
+# Subtest: invalid round budget -1 blocks before children
+ok 7 - invalid round budget -1 blocks before children
+  ---
+  duration_ms: 0.167433
+  type: 'test'
+  ...
+# Subtest: invalid round budget 1.5 blocks before children
+ok 8 - invalid round budget 1.5 blocks before children
+  ---
+  duration_ms: 0.134847
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: undefined
+ok 9 - invalid or blocked host evidence cannot complete: undefined
+  ---
+  duration_ms: 0.328637
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {}
+ok 10 - invalid or blocked host evidence cannot complete: {}
+  ---
+  duration_ms: 0.288438
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":0,"kind":"passed","summary":"fixed tests executed"}
+ok 11 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":0,"kind":"passed","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.220117
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":-1,"kind":"passed","summary":"fixed tests executed"}
+ok 12 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":-1,"kind":"passed","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.150137
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":"3","kind":"passed","summary":"fixed tests executed"}
+ok 13 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":"3","kind":"passed","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.186919
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":3,"kind":"infrastructure-error","summary":"fixed tests executed"}
+ok 14 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":3,"kind":"infrastructure-error","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.129044
+  type: 'test'
+  ...
+# Subtest: invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":3,"kind":"assertion-failure","summary":"fixed tests executed"}
+ok 15 - invalid or blocked host evidence cannot complete: {"exitCode":0,"testsRun":3,"kind":"assertion-failure","summary":"fixed tests executed"}
+  ---
+  duration_ms: 0.087138
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report undefined blocks and disposes
+ok 16 - implementation malformed or blocked report undefined blocks and disposes
+  ---
+  duration_ms: 0.224301
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report {} blocks and disposes
+ok 17 - implementation malformed or blocked report {} blocks and disposes
+  ---
+  duration_ms: 0.079595
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report {"status":"pass","summary":""} blocks and disposes
+ok 18 - implementation malformed or blocked report {"status":"pass","summary":""} blocks and disposes
+  ---
+  duration_ms: 0.10132
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report {"status":"blocked","summary":"environment unavailable"} blocks and disposes
+ok 19 - implementation malformed or blocked report {"status":"blocked","summary":"environment unavailable"} blocks and disposes
+  ---
+  duration_ms: 0.139691
+  type: 'test'
+  ...
+# Subtest: implementation malformed or blocked report {"status":"ready","summary":"ok","extra":true} blocks and disposes
+ok 20 - implementation malformed or blocked report {"status":"ready","summary":"ok","extra":true} blocks and disposes
+  ---
+  duration_ms: 0.077113
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report undefined blocks and disposes
+ok 21 - test malformed or blocked report undefined blocks and disposes
+  ---
+  duration_ms: 0.146661
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report {} blocks and disposes
+ok 22 - test malformed or blocked report {} blocks and disposes
+  ---
+  duration_ms: 0.092261
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report {"status":"pass","summary":""} blocks and disposes
+ok 23 - test malformed or blocked report {"status":"pass","summary":""} blocks and disposes
+  ---
+  duration_ms: 0.105875
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report {"status":"blocked","summary":"environment unavailable"} blocks and disposes
+ok 24 - test malformed or blocked report {"status":"blocked","summary":"environment unavailable"} blocks and disposes
+  ---
+  duration_ms: 0.112108
+  type: 'test'
+  ...
+# Subtest: test malformed or blocked report {"status":"ready","summary":"ok","extra":true} blocks and disposes
+ok 25 - test malformed or blocked report {"status":"ready","summary":"ok","extra":true} blocks and disposes
+  ---
+  duration_ms: 0.094632
+  type: 'test'
+  ...
+# Subtest: child reject blocks
+ok 26 - child reject blocks
+  ---
+  duration_ms: 0.178047
+  type: 'test'
+  ...
+# Subtest: child abnormal blocks
+ok 27 - child abnormal blocks
+  ---
+  duration_ms: 0.079218
+  type: 'test'
+  ...
+# Subtest: child dispose blocks
+ok 28 - child dispose blocks
+  ---
+  duration_ms: 0.11851
+  type: 'test'
+  ...
+# Subtest: child duplicate blocks
+ok 29 - child duplicate blocks
+  ---
+  duration_ms: 0.084436
+  type: 'test'
+  ...
+# Subtest: cancellation reaches active child and disposal finishes before return
+ok 30 - cancellation reaches active child and disposal finishes before return
+  ---
+  duration_ms: 8.587026
+  type: 'test'
+  ...
+# Subtest: already cancelled run starts no children
+ok 31 - already cancelled run starts no children
+  ---
+  duration_ms: 0.163205
+  type: 'test'
+  ...
+# Subtest: frozen manifest mutation during implementation blocks
+ok 32 - frozen manifest mutation during implementation blocks
+  ---
+  duration_ms: 0.259775
+  type: 'test'
+  ...
+# Subtest: frozen manifest mutation during test blocks
+ok 33 - frozen manifest mutation during test blocks
+  ---
+  duration_ms: 0.151213
+  type: 'test'
+  ...
+# Subtest: frozen manifest mutation during acceptance blocks
+ok 34 - frozen manifest mutation during acceptance blocks
+  ---
+  duration_ms: 0.131602
+  type: 'test'
+  ...
+# Subtest: frozen manifest mutation during dispose blocks
+ok 35 - frozen manifest mutation during dispose blocks
+  ---
+  duration_ms: 0.130362
+  type: 'test'
+  ...
+# Subtest: acceptance environment exception blocks without retry
+ok 36 - acceptance environment exception blocks without retry
+  ---
+  duration_ms: 0.171017
+  type: 'test'
+  ...
+1..36
+# tests 36
+# suites 0
+# pass 36
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 31.445519

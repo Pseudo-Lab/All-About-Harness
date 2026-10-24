@@ -1,0 +1,19 @@
+# Based on the actual standard preset's persona, one-shot shell and filesystem rows.
+# Run ../plugin/install.mjs to materialize resolved imports and fixed acceptance config.
+- id: persona
+  name: '@deepseek-ai/dsh-persona'
+  config:
+    prefix: You are a coding agent. Follow the assigned implementation or verification role. Do not delegate or start nested loops.
+    suffix: Your working directory is {{cwd}}.
+- id: tool-bash
+  name: '@deepseek-ai/dsh-tool-bash'
+- id: tool-fs
+  name: '@deepseek-ai/dsh-tool-fs'
+- id: custom-ralph
+  name: './ralph.generated.mjs'
+  config:
+    workspace: CONFIGURE_WITH_INSTALLER
+    frozenRoots: []
+    testFiles: []
+    maxRounds: 5
+    provider: spawn

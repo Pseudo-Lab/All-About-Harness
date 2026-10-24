@@ -1,0 +1,746 @@
+{
+  "schemaVersion": 1,
+  "mode": "custom",
+  "sessions": [
+    {
+      "id": "experiment-939ab6f6-ba90-4922-8458-07af71df8590",
+      "createdAt": 1792245271197,
+      "delegationDepth": 0,
+      "role": "controller",
+      "round": null,
+      "childSessionIds": [
+        "3c127299-36b0-445e-abdb-e2576bd89ea1",
+        "6035baa6-1891-4640-a077-1b88c3108b53"
+      ],
+      "timeline": [
+        {
+          "event": "subagent/catalog",
+          "seq": 3,
+          "time": 1792245271297,
+          "childId": "3c127299-36b0-445e-abdb-e2576bd89ea1",
+          "round": 1,
+          "role": "implementation"
+        },
+        {
+          "event": "subagent/catalog",
+          "seq": 4,
+          "time": 1792245369111,
+          "childId": "6035baa6-1891-4640-a077-1b88c3108b53",
+          "round": 1,
+          "role": "test"
+        }
+      ],
+      "usage": [],
+      "startedAt": null,
+      "endedAt": null,
+      "toolNames": []
+    },
+    {
+      "id": "3c127299-36b0-445e-abdb-e2576bd89ea1",
+      "parentSession": "experiment-939ab6f6-ba90-4922-8458-07af71df8590",
+      "createdAt": 1792245271284,
+      "origin": "subagent",
+      "delegationDepth": 1,
+      "role": "implementation",
+      "round": 1,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 3,
+          "time": 1792245271294,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 6,
+          "time": 1792245271302,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 14,
+          "time": 1792245274300,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_ET1uvMiqjU8D1C0hUbxOSZ"
+        },
+        {
+          "event": "tool/result",
+          "seq": 15,
+          "time": 1792245274318,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_ET1uvMiqjU8D1C0hUbxOSZ"
+        },
+        {
+          "event": "step/end",
+          "seq": 16,
+          "time": 1792245274318,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 17,
+          "time": 1792245274328,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 19,
+          "time": 1792245280441,
+          "turn": 1,
+          "step": 2,
+          "name": "write",
+          "callId": "tooluse_ibQu9RzuF36WPX8jtmHP38"
+        },
+        {
+          "event": "tool/result",
+          "seq": 20,
+          "time": 1792245280455,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_ibQu9RzuF36WPX8jtmHP38"
+        },
+        {
+          "event": "step/end",
+          "seq": 21,
+          "time": 1792245280456,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 22,
+          "time": 1792245280460,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 24,
+          "time": 1792245283605,
+          "turn": 1,
+          "step": 3,
+          "name": "read",
+          "callId": "tooluse_kMzh7CPdeUvvoqDE8WKGc5"
+        },
+        {
+          "event": "tool/result",
+          "seq": 25,
+          "time": 1792245283613,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_kMzh7CPdeUvvoqDE8WKGc5"
+        },
+        {
+          "event": "step/end",
+          "seq": 26,
+          "time": 1792245283613,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 27,
+          "time": 1792245283617,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 29,
+          "time": 1792245311816,
+          "turn": 1,
+          "step": 4,
+          "name": "read",
+          "callId": "tooluse_wTByotz7Gs23yUhnt4eNJi"
+        },
+        {
+          "event": "tool/result",
+          "seq": 30,
+          "time": 1792245311821,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_wTByotz7Gs23yUhnt4eNJi"
+        },
+        {
+          "event": "step/end",
+          "seq": 31,
+          "time": 1792245311821,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "step/start",
+          "seq": 32,
+          "time": 1792245311824,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "tool/call",
+          "seq": 34,
+          "time": 1792245369077,
+          "turn": 1,
+          "step": 5,
+          "name": "structured_output",
+          "callId": "tooluse_VOXoPPM33w0YdIvZoy8scq"
+        },
+        {
+          "event": "tool/result",
+          "seq": 35,
+          "time": 1792245369083,
+          "turn": 1,
+          "step": 5,
+          "callId": "tooluse_VOXoPPM33w0YdIvZoy8scq"
+        },
+        {
+          "event": "step/end",
+          "seq": 36,
+          "time": 1792245369083,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "turn/end",
+          "seq": 37,
+          "time": 1792245369083,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 13,
+          "time": 1792245274299,
+          "inputTokens": 3,
+          "outputTokens": 93,
+          "totalTokens": 4523,
+          "cacheWriteTokens": 4427
+        },
+        {
+          "seq": 18,
+          "time": 1792245280436,
+          "inputTokens": 5,
+          "outputTokens": 925,
+          "totalTokens": 7379,
+          "cacheReadTokens": 4427,
+          "cacheWriteTokens": 2022
+        },
+        {
+          "seq": 23,
+          "time": 1792245283604,
+          "inputTokens": 5,
+          "outputTokens": 71,
+          "totalTokens": 7510,
+          "cacheReadTokens": 6449,
+          "cacheWriteTokens": 985
+        },
+        {
+          "seq": 28,
+          "time": 1792245311814,
+          "inputTokens": 5,
+          "outputTokens": 608,
+          "totalTokens": 9284,
+          "cacheReadTokens": 7434,
+          "cacheWriteTokens": 1237
+        },
+        {
+          "seq": 33,
+          "time": 1792245369076,
+          "inputTokens": 7,
+          "outputTokens": 3444,
+          "totalTokens": 12780,
+          "cacheReadTokens": 8671,
+          "cacheWriteTokens": 658
+        }
+      ],
+      "startedAt": 1792245271294,
+      "endedAt": 1792245369083,
+      "toolNames": [
+        "read",
+        "write",
+        "structured_output"
+      ]
+    },
+    {
+      "id": "6035baa6-1891-4640-a077-1b88c3108b53",
+      "parentSession": "experiment-939ab6f6-ba90-4922-8458-07af71df8590",
+      "createdAt": 1792245369099,
+      "origin": "subagent",
+      "delegationDepth": 1,
+      "role": "test",
+      "round": 1,
+      "childSessionIds": [],
+      "timeline": [
+        {
+          "event": "turn/start",
+          "seq": 3,
+          "time": 1792245369110,
+          "turn": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 6,
+          "time": 1792245369113,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "tool/call",
+          "seq": 14,
+          "time": 1792245372085,
+          "turn": 1,
+          "step": 1,
+          "name": "read",
+          "callId": "tooluse_HVJT8vOafbNF9Lyz9GDkGv"
+        },
+        {
+          "event": "tool/result",
+          "seq": 15,
+          "time": 1792245372097,
+          "turn": 1,
+          "step": 1,
+          "callId": "tooluse_HVJT8vOafbNF9Lyz9GDkGv"
+        },
+        {
+          "event": "step/end",
+          "seq": 16,
+          "time": 1792245372098,
+          "turn": 1,
+          "step": 1
+        },
+        {
+          "event": "step/start",
+          "seq": 17,
+          "time": 1792245372103,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "tool/call",
+          "seq": 19,
+          "time": 1792245375456,
+          "turn": 1,
+          "step": 2,
+          "name": "bash",
+          "callId": "tooluse_8hMY04QCNQzUF650cqTK3w"
+        },
+        {
+          "event": "tool/result",
+          "seq": 20,
+          "time": 1792245375566,
+          "turn": 1,
+          "step": 2,
+          "callId": "tooluse_8hMY04QCNQzUF650cqTK3w"
+        },
+        {
+          "event": "step/end",
+          "seq": 21,
+          "time": 1792245375566,
+          "turn": 1,
+          "step": 2
+        },
+        {
+          "event": "step/start",
+          "seq": 22,
+          "time": 1792245375570,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "tool/call",
+          "seq": 24,
+          "time": 1792245378367,
+          "turn": 1,
+          "step": 3,
+          "name": "bash",
+          "callId": "tooluse_Dfyezr5YKpq1IxEnV4PVMW"
+        },
+        {
+          "event": "tool/result",
+          "seq": 25,
+          "time": 1792245380534,
+          "turn": 1,
+          "step": 3,
+          "callId": "tooluse_Dfyezr5YKpq1IxEnV4PVMW"
+        },
+        {
+          "event": "step/end",
+          "seq": 26,
+          "time": 1792245380534,
+          "turn": 1,
+          "step": 3
+        },
+        {
+          "event": "step/start",
+          "seq": 27,
+          "time": 1792245380537,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "tool/call",
+          "seq": 29,
+          "time": 1792245384854,
+          "turn": 1,
+          "step": 4,
+          "name": "bash",
+          "callId": "tooluse_7Dbt18QMsL9whZVSmOjFyV"
+        },
+        {
+          "event": "tool/result",
+          "seq": 30,
+          "time": 1792245384983,
+          "turn": 1,
+          "step": 4,
+          "callId": "tooluse_7Dbt18QMsL9whZVSmOjFyV"
+        },
+        {
+          "event": "step/end",
+          "seq": 31,
+          "time": 1792245384983,
+          "turn": 1,
+          "step": 4
+        },
+        {
+          "event": "step/start",
+          "seq": 32,
+          "time": 1792245384986,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "tool/call",
+          "seq": 34,
+          "time": 1792245388326,
+          "turn": 1,
+          "step": 5,
+          "name": "bash",
+          "callId": "tooluse_0TyaIbxb8JEFEC4kacda4r"
+        },
+        {
+          "event": "tool/result",
+          "seq": 35,
+          "time": 1792245388440,
+          "turn": 1,
+          "step": 5,
+          "callId": "tooluse_0TyaIbxb8JEFEC4kacda4r"
+        },
+        {
+          "event": "step/end",
+          "seq": 36,
+          "time": 1792245388440,
+          "turn": 1,
+          "step": 5
+        },
+        {
+          "event": "step/start",
+          "seq": 37,
+          "time": 1792245388443,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "tool/call",
+          "seq": 39,
+          "time": 1792245391329,
+          "turn": 1,
+          "step": 6,
+          "name": "bash",
+          "callId": "tooluse_lv10jjyJAzKpxG0B30Oo0j"
+        },
+        {
+          "event": "tool/result",
+          "seq": 40,
+          "time": 1792245391444,
+          "turn": 1,
+          "step": 6,
+          "callId": "tooluse_lv10jjyJAzKpxG0B30Oo0j"
+        },
+        {
+          "event": "step/end",
+          "seq": 41,
+          "time": 1792245391444,
+          "turn": 1,
+          "step": 6
+        },
+        {
+          "event": "step/start",
+          "seq": 42,
+          "time": 1792245391448,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "tool/call",
+          "seq": 44,
+          "time": 1792245394700,
+          "turn": 1,
+          "step": 7,
+          "name": "bash",
+          "callId": "tooluse_yLwh6sFcmWNufNbHqgivF0"
+        },
+        {
+          "event": "tool/result",
+          "seq": 45,
+          "time": 1792245394812,
+          "turn": 1,
+          "step": 7,
+          "callId": "tooluse_yLwh6sFcmWNufNbHqgivF0"
+        },
+        {
+          "event": "step/end",
+          "seq": 46,
+          "time": 1792245394812,
+          "turn": 1,
+          "step": 7
+        },
+        {
+          "event": "step/start",
+          "seq": 47,
+          "time": 1792245394816,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "tool/call",
+          "seq": 49,
+          "time": 1792245397987,
+          "turn": 1,
+          "step": 8,
+          "name": "bash",
+          "callId": "tooluse_QIJ8tBPXqJmkTXXzuP1F4f"
+        },
+        {
+          "event": "tool/result",
+          "seq": 50,
+          "time": 1792245398095,
+          "turn": 1,
+          "step": 8,
+          "callId": "tooluse_QIJ8tBPXqJmkTXXzuP1F4f"
+        },
+        {
+          "event": "step/end",
+          "seq": 51,
+          "time": 1792245398095,
+          "turn": 1,
+          "step": 8
+        },
+        {
+          "event": "step/start",
+          "seq": 52,
+          "time": 1792245398098,
+          "turn": 1,
+          "step": 9
+        },
+        {
+          "event": "tool/call",
+          "seq": 54,
+          "time": 1792245401046,
+          "turn": 1,
+          "step": 9,
+          "name": "bash",
+          "callId": "tooluse_qnW3jLyxqH3M74yTOzXAbG"
+        },
+        {
+          "event": "tool/result",
+          "seq": 55,
+          "time": 1792245401158,
+          "turn": 1,
+          "step": 9,
+          "callId": "tooluse_qnW3jLyxqH3M74yTOzXAbG"
+        },
+        {
+          "event": "step/end",
+          "seq": 56,
+          "time": 1792245401158,
+          "turn": 1,
+          "step": 9
+        },
+        {
+          "event": "step/start",
+          "seq": 57,
+          "time": 1792245401161,
+          "turn": 1,
+          "step": 10
+        },
+        {
+          "event": "tool/call",
+          "seq": 59,
+          "time": 1792245405665,
+          "turn": 1,
+          "step": 10,
+          "name": "bash",
+          "callId": "tooluse_a1ZgNzwDGc8lxSvXxV5gD4"
+        },
+        {
+          "event": "tool/result",
+          "seq": 60,
+          "time": 1792245405838,
+          "turn": 1,
+          "step": 10,
+          "callId": "tooluse_a1ZgNzwDGc8lxSvXxV5gD4"
+        },
+        {
+          "event": "step/end",
+          "seq": 61,
+          "time": 1792245405839,
+          "turn": 1,
+          "step": 10
+        },
+        {
+          "event": "step/start",
+          "seq": 62,
+          "time": 1792245405842,
+          "turn": 1,
+          "step": 11
+        },
+        {
+          "event": "tool/call",
+          "seq": 64,
+          "time": 1792245414456,
+          "turn": 1,
+          "step": 11,
+          "name": "structured_output",
+          "callId": "tooluse_cK01IaNXzHmLqWSxWoEfLR"
+        },
+        {
+          "event": "tool/result",
+          "seq": 65,
+          "time": 1792245414458,
+          "turn": 1,
+          "step": 11,
+          "callId": "tooluse_cK01IaNXzHmLqWSxWoEfLR"
+        },
+        {
+          "event": "step/end",
+          "seq": 66,
+          "time": 1792245414459,
+          "turn": 1,
+          "step": 11
+        },
+        {
+          "event": "turn/end",
+          "seq": 67,
+          "time": 1792245414459,
+          "turn": 1,
+          "kind": "completed"
+        }
+      ],
+      "usage": [
+        {
+          "seq": 13,
+          "time": 1792245372084,
+          "inputTokens": 3,
+          "outputTokens": 75,
+          "totalTokens": 4896,
+          "cacheWriteTokens": 4818
+        },
+        {
+          "seq": 18,
+          "time": 1792245375456,
+          "inputTokens": 5,
+          "outputTokens": 91,
+          "totalTokens": 6153,
+          "cacheReadTokens": 4818,
+          "cacheWriteTokens": 1239
+        },
+        {
+          "seq": 23,
+          "time": 1792245378367,
+          "inputTokens": 6,
+          "outputTokens": 125,
+          "totalTokens": 6371,
+          "cacheReadTokens": 6057,
+          "cacheWriteTokens": 183
+        },
+        {
+          "seq": 28,
+          "time": 1792245384853,
+          "inputTokens": 6,
+          "outputTokens": 162,
+          "totalTokens": 6944,
+          "cacheReadTokens": 6240,
+          "cacheWriteTokens": 536
+        },
+        {
+          "seq": 33,
+          "time": 1792245388326,
+          "inputTokens": 6,
+          "outputTokens": 134,
+          "totalTokens": 7111,
+          "cacheReadTokens": 6776,
+          "cacheWriteTokens": 195
+        },
+        {
+          "seq": 38,
+          "time": 1792245391329,
+          "inputTokens": 6,
+          "outputTokens": 125,
+          "totalTokens": 7264,
+          "cacheReadTokens": 6971,
+          "cacheWriteTokens": 162
+        },
+        {
+          "seq": 43,
+          "time": 1792245394700,
+          "inputTokens": 6,
+          "outputTokens": 130,
+          "totalTokens": 7415,
+          "cacheReadTokens": 7133,
+          "cacheWriteTokens": 146
+        },
+        {
+          "seq": 48,
+          "time": 1792245397986,
+          "inputTokens": 6,
+          "outputTokens": 131,
+          "totalTokens": 7568,
+          "cacheReadTokens": 7279,
+          "cacheWriteTokens": 152
+        },
+        {
+          "seq": 53,
+          "time": 1792245401045,
+          "inputTokens": 6,
+          "outputTokens": 129,
+          "totalTokens": 7718,
+          "cacheReadTokens": 7431,
+          "cacheWriteTokens": 152
+        },
+        {
+          "seq": 58,
+          "time": 1792245405664,
+          "inputTokens": 6,
+          "outputTokens": 184,
+          "totalTokens": 7923,
+          "cacheReadTokens": 7583,
+          "cacheWriteTokens": 150
+        },
+        {
+          "seq": 63,
+          "time": 1792245414455,
+          "inputTokens": 6,
+          "outputTokens": 443,
+          "totalTokens": 8435,
+          "cacheReadTokens": 7733,
+          "cacheWriteTokens": 253
+        }
+      ],
+      "startedAt": 1792245369110,
+      "endedAt": 1792245414459,
+      "toolNames": [
+        "read",
+        "bash",
+        "structured_output"
+      ]
+    }
+  ],
+  "note": "Only observed native metadata. Null round/role unknown means no explicit marker; no inferred rounds or token estimates."
+}

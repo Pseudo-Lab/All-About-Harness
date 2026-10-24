@@ -1,0 +1,91 @@
+TAP version 13
+# Subtest: two clients observe the same newly appended child and test results
+ok 1 - two clients observe the same newly appended child and test results
+  ---
+  duration_ms: 30079.297456
+  type: 'test'
+  ...
+# Subtest: truncation sends reset and replays the replacement log
+ok 2 - truncation sends reset and replays the replacement log
+  ---
+  duration_ms: 100.699313
+  type: 'test'
+  ...
+# Subtest: out-of-order records are never emitted twice
+not ok 3 - out-of-order records are never emitted twice
+  ---
+  duration_ms: 77.311314
+  type: 'test'
+  location: '/tmp/week2-harness-runs/custom-CfDjFb/frozen/live-ui-heldout.test.mjs:98:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+        1,
+        3,
+    +   2
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 1
+    1: 3
+  actual:
+    0: 1
+    1: 3
+    2: 2
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/week2-harness-runs/custom-CfDjFb/frozen/live-ui-heldout.test.mjs:101:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1110:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:785:7)
+  ...
+# Subtest: serves a runnable dashboard and rejects unknown paths
+ok 4 - serves a runnable dashboard and rejects unknown paths
+  ---
+  duration_ms: 128.030009
+  type: 'test'
+  ...
+# Subtest: empty or missing event log produces an honest empty snapshot
+ok 5 - empty or missing event log produces an honest empty snapshot
+  ---
+  duration_ms: 83.326606
+  type: 'test'
+  ...
+# Subtest: snapshot preserves ordered real run, child, host-test, and handoff events
+ok 6 - snapshot preserves ordered real run, child, host-test, and handoff events
+  ---
+  duration_ms: 75.639117
+  type: 'test'
+  ...
+# Subtest: SSE replays history, follows appended lines, and withholds a partial line
+ok 7 - SSE replays history, follows appended lines, and withholds a partial line
+  ---
+  duration_ms: 344.71905
+  type: 'test'
+  ...
+# Subtest: Last-Event-ID resumes without replaying earlier events
+ok 8 - Last-Event-ID resumes without replaying earlier events
+  ---
+  duration_ms: 98.514609
+  type: 'test'
+  ...
+# Subtest: malformed and duplicate complete lines do not crash the stream
+ok 9 - malformed and duplicate complete lines do not crash the stream
+  ---
+  duration_ms: 81.800264
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 8
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 34232.637462

@@ -1,0 +1,3 @@
+# Preserve model output and captured TAP byte-for-byte as experimental evidence.
+evidence/**/workspace/cli.mjs whitespace=-blank-at-eol
+tests/*.log whitespace=-blank-at-eol

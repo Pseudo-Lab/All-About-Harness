@@ -229,3 +229,22 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
 - 알게 된 점
   - 실제 CLI의 Host Shell은 `timeoutMs: 60000`이다(`packages/bundle/base/cordis.patch.yml:218`). probe의 Host(30000)와 다르고, Stage 2 `fix` 표식(60000)과 겹친다. 그래서 `fix` 표식을 45000으로 바꿨다. 실험 5·6의 60000은 probe 기준(Host 30000) 기록이라 그대로 둔다.
   - **실제 Agent 세션은 시작하자마자 `sandbox/mode: workspace-write`를 세션에 기록한다**(session seq 1, `permission/preset` 직후). 정책 우선순위상 세션 모드가 그룹 기본값보다 위다. Stage 2 verify(read-only)가 실제 세션에서도 유지되는지는 Task 5에서 확인한다.
+
+## Task 5. 실제 Agent 세션에서 verify(read-only)가 유지되나
+
+- 질문: Stage 2로 실제 Agent를 실행하고 verify 그룹의 `run_check`에 `echo test > task5.txt`를 시키면? 세션은 시작 시 `sandbox/mode: workspace-write`를 기록한다(Task 3).
+- 사용자 예측: (b) 써진다. 세션 모드가 더 상위다.
+- Claude 예측: (b). 그룹 정책의 `resolve()`는 `request.mode ?? overrideOf(session) ?? this.defaultMode` 순서다(`packages/sandbox/sandbox-policy/src/index.ts:163-169`). `overrideOf`가 읽는 세션 기록(`sessionProjections`)은 isolate하지 않아 Host와 공유된다.
+- 결과: (b). 써졌다.
+
+  ```
+  run_check "echo test > task5.txt" → PASS
+  shell.executorTimeoutMs=5000 (verify 그룹 Shell), shell.defaultMode=read-only
+  sandbox.mode=workspace-write, denied=false
+  ~/week3-lab/task5.txt 생성됨
+  ```
+
+- 알게 된 점
+  - isolate는 동작했다(verify 전용 Shell 5000, 전용 정책 기본값 read-only). 하지만 그 정책은 공유 세션 기록을 먼저 읽는다. 그래서 probe(실험 5, 세션 기록 없음)에서 막힌 쓰기가 실제 Agent에서는 뚫린다.
+  - `cb`의 빈틈("검증자도 고칠 수 있다")이 isolate 후에도 남아 있었다. 오류 없이 격리된 것처럼 보인다는 점에서 실험 8b와 같은 종류의 위험이다.
+  - 모델 없는 probe만으로 결론 내리면 안 된다. probe 세션에는 `permission/preset`·`sandbox/mode` 이벤트가 없다.

@@ -1,0 +1,3 @@
+name: Exp 1 (group disabled)
+description: check-runner and patch-note bundled in one group without isolate; both use the host shell.
+order: 31

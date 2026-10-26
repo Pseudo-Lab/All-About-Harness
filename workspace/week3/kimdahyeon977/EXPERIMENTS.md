@@ -48,3 +48,17 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
 
   - 바꾼 것은 bwrap 하나다. 설치 전에는 거부, 설치 후에는 full이다.
   - `executorTimeoutMs: 30000` = Host Shell이다. isolate 없는 Stage 1의 `check-runner`는 Host의 workspace-write Shell을 그대로 쓴다(Task 2 "공유 Service" 답).
+
+## 실험 1. Group 켰을 때/껐을 때 Tool 목록
+
+- 질문: Stage 1의 `cb-lite` 그룹 행에 `disabled: true`만 추가하면(`config/exp1-off/`) Agent가 받는 Tool은?
+- 사용자 예측: (a) `[]`. 그룹 자체를 껐고 Plugin이 그 그룹에 속해 있기 때문이다.
+- Claude 예측: (a). Loader는 entry 자신 또는 부모 entry 중 하나라도 disabled면 꺼진 것으로 판정한다(`vendor/loader/src/config/entry.ts:83-94`).
+- 결과: (a).
+
+  | Preset | Agent Tool |
+  |---|---|
+  | `stage1` | `['run_check', 'write_note']` |
+  | `exp1-off` | `[]` |
+
+- 알게 된 점: 그룹 행 하나가 하위 Plugin 전체의 on/off 스위치다. 판정은 부모 체인을 따라 올라가며 한다.

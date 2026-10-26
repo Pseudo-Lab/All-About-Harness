@@ -263,3 +263,20 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
   | `write_note` | 45000 | workspace-write | workspace-write | workspace-write | `written: true`, `notes/task5b.md` 있음 |
 
 - 알게 된 점: isolate(어느 Shell·정책을 쓰나)와 Sandbox(어디에 쓸 수 있나)에 더해, **정책이 무엇을 입력으로 읽는가**까지 확인해야 격리가 성립한다. 이번 구멍은 isolate하지 않은 공유 상태(세션 기록)를 통해 들어왔다.
+
+## 실험 7. read-only 그룹 안의 `tool-fs`(Shell을 거치지 않는 쓰기)
+
+- 준비: 처음 가설은 "`tool-fs`는 Sandbox를 우회한다"였다. 구성을 확인해 보니 Host `ctx.fs`가 `fs-sandbox`(정책을 읽고 쓰기를 거부함)라(`packages/bundle/base/cordis.patch.yml:479`) 질문을 바꿨다. probe Host에도 `fs-sandbox`를 붙였다.
+- 질문: Stage 2 verify 그룹(shell·sandboxPolicy isolate, read-only)에 `dsh-tool-fs`를 넣고(`config/exp7-toolfs/`) `write`로 `exp7.txt`를 쓰면? `ctx.fs`는 isolate하지 않았다.
+- 사용자 예측: (b) 써진다. `write`는 Shell이 아니라 `ctx.fs`를 쓰고, `ctx.fs`는 isolate하지 않았으니 Host 권한대로 써진다.
+- Claude 예측: (a) probe에서는 막힌다.
+  - `fs-sandbox`는 호출자가 넘긴 정책으로 판단한다(`packages/fs/fs-sandbox/src/index.ts:76-87`).
+  - 정책은 `tool-fs`가 자기 ctx에서 가져온다(`packages/fs/tool-fs/src/sandbox.ts:46`, `write.ts:110-117`). verify 그룹의 read-only 정책이다.
+  - 실제 Agent 세션에서는 Task 5와 같은 이유로 써질 것이다.
+- 결과
+  - probe: (a). `FS_SANDBOX_DENIED`, `[sandbox: file access denied under read-only mode]`, 파일 없음.
+  - 실제 Agent(`config/logs/exp7-toolfs-*.json`): 세션 모드 workspace-write, `write` → `Created file`, `~/week3-lab/exp7-agent.txt` 생성.
+- 알게 된 점
+  - Provider(`ctx.fs`)가 Host 것이어도 정책은 Consumer(`tool-fs`)가 있는 그룹에서 결정된다. 사용자 예측이 어긋난 지점이다.
+  - Task 5의 구멍은 우리 Plugin만의 문제가 아니다. 기본 `tool-fs`도 실제 세션에서 read-only 그룹을 넘어 쓴다.
+  - 원인은 설계다. `sandbox-policy`의 `mode`는 "File-sandbox mode a session starts from"(`sandbox-policy/src/index.ts:71`), 즉 상한이 아니라 세션의 출발값이다. 하네스의 권한 모델은 세션 단위(사용자 선택·승인)다. 그룹별 상한을 원하면 Consumer가 직접 걸거나(우리 `shell-call.mjs`), 정책에 상한 설정이 있어야 한다.

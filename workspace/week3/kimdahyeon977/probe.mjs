@@ -21,6 +21,7 @@ import SubprocessLocal from '@deepseek-ai/dsh-subprocess-local'
 import SandboxLocal from '@deepseek-ai/dsh-sandbox-local'
 import SandboxPolicy from '@deepseek-ai/dsh-sandbox-policy'
 import BashSandbox from '@deepseek-ai/dsh-bash-sandbox'
+import FsSandbox from '@deepseek-ai/dsh-fs-sandbox'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const lab = process.env.WEEK3_LAB ?? join(homedir(), 'week3-lab')
@@ -48,6 +49,7 @@ await ctx.plugin(SubprocessLocal)
 await ctx.plugin(SandboxLocal)
 await ctx.plugin(SandboxPolicy, { mode: 'workspace-write', workspaceRoot: lab })
 await ctx.plugin(BashSandbox, { timeoutMs: 30000 })
+await ctx.plugin(FsSandbox, { cwd: lab }) // host ctx.fs, as in base (cordis.patch.yml:479)
 await ctx.plugin(AgentPresets, { default: presetId, roots: [{ path: join(here, 'config'), trust: 'user' }], includeShippedRoot: false, includeUserRoot: false })
 await new Promise(r => setTimeout(r, 200)) // let the host services settle before mounting
 

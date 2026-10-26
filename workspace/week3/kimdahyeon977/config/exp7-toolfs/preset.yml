@@ -1,0 +1,3 @@
+name: Exp 7 (tool-fs inside the read-only group)
+description: verify group isolates shell and policy and also mounts dsh-tool-fs.
+order: 40

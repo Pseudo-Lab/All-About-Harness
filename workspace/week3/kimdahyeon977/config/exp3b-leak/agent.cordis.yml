@@ -1,0 +1,7 @@
+# Exp 3b: no collision this time; does the preset invariant catch the leak?
+- id: cb-lite
+  name: cordis:group
+  group: true
+  config:
+    - id: lab-note
+      name: ./lab-note-service.mjs

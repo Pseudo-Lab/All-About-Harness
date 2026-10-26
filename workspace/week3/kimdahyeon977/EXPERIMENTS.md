@@ -80,3 +80,34 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
 - 알게 된 점
   - 묶기만 해서는 Service가 분리되지 않는다. 그룹이 주는 것은 (1) 하위 Plugin을 함께 켜고 끄는 단위(실험 1), (2) isolate를 걸어 Provider와 Consumer를 한 영역에 모으는 자리다. (2)는 실험 4에서 확인한다.
   - `isolate`는 그룹 전용이 아니라 Loader의 모든 entry가 받는 옵션이다(`isolate.ts:8`, `:79`).
+
+## 실험 3. isolate 없이 Shell Provider를 Preset에 넣기
+
+- 질문: Host가 이미 `ctx.shell`(30000)을 제공하는 상태에서 `cb-lite` 그룹에 `dsh-bash-sandbox`(5000)를 isolate 없이 넣으면(`config/exp3-noisolate/`)?
+- 사용자 예측: (c) 붙고, Host Shell을 덮어써서 프로세스 전체가 5000 Shell을 쓴다. isolate가 없으면 분리가 안 되니 덮어씌워진다.
+- Claude 예측: (d) 같은 이름 충돌로 mount 실패.
+  - 같은 영역 키로 두 번째 등록하면 `provide()`가 throw한다(`presets/standard/agent.cordis.yml:16-17`).
+  - mount는 "켜지지 않은 행" → "루트로 샌 Service" 순서로 검사한다(`agent-presets/src/mount.ts:403-413`). 충돌이면 앞 검사에 걸린다.
+- 결과: (d). 실패 위치는 예측보다 앞인 entry 적용 단계다.
+
+  ```
+  failed to apply loader entry lite-shell (@deepseek-ai/dsh-bash-sandbox):
+  service "shell" has been registered at <SandboxBashExecutor>
+  ```
+
+- 반증 확인(`config/exp3b-leak/`): Host에 없는 이름(`labNote`, fixture Service)을 isolate 없이 제공했다. 충돌이 없으면 두 번째 안전장치에 걸리는지 확인하려는 것이다.
+
+  ```
+  row(s) published process-global service(s) [labNote];
+  a preset service must sit behind an `isolate` realm or move to the host composition
+  ```
+
+  | 변형 | 막힌 곳 |
+  |---|---|
+  | 이름 충돌 있음(`shell`) | cordis Service 등록 단계 |
+  | 이름 충돌 없음(`labNote`) | agent-presets mount 후 누출 검사(`leakedServices`, `mount.ts:211-225`) |
+
+- 알게 된 점
+  - isolate 없는 Provider는 루트 영역(프로세스 전체)에 등록하려 한다. 여기까지는 사용자 직관이 맞다.
+  - 같은 영역의 같은 이름은 덮어쓰지 않고 거부한다. 이름이 안 겹쳐도 Preset 층이 누출로 거부한다.
+  - 따라서 Preset 안에서 Service를 제공하려면 isolate가 필수다. 같은 Preset을 쓰는 여러 세션이 인스턴스를 공유하거나 서로 덮어쓰는 것을 두 겹으로 막는다.

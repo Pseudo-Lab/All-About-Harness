@@ -1,0 +1,13 @@
+# Exp 3: a shell provider in the group, but no isolate realm.
+- id: cb-lite
+  name: cordis:group
+  group: true
+  config:
+    - id: lite-shell
+      name: '@deepseek-ai/dsh-bash-sandbox'
+      config:
+        timeoutMs: 5000
+    - id: check-runner
+      name: ../../plugins/check-runner.mjs
+    - id: patch-note
+      name: ../../plugins/patch-note.mjs

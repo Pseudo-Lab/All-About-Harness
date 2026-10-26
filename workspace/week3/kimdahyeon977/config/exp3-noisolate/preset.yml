@@ -1,0 +1,3 @@
+name: Exp 3 (shell provider without isolate)
+description: A shell provider inside a group that has no isolate realm.
+order: 34

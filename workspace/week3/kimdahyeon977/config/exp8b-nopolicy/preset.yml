@@ -1,0 +1,3 @@
+name: Exp 8b (isolate shell only, no group policy)
+description: Stage 2 shells isolated, but no policy provider in either group.
+order: 39

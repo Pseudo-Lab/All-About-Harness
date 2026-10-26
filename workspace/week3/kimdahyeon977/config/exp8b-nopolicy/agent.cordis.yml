@@ -1,0 +1,26 @@
+# Exp 8b: shells isolated per group, no policy provider inside; both read the host policy.
+- id: verify
+  name: cordis:group
+  group: true
+  isolate:
+    shell: true
+  config:
+    - id: verify-shell
+      name: '@deepseek-ai/dsh-bash-sandbox'
+      config:
+        timeoutMs: 5000
+    - id: check-runner
+      name: ../../plugins/check-runner.mjs
+
+- id: fix
+  name: cordis:group
+  group: true
+  isolate:
+    shell: true
+  config:
+    - id: fix-shell
+      name: '@deepseek-ai/dsh-bash-sandbox'
+      config:
+        timeoutMs: 60000
+    - id: patch-note
+      name: ../../plugins/patch-note.mjs

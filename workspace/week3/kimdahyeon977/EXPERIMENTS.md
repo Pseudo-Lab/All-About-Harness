@@ -182,3 +182,28 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
   - **isolate ≠ Sandbox.** isolate는 어느 Shell을 쓰는지를, Sandbox 모드는 그 Shell이 어디에 쓸 수 있는지를 정한다. isolate된 그룹이라고 아무 데나 쓸 수 있는 것이 아니다. 사용자 예측이 어긋난 지점이다.
   - **종료 코드는 결과의 증거가 아니다.** `/tmp` 쓰기는 exit 0으로 성공했지만 bwrap 일회용 `/tmp`라 명령이 끝나면 사라졌다. 종료 코드만으로 판정하는 `write_note`/`run_check`는 거짓 성공을 보고할 수 있다.
   - 경로에 `~`를 쓰면 따옴표 안이라 확장되지 않는다. 처음 질문의 `~/exp6-outside.md`를 절대경로로 바꿔 실행했다.
+
+## 실험 8. `shell`만 isolate하고 `sandboxPolicy`는 빼면
+
+- 질문: Stage 2에서 두 그룹의 isolate를 `shell`만 남기고, 각 그룹의 정책 Plugin(read-only / workspace-write)은 그대로 두면(`config/exp8-shellonly/`)? (a) Stage 2와 같다, (b) 둘 다 Host 정책을 따라 verify도 쓸 수 있다, (c) mount 실패.
+- 사용자 예측: (a). Sandbox 모드를 끄니까. (실제로는 정책 Plugin은 남아 있고 정책을 그룹에 가두는 설정만 뺀 것이다.)
+- Claude 예측: (c). 실험 3과 같은 이유다. isolate하지 않은 `sandboxPolicy` Provider는 루트 영역에 등록하려 하고, 그 자리에 Host 정책이 이미 있다.
+- 결과: (c).
+
+  ```
+  failed to apply loader entry verify-policy (@deepseek-ai/dsh-sandbox-policy):
+    service "sandboxPolicy" has been registered at <SandboxPolicyService>
+  failed to apply loader entry fix-policy (...): 같은 오류
+  ```
+
+- 설계 추론 확인(`config/exp8b-nopolicy/`): DECISIONS Q4의 추론("`shell`만 isolate하면 두 Shell이 Host 정책 하나를 읽어 모드가 같아진다")은 그룹에서 정책 Plugin을 빼야 성립한다. verify의 `run_check`로 `echo x > exp8b.txt`를 실행했다.
+
+  ```
+  "verdict": "PASS", "executorTimeoutMs": 5000, "mode": "workspace-write", "denied": false
+  ```
+
+  `~/week3-lab/exp8b.txt`가 생겼다. Shell은 verify 전용(5000)인데 정책은 Host의 workspace-write라 검증 그룹이 파일을 썼다.
+
+- 알게 된 점
+  - 그룹별로 다른 모드를 주려면 **`sandboxPolicy`도 isolate하고 그룹 안에 정책 Provider를 둬야 한다**. 최종 YAML(Stage 2)의 `isolate: { shell: true, sandboxPolicy: true }`의 근거다.
+  - `shell`만 isolate하면 다음 둘 중 하나다. 정책 Provider를 두면 이름 충돌로 실패하고(8), 빼면 조용히 Host 정책을 따라 검증 그룹도 쓸 수 있게 된다(8b). 8b가 더 위험하다. 오류 없이 붙고 Shell도 그룹 전용처럼 보여서 격리된 것으로 착각하기 쉽다.

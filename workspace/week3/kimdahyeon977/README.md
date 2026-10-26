@@ -116,7 +116,7 @@ Agent 최종 답변: "run_check verdict: PASS … Both tools reported the same s
 - 정책은 `요청 모드 ?? 세션 기록 ?? 그룹 기본값` 순서로 모드를 정한다(`packages/sandbox/sandbox-policy/src/index.ts:163-169`). 세션 기록은 isolate하지 않아 그룹끼리 공유된다. probe 세션에는 이 기록이 없어서 실험 5에서는 보이지 않았다.
 - 정책의 `mode`는 상한이 아니라 "a session starts from"(같은 파일 `:71`)이다. 하네스의 권한 모델은 세션 단위다.
 - 기본 `tool-fs`도 같다. read-only 그룹 안에서 probe로는 `FS_SANDBOX_DENIED`였지만 실제 세션에서는 파일을 만들었다(실험 7).
-- 수정: [`shell-call.mjs`](plugins/shell-call.mjs)가 세션 모드와 그룹 기본값 중 더 좁은 쪽으로 실행한다. 그룹 기본값이 상한이 되고 세션은 더 좁힐 수만 있다.
+- 수정: [`shell-call.mjs`](plugins/shell-call.mjs)가 세션 모드와 그룹 기본값 중 더 좁은 쪽으로 실행한다(`capMode`). 그룹 기본값이 상한이 되고 세션은 더 좁힐 수만 있다. 모르는 모드는 기본값으로 내린다. 확인은 `node plugins/shell-call.check.mjs`.
 
 **권한 상향(실험 9)**: read-only 세션에서 모델이 `sandbox_permissions`로 상향을 요청하자 `requires approval, but no approval channel is available`로 즉시 거부됐다(실행 12초). 승인할 사람이 없으면 기다리지 않고 거부한다.
 
@@ -150,7 +150,7 @@ node agent-run.mjs stage2 'Call run_check with `echo x > a.txt` and report the r
 
 ## 파일
 
-- `plugins/`: Plugin 2개와 공통 헬퍼
+- `plugins/`: Plugin 2개, 공통 헬퍼, 상한 로직 체크(`shell-call.check.mjs`)
 - `config/stage1`, `config/stage2`: 최종 Preset. `config/exp*`: 실험별 변형 Preset
 - `config/logs/`: Agent 실행 요약(Tool 호출·결과·최종 답변, 자격 증명 없음)
 - `probe.mjs`, `agent-run.mjs`, `config/preset-runner.mjs`, `config/harness-resolve.mjs`: 실행 도구

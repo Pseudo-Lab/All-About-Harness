@@ -1,9 +1,9 @@
 // One headless agent run over a preset from ./config, on Bedrock Haiku.
 // node agent-run.mjs <presetId> <task...>
 // Credentials: BEDROCK_ENV file (default ~/.dsh/bedrock.env); only the three AWS values are passed on.
-import { spawn } from 'node:child_process'
-import { mkdtemp, mkdir, readFile, writeFile, cp } from 'node:fs/promises'
-import { createWriteStream } from 'node:fs'
+import { spawn, execFileSync } from 'node:child_process'
+import { mkdtemp, mkdir, readFile, writeFile } from 'node:fs/promises'
+import { createWriteStream, existsSync, readdirSync } from 'node:fs'
 import { homedir, tmpdir } from 'node:os'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -50,10 +50,8 @@ console.log(`\n# run=${run} exit=${code}`)
 
 // Evidence: decode the session log (multi-frame zstd; Node's zstd stream stops at
 // the first frame, so use the zstd CLI) and keep only the facts the README needs.
-const { execFileSync } = await import('node:child_process')
-const { readdirSync } = await import('node:fs')
 const sessions = join(home, 'sessions')
-const file = readdirSync(sessions, { recursive: true }).map(String).find(p => p.endsWith('session.v3.jsonl.zstd'))
+const file = existsSync(sessions) && readdirSync(sessions, { recursive: true }).map(String).find(p => p.endsWith('session.v3.jsonl.zstd'))
 if (file) {
   const events = execFileSync('zstd', ['-dc', join(sessions, file)], { encoding: 'utf8' }).split('\n').filter(Boolean).map(l => JSON.parse(l))
   // Tool results nest their text one level down (content[].type === 'tool-result').
@@ -63,7 +61,7 @@ if (file) {
     sessionModes: events.filter(e => e.type === 'sandbox/mode').map(e => e.data.mode),
     toolCalls: events.filter(e => e.type === 'tool/call').map(e => ({ name: e.data.name, arguments: JSON.parse(e.data.arguments),
       result: (r => r && textOf(r.data.message))(events.find(r => r.type === 'tool/result' && r.data.message.source.callId === e.data.callId)) })),
-    finalAnswer: textOf(events.filter(e => e.type === 'assistant/message').at(-1).data.message),
+    finalAnswer: (last => last ? textOf(last.data.message) : null)(events.filter(e => e.type === 'assistant/message').at(-1)),
   }
   const saved = join(here, 'config/logs', `${presetId}-${new Date().toISOString().replace(/[:.]/g, '-')}.json`)
   await writeFile(saved, JSON.stringify(summary, null, 2) + '\n')

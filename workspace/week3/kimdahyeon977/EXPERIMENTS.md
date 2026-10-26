@@ -162,3 +162,23 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
 - 알게 된 점
   - `run_check`는 임의 명령을 받지만 그룹 Shell이 read-only라 쓰기가 권한으로 막힌다. `cb`의 "검증자는 고치지 않는다"(프롬프트 약속)를 이 구성은 권한으로 강제한다. Task 4의 핵심 근거다.
   - 실제 Agent 세션에서는 세션 모드 기록이 기본값보다 우선한다. 같은 결과가 나오는지는 Task 5 시연에서 확인한다.
+
+## 실험 6. workspace-write 안/밖/`/tmp` 쓰기
+
+- 질문: Stage 2 `fix` 그룹(workspace-write Shell)의 `write_note`로 (1) `exp6/in.md`, (2) `/home/dhkim/exp6-outside.md`, (3) `/tmp/exp6-tmp.md`를 쓰면?
+- 사용자 예측: isolate가 되면 각각 써지고, 아니면 막힌다. `fix`는 isolate돼 있으므로 셋 다 써진다고 기록한다.
+- Claude 예측: 1 성공, 2 차단, 3은 성공으로 보고되지만 실제 `/tmp`에는 남지 않는다. workspace-write는 workspace root와 `/tmp`만 쓸 수 있고, bwrap의 `/tmp`는 일회용이다(`bash-sandbox/README.md` 모드 표).
+- 결과: Claude 예측대로다.
+
+  | # | 경로 | Tool 응답 | 실제 디스크 |
+  |---|---|---|---|
+  | 1 | `exp6/in.md` | `written: true` | 있음 |
+  | 2 | `/home/dhkim/exp6-outside.md` | `written: false`, `Read-only file system`, `denied: true` | 없음 |
+  | 3 | `/tmp/exp6-tmp.md` | `written: true`, `exitCode: 0` | **없음** |
+
+  셋 다 `executorTimeoutMs: 60000`(fix 그룹 Shell), mode `workspace-write`이다.
+
+- 알게 된 점
+  - **isolate ≠ Sandbox.** isolate는 어느 Shell을 쓰는지를, Sandbox 모드는 그 Shell이 어디에 쓸 수 있는지를 정한다. isolate된 그룹이라고 아무 데나 쓸 수 있는 것이 아니다. 사용자 예측이 어긋난 지점이다.
+  - **종료 코드는 결과의 증거가 아니다.** `/tmp` 쓰기는 exit 0으로 성공했지만 bwrap 일회용 `/tmp`라 명령이 끝나면 사라졌다. 종료 코드만으로 판정하는 `write_note`/`run_check`는 거짓 성공을 보고할 수 있다.
+  - 경로에 `~`를 쓰면 따옴표 안이라 확장되지 않는다. 처음 질문의 `~/exp6-outside.md`를 절대경로로 바꿔 실행했다.

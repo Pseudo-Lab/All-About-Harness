@@ -126,4 +126,19 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
 
 - 알게 된 점
   - isolate는 그 그룹 안에서만 유효한 Service 주소록을 만든다. 그룹 밖 Tool은 그룹 Shell을 자동으로 쓰지 않는다(과제 문서의 "그룹 밖에 등록한 다른 Tool이 이 Shell을 자동으로 사용하게 되는 것은 아닙니다"를 확인).
-  - Provider(`bash-sandbox`)와 Consumer(`check-runner`)가 같은 그룹 안에 있어야 연결된다. 실험 2에서 남긴 "그룹 = Provider와 Consumer를 한 영역에 모으는 자리" 가설을 확인했다.
+  - 이 실험이 보인 것은 "그룹 밖에서는 그룹 Shell이 안 보인다"까지다. 처음에 "Provider와 Consumer가 같은 그룹에 있어야 연결된다"까지 확인됐다고 적었는데 과장이었다. 반대 방향은 실험 4b에서 확인했다.
+  - `write_note`가 Shell을 쓸 수 있었던 것은 Host가 모두에게 Shell을 주기 때문이다. isolate 맵은 `Object.create(부모 맵)`이라(`isolate.ts:93`) isolate하지 않은 이름은 바깥을 따라간다. 그룹 안 `check-runner`가 Host의 `tools`에 Tool을 등록할 수 있는 것도 같은 이유다.
+
+## 실험 4b. isolate했는데 그룹 안에 Provider가 없으면
+
+- 질문: `verify`에 `isolate: { shell: true }`만 걸고 Shell Provider 없이 `check-runner`만 두면(`config/exp4b-noprovider/`)? (a) 바깥 Host Shell을 찾아 쓴다, (b) Shell을 못 찾아 Tool이 안 생기거나 mount 실패.
+- 사용자 예측: (b). 이유는 "횟수 제한은 안 해서..?"(원문 그대로)이다.
+- Claude 예측: (b) `row(s) did not activate`. isolate는 그룹 맵의 `shell` 칸을 비우는 게 아니라 새 키로 덮어쓴다(`isolate.ts:93-97`). 그 키로 등록된 Provider가 없으니 `inject: ['shell']`인 `check-runner`가 시작하지 못한다.
+- 결과: (b).
+
+  ```
+  1 row(s) did not activate:
+  check-runner (../../plugins/check-runner.mjs): waiting for shell
+  ```
+
+- 알게 된 점: isolate한 이름은 바깥으로 넘어가 찾지 않는다. 실험 4와 합치면 **isolate한 Service의 Provider와 Consumer는 같은 그룹에 있어야 한다**. 그룹이 isolate의 단위로 필요한 이유다(실험 2 가설 확인).

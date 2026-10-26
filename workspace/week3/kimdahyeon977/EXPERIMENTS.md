@@ -30,4 +30,21 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
 - 알게 된 점
   - **커널 기능 ≠ 하네스가 쓸 수 있음.** 하네스는 커널 기능을 별도 실행 파일로 쓰므로 그 실행 파일이 있어야 한다.
   - **fail closed.** Sandbox를 못 쓰면 가두지 않은 채로 실행하지 않고 거부한다. week2에서 `tool-bash`가 문제없이 돈 것처럼 보였다면 그 실행이 어떤 Shell 구성이었는지 다시 볼 필요가 있다(week2 증거에 sandbox 기록 없음).
-- 다음: `bubblewrap` 설치 후 재실행한다([DECISIONS.md](DECISIONS.md) Q6 대체 경로).
+- 조치: `sudo apt install`은 `!` 실행에서 비밀번호를 받을 터미널이 없어 실패했다. sudo 없이 설치했다. bwrap은 unprivileged user namespace로 돈다(`max_user_namespaces=63367`).
+
+  ```sh
+  cd ~/.local/opt/bwrap-deb && apt-get download bubblewrap && dpkg -x bubblewrap_*.deb .
+  ln -sf ~/.local/opt/bwrap-deb/usr/bin/bwrap ~/.local/bin/bwrap   # sandbox-local은 PATH의 'bwrap'을 찾는다(src/index.ts:69)
+  ```
+
+- 재실행. 사용자 예측은 (a). Claude 예측도 (a)다. README가 partial을 Windows ACL과 구 Landlock ABI로만 든다(`sandbox-local/README.md:53`).
+- 결과: (a).
+
+  ```json
+  "verdict": "PASS",
+  "shell":   { "executorTimeoutMs": 30000, "defaultMode": "workspace-write", "workdir": "/home/dhkim/week3-lab" },
+  "sandbox": { "mode": "workspace-write", "denied": false, "enforcement": "full" }
+  ```
+
+  - 바꾼 것은 bwrap 하나다. 설치 전에는 거부, 설치 후에는 full이다.
+  - `executorTimeoutMs: 30000` = Host Shell이다. isolate 없는 Stage 1의 `check-runner`는 Host의 workspace-write Shell을 그대로 쓴다(Task 2 "공유 Service" 답).

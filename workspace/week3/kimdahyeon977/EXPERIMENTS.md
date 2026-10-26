@@ -280,3 +280,23 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
   - Provider(`ctx.fs`)가 Host 것이어도 정책은 Consumer(`tool-fs`)가 있는 그룹에서 결정된다. 사용자 예측이 어긋난 지점이다.
   - Task 5의 구멍은 우리 Plugin만의 문제가 아니다. 기본 `tool-fs`도 실제 세션에서 read-only 그룹을 넘어 쓴다.
   - 원인은 설계다. `sandbox-policy`의 `mode`는 "File-sandbox mode a session starts from"(`sandbox-policy/src/index.ts:71`), 즉 상한이 아니라 세션의 출발값이다. 하네스의 권한 모델은 세션 단위(사용자 선택·승인)다. 그룹별 상한을 원하면 Consumer가 직접 걸거나(우리 `shell-call.mjs`), 정책에 상한 설정이 있어야 한다.
+
+## 실험 9. headless에서 권한 상향 요청
+
+- 준비: `config/exp9-escalation/`(Host 정책 위의 `tool-fs`만)로 `DSH_PERMISSION_MODE=read-only`를 주고 실행했다. 쓰기가 막히면 거부 메시지대로 `sandbox_permissions` + `justification`으로 한 번 재시도하라고 지시했다.
+- 질문: 승인할 사람이 없는 headless에서 상향 요청은? (a) 자동 거부, (b) 승인을 기다리며 멈춤, (c) 자동 승인, (d) 상향 기능 꺼짐.
+- 사용자 예측: (b)(이유 미기재).
+- Claude 예측: (a). 세션 승인 정책 `'ask'`는 연결된 응답자가 없으면 `'unavailable'`로 떨어지고, 호출자는 이를 거부로 처리한다(`packages/interaction/user-approval/src/index.ts:50-58`, `types.ts:30`).
+- 결과: (a). 실행 전체 12초, 파일 없음(`config/logs/exp9-escalation-*.json`).
+
+  ```
+  sessionModes: [read-only]
+  1차 write → [sandbox: file access denied under read-only mode] + escalation 안내
+  2차 write {sandbox_permissions: "workspace-write", justification: "..."}
+        → sandbox escalation to "workspace-write" requires approval, but no approval channel is available
+  ```
+
+- 알게 된 점
+  - 승인할 사람이 없으면 기다리지 않고 즉시 거부한다(fail closed). 실험 0의 `SANDBOX_UNAVAILABLE`과 같은 원칙이다.
+  - 세션 출발 모드는 `DSH_PERMISSION_MODE`로 바꿀 수 있다(`packages/bundle/base/cordis.patch.yml:209`). Task 5의 구멍은 실행 환경에서 read-only로 시작해도 피할 수 있다. 다만 그러면 fix 그룹도 read-only가 된다.
+  - 무인 실행용으로 승인 정책 `'never'`가 따로 있다. 처음부터 모델에게 상향을 요청하지 말라고 알린다(`user-approval/src/index.ts:57`).

@@ -1,0 +1,4 @@
+# Exp 9: tool-fs on the host policy. Run with DSH_PERMISSION_MODE=read-only so a
+# write is denied and the model is offered sandbox escalation with no one to approve.
+- id: tool-fs
+  name: '@deepseek-ai/dsh-tool-fs'

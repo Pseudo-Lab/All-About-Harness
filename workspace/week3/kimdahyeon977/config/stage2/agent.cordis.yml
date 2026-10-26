@@ -1,0 +1,38 @@
+# Stage 2 (Task 4-5): each group owns its shell and policy. ctx.sandbox (the
+# confinement runner) stays the host's, so no duplicate provider is created.
+# executor timeoutMs differs per group only to tell the instances apart in tool output.
+- id: verify
+  name: cordis:group
+  group: true
+  isolate:
+    shell: true
+    sandboxPolicy: true
+  config:
+    - id: verify-policy
+      name: '@deepseek-ai/dsh-sandbox-policy'
+      config:
+        mode: read-only
+    - id: verify-shell
+      name: '@deepseek-ai/dsh-bash-sandbox'
+      config:
+        timeoutMs: 5000
+    - id: check-runner
+      name: ../../plugins/check-runner.mjs
+
+- id: fix
+  name: cordis:group
+  group: true
+  isolate:
+    shell: true
+    sandboxPolicy: true
+  config:
+    - id: fix-policy
+      name: '@deepseek-ai/dsh-sandbox-policy'
+      config:
+        mode: workspace-write
+    - id: fix-shell
+      name: '@deepseek-ai/dsh-bash-sandbox'
+      config:
+        timeoutMs: 60000
+    - id: patch-note
+      name: ../../plugins/patch-note.mjs

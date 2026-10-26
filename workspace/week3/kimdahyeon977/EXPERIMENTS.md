@@ -111,3 +111,19 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
   - isolate 없는 Provider는 루트 영역(프로세스 전체)에 등록하려 한다. 여기까지는 사용자 직관이 맞다.
   - 같은 영역의 같은 이름은 덮어쓰지 않고 거부한다. 이름이 안 겹쳐도 Preset 층이 누출로 거부한다.
   - 따라서 Preset 안에서 Service를 제공하려면 isolate가 필수다. 같은 Preset을 쓰는 여러 세션이 인스턴스를 공유하거나 서로 덮어쓰는 것을 두 겹으로 막는다.
+
+## 실험 4. isolate 후 그룹 밖 Tool이 그룹 전용 Shell을 보는가
+
+- 질문: `verify` 그룹만 isolate(read-only Shell, 5000)하고 `patch-note`를 그룹 밖 최상위 행에 두면(`config/exp4-outside/`) 각 Tool에 어느 Shell이 응답하나?
+- 사용자 예측: (a) `run_check`는 그룹 Shell(5000, read-only), `write_note`는 Host Shell(30000, workspace-write). 그렇게 명시했기 때문이다.
+- Claude 예측: (a). isolate가 걸린 entry만 새 isolate 맵을 받고(`vendor/loader/src/config/isolate.ts:93`) 하위 행이 그 맵을 물려받는다. 그룹 밖은 원래 맵을 쓴다.
+- 결과: (a).
+
+  | Tool | 위치 | `executorTimeoutMs` | mode | 결과 |
+  |---|---|---|---|---|
+  | `run_check` | verify 그룹 안 | 5000 | read-only | PASS |
+  | `write_note` | 그룹 밖 | 30000 | workspace-write | `~/week3-lab/exp4/out.md` 작성됨 |
+
+- 알게 된 점
+  - isolate는 그 그룹 안에서만 유효한 Service 주소록을 만든다. 그룹 밖 Tool은 그룹 Shell을 자동으로 쓰지 않는다(과제 문서의 "그룹 밖에 등록한 다른 Tool이 이 Shell을 자동으로 사용하게 되는 것은 아닙니다"를 확인).
+  - Provider(`bash-sandbox`)와 Consumer(`check-runner`)가 같은 그룹 안에 있어야 연결된다. 실험 2에서 남긴 "그룹 = Provider와 Consumer를 한 영역에 모으는 자리" 가설을 확인했다.

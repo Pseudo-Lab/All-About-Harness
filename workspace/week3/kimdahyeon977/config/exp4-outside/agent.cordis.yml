@@ -1,0 +1,21 @@
+# Exp 4: only verify is isolated; patch-note is a top-level row outside it.
+- id: verify
+  name: cordis:group
+  group: true
+  isolate:
+    shell: true
+    sandboxPolicy: true
+  config:
+    - id: verify-policy
+      name: '@deepseek-ai/dsh-sandbox-policy'
+      config:
+        mode: read-only
+    - id: verify-shell
+      name: '@deepseek-ai/dsh-bash-sandbox'
+      config:
+        timeoutMs: 5000
+    - id: check-runner
+      name: ../../plugins/check-runner.mjs
+
+- id: patch-note
+  name: ../../plugins/patch-note.mjs

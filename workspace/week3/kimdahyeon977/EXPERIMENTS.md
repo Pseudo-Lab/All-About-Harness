@@ -298,5 +298,5 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
 
 - 알게 된 점
   - 승인할 사람이 없으면 기다리지 않고 즉시 거부한다(fail closed). 실험 0의 `SANDBOX_UNAVAILABLE`과 같은 원칙이다.
-  - 세션 출발 모드는 `DSH_PERMISSION_MODE`로 바꿀 수 있다(`packages/bundle/base/cordis.patch.yml:209`). Task 5의 구멍은 실행 환경에서 read-only로 시작해도 피할 수 있다. 다만 그러면 fix 그룹도 read-only가 된다.
+  - 세션 출발 모드는 `DSH_PERMISSION_MODE`로 바꿀 수 있다(`packages/bundle/base/cordis.patch.yml:211`). Task 5의 구멍은 실행 환경에서 read-only로 시작해도 피할 수 있다. 다만 그러면 fix 그룹도 read-only가 된다.
   - 무인 실행용으로 승인 정책 `'never'`가 따로 있다. 처음부터 모델에게 상향을 요청하지 말라고 알린다(`user-approval/src/index.ts:57`).

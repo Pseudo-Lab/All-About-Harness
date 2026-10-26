@@ -123,3 +123,10 @@ grill-me 인터뷰(2026-10-26)에서 정한 사항과 이유다. 경로는 `deep
 5. Task 3 Agent 실행, Task 5 시연(로그는 `config/`)
 6. README 작성
 7. 단계별 커밋, push·PR은 확인받고
+
+## 실험 후 바뀐 것
+
+- Q4 fix Shell 표식: 60000 → 45000. 실제 CLI Host Shell이 60000(`packages/bundle/base/cordis.patch.yml:218`)이라 겹쳤다.
+- Q4 추론 "`shell`만 isolate하면 모드가 섞인다": 그룹에서 정책 Provider를 뺄 때만 맞다(실험 8b). 정책 Provider를 두면 이름 충돌로 mount 실패다(실험 8). 결론(`sandboxPolicy`도 isolate)은 유지한다.
+- Q3 Plugin 동작 추가: 세션 모드와 그룹 기본값 중 좁은 쪽으로 실행한다(`plugins/shell-call.mjs`). 실제 Agent 세션의 `sandbox/mode: workspace-write`가 read-only 그룹을 넓히는 구멍을 막기 위해서다(Task 5).
+- Q6 심화 7·9도 실행했다. 실험 7은 가설("`tool-fs`가 Sandbox를 우회")을 질문부터 고쳤다. Host `ctx.fs`가 `fs-sandbox`였기 때문이다.

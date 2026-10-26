@@ -142,3 +142,23 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
   ```
 
 - 알게 된 점: isolate한 이름은 바깥으로 넘어가 찾지 않는다. 실험 4와 합치면 **isolate한 Service의 Provider와 Consumer는 같은 그룹에 있어야 한다**. 그룹이 isolate의 단위로 필요한 이유다(실험 2 가설 확인).
+
+## 실험 5. read-only 읽기 vs 쓰기
+
+- 질문: Stage 2 `verify` 그룹(read-only Shell)의 `run_check`로 (1) `cat exp4/out.md`, (2) `echo test > exp5.txt`를 실행하면?
+- 사용자 예측: (b) 둘 다 성공(이유 미기재).
+- Claude 예측: (a) 읽기 성공, 쓰기 차단.
+  - 정책 우선순위는 승인된 상향 > 세션 모드 기록 > 기본값이다(`packages/sandbox/sandbox-policy/src/index.ts:156`). probe 세션에는 기록도 승인도 없어 그룹 기본값 read-only가 적용된다.
+  - read-only에서 쓸 수 있는 곳은 `/dev/null`뿐이다(`packages/shell/bash-sandbox/README.md` 모드 표).
+- 결과: (a).
+
+  | 명령 | verdict | 출력 | sandbox |
+  |---|---|---|---|
+  | `cat exp4/out.md` | PASS | `hi` | 5000 / read-only / `denied: false` / full |
+  | `echo test > exp5.txt` | FAIL | `bash: line 1: exp5.txt: Read-only file system` | 5000 / read-only / `denied: true` / full |
+
+  `ls ~/week3-lab/exp5.txt` → `No such file or directory`.
+
+- 알게 된 점
+  - `run_check`는 임의 명령을 받지만 그룹 Shell이 read-only라 쓰기가 권한으로 막힌다. `cb`의 "검증자는 고치지 않는다"(프롬프트 약속)를 이 구성은 권한으로 강제한다. Task 4의 핵심 근거다.
+  - 실제 Agent 세션에서는 세션 모드 기록이 기본값보다 우선한다. 같은 결과가 나오는지는 Task 5 시연에서 확인한다.

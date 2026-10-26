@@ -207,3 +207,25 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
 - 알게 된 점
   - 그룹별로 다른 모드를 주려면 **`sandboxPolicy`도 isolate하고 그룹 안에 정책 Provider를 둬야 한다**. 최종 YAML(Stage 2)의 `isolate: { shell: true, sandboxPolicy: true }`의 근거다.
   - `shell`만 isolate하면 다음 둘 중 하나다. 정책 Provider를 두면 이름 충돌로 실패하고(8), 빼면 조용히 Host 정책을 따라 검증 그룹도 쓸 수 있게 된다(8b). 8b가 더 위험하다. 오류 없이 붙고 Shell도 그룹 전용처럼 보여서 격리된 것으로 착각하기 쉽다.
+
+## Task 3. 하나의 Agent Preset으로 실제 Agent 실행
+
+- 명령: `node agent-run.mjs stage1 '<작업>'`. headless CLI, Bedrock Haiku 4.5(`config/bedrock-haiku.patch.yml`), 작업 폴더 `~/week3-lab`이다. 기록은 `config/logs/stage1-*.json`이다.
+- 작업: "`write_note`로 `notes/plan.md`에 `status: verified` 한 줄을 쓰고, `run_check`로 `grep -qx "status: verified" notes/plan.md`를 실행해 verdict와 각 Tool의 Shell을 보고하라."
+- 처음 실행은 실패했다. Agent가 `write_note`/`run_check`가 아니라 Host의 `write`/`bash`를 썼다.
+  - 세션 로그에 Preset mount 기록이 없었다.
+  - headless 실행기는 Preset roster를 쓰지 않는다. `packages/bundle/headless/src/index.ts:180-191`: "This bundle composes no preset roster… A deployment that DOES configure one has to join it here first."
+  - roster의 `default: stage1` 설정은 아무도 읽지 않았다. week2가 자체 bootstrap을 넣은 이유와 같다.
+- 조치: `config/preset-runner.mjs`가 `headless-runner`를 대신해 Agent 생성 시 `ctx.agentPresets.mount(agentCtx, presetId)`를 호출한다. 모델이 우회하지 못하게 Host `tool-bash`/`tool-fs`/`tool-fs-search`를 끈다.
+- 결과: Agent Tool 목록에 `run_check`와 `write_note`가 있고 `bash`/`write`/`read`는 없다.
+
+  | 호출 | 인자 | 결과 | Shell |
+  |---|---|---|---|
+  | `write_note` | `notes/plan.md`, `status: verified` | `written: true` | 60000 / workspace-write |
+  | `run_check` | `grep -qx "status: verified" notes/plan.md` | `PASS` | 60000 / workspace-write |
+
+  - 디스크의 `~/week3-lab/notes/plan.md` = `status: verified`.
+  - Agent 최종 답변: "run_check verdict: PASS … Both tools reported the same shell configuration with a 60-second executor timeout and workspace-write sandbox mode."
+- 알게 된 점
+  - 실제 CLI의 Host Shell은 `timeoutMs: 60000`이다(`packages/bundle/base/cordis.patch.yml:218`). probe의 Host(30000)와 다르고, Stage 2 `fix` 표식(60000)과 겹친다. 그래서 `fix` 표식을 45000으로 바꿨다. 실험 5·6의 60000은 probe 기준(Host 30000) 기록이라 그대로 둔다.
+  - **실제 Agent 세션은 시작하자마자 `sandbox/mode: workspace-write`를 세션에 기록한다**(session seq 1, `permission/preset` 직후). 정책 우선순위상 세션 모드가 그룹 기본값보다 위다. Stage 2 verify(read-only)가 실제 세션에서도 유지되는지는 Task 5에서 확인한다.

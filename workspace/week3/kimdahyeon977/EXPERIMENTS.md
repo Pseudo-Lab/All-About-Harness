@@ -62,3 +62,21 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
   | `exp1-off` | `[]` |
 
 - 알게 된 점: 그룹 행 하나가 하위 Plugin 전체의 on/off 스위치다. 판정은 부모 체인을 따라 올라가며 한다.
+
+## 실험 2. Group으로 묶었을 때/개별 등록했을 때
+
+- 질문: 두 Plugin을 그룹 없이 최상위 행으로 등록하면(`config/exp2-flat/`) Stage 1과 비교해 (1) Tool 목록, (2) `run_check`에 응답하는 Shell이 달라지나?
+- 사용자 예측: (1) 같다. 개별 등록했어도 같은 Plugin이다. (2) 같다. 그룹 종속만 달라졌고 Service를 제공하는 쪽은 그대로다.
+- Claude 예측: 둘 다 같다.
+  - `cordis:group`은 Loader의 `Group`을 다시 내보내는 3줄이다(`vendor/group/src/index.ts`).
+  - Service 조회 키는 entry에 `isolate` 옵션이 있을 때만 새 맵으로 갈린다(`vendor/loader/src/config/isolate.ts:79-93`). 없으면 부모 맵을 물려받는다.
+- 결과: 둘 다 같다.
+
+  | Preset | Agent Tool | `run_check` Shell |
+  |---|---|---|
+  | `stage1` | `run_check`, `write_note` | `executorTimeoutMs: 30000`, workspace-write (Host) |
+  | `exp2-flat` | `run_check`, `write_note` | `executorTimeoutMs: 30000`, workspace-write (Host) |
+
+- 알게 된 점
+  - 묶기만 해서는 Service가 분리되지 않는다. 그룹이 주는 것은 (1) 하위 Plugin을 함께 켜고 끄는 단위(실험 1), (2) isolate를 걸어 Provider와 Consumer를 한 영역에 모으는 자리다. (2)는 실험 4에서 확인한다.
+  - `isolate`는 그룹 전용이 아니라 Loader의 모든 entry가 받는 옵션이다(`isolate.ts:8`, `:79`).

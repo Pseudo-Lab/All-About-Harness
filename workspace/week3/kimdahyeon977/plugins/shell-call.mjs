@@ -4,10 +4,19 @@
  * Both plugins share this helper so their only difference is which group
  * (and therefore which shell instance) they are mounted in.
  */
+const WIDTH = ['read-only', 'workspace-write', 'danger-full-access']
+
 export async function runInShell(ctx, exec, command) {
   // Only a confining executor (bash-sandbox) has a mode; bash-local has none.
-  const policy = ctx.shell.sandboxMode === undefined ? undefined
-    : ctx.get('sandboxPolicy').resolve(exec.agent === undefined ? {} : { session: exec.agent.session })
+  const sandboxPolicy = ctx.shell.sandboxMode === undefined ? undefined : ctx.get('sandboxPolicy')
+  const resolved = sandboxPolicy?.resolve(exec.agent === undefined ? {} : { session: exec.agent.session })
+  // The session's logged mode outranks the group default and the session log is
+  // shared across groups, so a real agent session (which logs workspace-write at
+  // start) would widen the read-only verify group. Run with the narrower of the
+  // two: the group default is a ceiling, the session can only narrow it.
+  const policy = resolved && WIDTH.indexOf(resolved.mode) > WIDTH.indexOf(sandboxPolicy.defaultMode)
+    ? { ...resolved, mode: sandboxPolicy.defaultMode }
+    : resolved
   const workdir = policy?.workspaceRoot ?? exec.agent?.session.header.cwd
   const spec = ctx.shell.resolve({
     command,
@@ -21,7 +30,7 @@ export async function runInShell(ctx, exec, command) {
     stdout: result.stdout.text.slice(-2000),
     stderr: result.stderr.text.slice(-2000),
     // Which shell instance answered: timeoutMs differs per group's executor config.
-    shell: { executorTimeoutMs: spec.timeoutMs, defaultMode: ctx.shell.sandboxMode ?? 'unconfined', workdir: spec.workdir },
+    shell: { executorTimeoutMs: spec.timeoutMs, defaultMode: ctx.shell.sandboxMode ?? 'unconfined', resolvedMode: resolved?.mode ?? null, workdir: spec.workdir },
     sandbox: result.sandbox ?? null,
   }
 }

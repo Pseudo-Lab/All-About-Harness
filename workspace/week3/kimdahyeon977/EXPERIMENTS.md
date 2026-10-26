@@ -248,3 +248,18 @@ node --import ./config/harness-resolve.mjs probe.mjs <presetId> [tool '<json arg
   - isolate는 동작했다(verify 전용 Shell 5000, 전용 정책 기본값 read-only). 하지만 그 정책은 공유 세션 기록을 먼저 읽는다. 그래서 probe(실험 5, 세션 기록 없음)에서 막힌 쓰기가 실제 Agent에서는 뚫린다.
   - `cb`의 빈틈("검증자도 고칠 수 있다")이 isolate 후에도 남아 있었다. 오류 없이 격리된 것처럼 보인다는 점에서 실험 8b와 같은 종류의 위험이다.
   - 모델 없는 probe만으로 결론 내리면 안 된다. probe 세션에는 `permission/preset`·`sandbox/mode` 이벤트가 없다.
+
+### Task 5 수정 후 재실행
+
+- 수정(`plugins/shell-call.mjs`): 세션 모드와 그룹 기본값 중 더 좁은 쪽으로 실행한다(read-only < workspace-write < danger-full-access). 그룹 기본값이 상한이 되고 세션은 그보다 좁힐 수만 있다. 결과에 세션이 요청한 모드(`resolvedMode`)를 함께 남긴다.
+- 질문: 같은 세션(workspace-write)에서 (1) verify `run_check`로 `echo test > task5b.txt`, (2) fix `write_note`로 `notes/task5b.md`를 쓰면?
+- 사용자 예측: (1) 막힌다. 더 좁은 그룹 기본값으로 고쳤기 때문이다. (2) 미기재.
+- Claude 예측: (1) 막힌다(min(workspace-write, read-only) = read-only). (2) 써진다(min(workspace-write, workspace-write)). 둘 다 막히면 과하게 고친 것이다.
+- 결과: 예측대로다.
+
+  | Tool | Shell | 그룹 기본값 | 세션 요청 | 실제 실행 | 결과 |
+  |---|---|---|---|---|---|
+  | `run_check` | 5000 | read-only | workspace-write | read-only | FAIL, `Read-only file system`, `denied: true`, 파일 없음 |
+  | `write_note` | 45000 | workspace-write | workspace-write | workspace-write | `written: true`, `notes/task5b.md` 있음 |
+
+- 알게 된 점: isolate(어느 Shell·정책을 쓰나)와 Sandbox(어디에 쓸 수 있나)에 더해, **정책이 무엇을 입력으로 읽는가**까지 확인해야 격리가 성립한다. 이번 구멍은 isolate하지 않은 공유 상태(세션 기록)를 통해 들어왔다.

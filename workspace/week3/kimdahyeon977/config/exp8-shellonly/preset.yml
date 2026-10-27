@@ -1,0 +1,3 @@
+name: Exp 8 (isolate shell only)
+description: Stage 2 with sandboxPolicy left out of isolate.
+order: 38

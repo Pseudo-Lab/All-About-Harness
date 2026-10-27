@@ -1,0 +1,5 @@
+# Exp 2: same two plugins as top-level rows, no group.
+- id: check-runner
+  name: ../../plugins/check-runner.mjs
+- id: patch-note
+  name: ../../plugins/patch-note.mjs

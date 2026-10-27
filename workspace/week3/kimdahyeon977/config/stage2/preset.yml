@@ -1,0 +1,3 @@
+name: Week 3 Stage 2 (verify / fix isolated)
+description: verify group runs check-runner on a read-only shell, fix group runs patch-note on a workspace-write shell.
+order: 32

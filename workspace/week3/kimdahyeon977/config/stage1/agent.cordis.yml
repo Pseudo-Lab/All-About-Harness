@@ -1,0 +1,10 @@
+# Stage 1 (Task 2-3): group only. No provider here, so both plugins resolve
+# the host composition's ctx.shell (bash-sandbox) and ctx.sandboxPolicy.
+- id: cb-lite
+  name: cordis:group
+  group: true
+  config:
+    - id: check-runner
+      name: ../../plugins/check-runner.mjs
+    - id: patch-note
+      name: ../../plugins/patch-note.mjs

@@ -1,0 +1,3 @@
+name: Exp 4b (isolated group without a provider)
+description: verify isolates shell but mounts no shell provider.
+order: 37

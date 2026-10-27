@@ -1,0 +1,3 @@
+name: Exp 4 (consumer outside the isolated group)
+description: verify group owns a read-only shell; patch-note sits outside the group.
+order: 36

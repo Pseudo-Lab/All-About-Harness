@@ -1,0 +1,3 @@
+name: Week 3 Stage 1 (group only)
+description: check-runner and patch-note bundled in one group without isolate; both use the host shell.
+order: 31

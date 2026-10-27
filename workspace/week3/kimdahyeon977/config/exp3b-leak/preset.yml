@@ -1,0 +1,3 @@
+name: Exp 3b (new service without isolate)
+description: A service the host does not provide, published without an isolate realm.
+order: 35
